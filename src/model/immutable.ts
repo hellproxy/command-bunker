@@ -3,6 +3,7 @@ namespace Immutable {
     readonly type: string;
     readonly name: string;
     readonly image: string;
+    readonly section: Section;
     readonly cabalPoints?: number;
     readonly statsLine: StatsLine;
     readonly rangedWeapons: Weapon[];
@@ -51,7 +52,8 @@ namespace Immutable {
     readonly wargearOption?: boolean;
   }
 
-  type Range = number | "melee";
-  type Attacks = number | string;
-  type Skill = number | "N/A";
+  export type Section = "characters" | "infantry" | "nonInfantry";
+  export type Range = number | "melee";
+  export type Attacks = number | string;
+  export type Skill = number | "N/A";
 }

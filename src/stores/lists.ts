@@ -1,15 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { produce } from "immer";
+import { produce, enableMapSet } from "immer";
 import { v4 as uuidv4 } from "uuid";
 import { stat } from "fs";
-import { list } from "postcss";
 
-type Location = "ranged" | "melee" | "wargear";
+enableMapSet();
 
 interface ListState {
   // lists
-  lists: ListBuilder.List[];
+  lists: Map<string, ListBuilder.List>;
   getList: (listId: string) => ListBuilder.List;
   addList: () => void;
   removeList: (listId: string) => () => void;
@@ -19,142 +18,126 @@ interface ListState {
   isSelected: (
     listId: string,
     unitId: string,
-    type: string,
-    location: Location
+    location: ListBuilder.Location,
+    type: string
   ) => boolean;
   setOption: (
     listId: string,
     unitId: string,
-    type: string,
-    location: Location
+    location: ListBuilder.Location,
+    type: string
   ) => (value: boolean) => void;
 }
 
 export const useListStore = create<ListState>()(
   persist(
     (set, get) => ({
-      lists: [],
+      ...baseState(),
       // list functions
-      getList: (listId) => findList(get(), listId),
+      getList: (listId) => get().lists.get(listId)!,
       addList: () =>
         set(
-          produce((state) => {
-            state.lists.push(newList());
+          produce((state: ListState) => {
+            const list = newList();
+            state.lists.set(list.listId, list);
           })
         ),
       removeList: (listId) => () =>
         set(
-          produce((state) => {
-            state.lists = state.lists.filter(byListIdNot(listId));
+          produce((state: ListState) => {
+            state.lists.delete(listId);
           })
         ),
       setName: (listId) => (name) =>
         set(
-          produce((state) => {
-            findList(state, listId).name = name.replace(/\r?\n|\r/gm, "");
+          produce((state: ListState) => {
+            state.lists.get(listId)!.name = name.replace(/\r?\n|\r/gm, "");
           })
         ),
       // unit functions
       addUnit: (listId) => (unit) => {
         set(
-          produce((state) => {
-            findList(state, listId).units.push(unit);
+          produce((state: ListState) => {
+            state.lists.get(listId)!.units.set(unit.id, unit);
           })
         );
       },
       removeUnit: (listId, unitId) => () => {
         set(
-          produce((state) => {
-            const list = findList(state, listId);
-            list.units = list.units.filter((unit) => unit.id !== unitId);
+          produce((state: ListState) => {
+            state.lists.get(listId)!.units.delete(unitId);
           })
         );
       },
       // weapons and wargear
-      isSelected: (listId, unitId, type, location) => {
-        const selectable = findSelectable(
-          get(),
-          listId,
-          unitId,
-          type,
-          location
-        );
-        return selectable.selected;
+      isSelected: (listId, unitId, location, type) => {
+        return get()
+          .lists.get(listId)!
+          .units.get(unitId)!
+          .options.get(location)!
+          .get(type)!;
       },
-      setOption: (listId, unitId, type, location) => (value) => {
+      setOption: (listId, unitId, location, type) => (value) => {
         set(
-          produce((state) => {
-            const selectable = findSelectable(
-              state,
-              listId,
-              unitId,
-              type,
-              location
-            );
-            selectable.selected = value;
+          produce((state: ListState) => {
+            state.lists
+              .get(listId)!
+              .units.get(unitId)!
+              .options.get(location)!
+              .set(type, value);
           })
         );
       },
     }),
     {
       name: "list-storage",
+      storage: {
+        getItem(name) {
+          const str = localStorage.getItem(name);
+          return {
+            state: str == null ? baseState() : JSON.parse(str, reviver),
+          };
+        },
+        setItem(name, value) {
+          const str = JSON.stringify(value.state, replacer);
+          localStorage.setItem(name, str);
+        },
+        removeItem(name) {
+          localStorage.removeItem(name);
+        },
+      },
     }
   )
 );
 
 function newList(): ListBuilder.List {
   return {
-    listId: uuidv4(),
+    listId: uuidv4().substring(0, 8),
     name: "",
-    units: [],
+    units: new Map(),
   };
 }
 
-function findList(state: ListState, listId: string): ListBuilder.List {
-  return state.lists.find(byListId(listId))!;
+function baseState() {
+  return {
+    lists: new Map(),
+  };
 }
 
-function byListId(listId: string): (list: ListBuilder.List) => boolean {
-  return (list) => list.listId === listId;
-}
-
-function byListIdNot(listId: string): (list: ListBuilder.List) => boolean {
-  return (list) => list.listId !== listId;
-}
-
-function findUnit(list: ListBuilder.List, unitId: string): ListBuilder.Unit {
-  return list.units.find((unit) => unit.id === unitId)!;
-}
-
-function getOptions(
-  unit: ListBuilder.Unit,
-  location: Location
-): ListBuilder.Selectable[] {
-  if (location === "ranged") {
-    return unit.rangedWeaponOptions;
-  } else if (location === "melee") {
-    return unit.meleeWeaponOptions;
-  } else {
-    return unit.wargearOptions;
+function replacer(key: any, value: any) {
+  if (value instanceof Map) {
+    return {
+      __type: "Map",
+      __data: Array.from(value.entries()),
+    };
   }
+  return value;
 }
 
-function findOption(
-  options: ListBuilder.Selectable[],
-  type: string
-): ListBuilder.Selectable {
-  return options.find((option) => option.type === type)!;
-}
-
-function findSelectable(
-  state: ListState,
-  listId: string,
-  unitId: string,
-  type: string,
-  location: Location
-): ListBuilder.Selectable {
-  const list = findList(state, listId);
-  const unit = findUnit(list, unitId);
-  const options = getOptions(unit, location);
-  return findOption(options, type);
+function reviver(key: any, value: any) {
+  if (value["__type"] === "Map") {
+    const data = value["__data"];
+    return new Map(data);
+  }
+  return value;
 }

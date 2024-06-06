@@ -2,15 +2,13 @@ namespace ListBuilder {
   export interface List {
     listId: string;
     name: string;
-    units: Unit[];
+    units: Map<string, Unit>;
   }
 
   export interface Unit {
     id: string;
     type: string;
-    rangedWeaponOptions: Weapon[];
-    meleeWeaponOptions: Weapon[];
-    wargearOptions: Ability[];
+    options: Map<Location, Map<string, boolean>>;
   }
 
   export interface Selectable {
@@ -18,6 +16,7 @@ namespace ListBuilder {
     selected: boolean;
   }
 
+  export type Location = "ranged" | "melee" | "wargear";
   export type Weapon = Selectable;
   export type Ability = Selectable;
 }

@@ -1,42 +1,68 @@
 "use client";
 
 import { useListStore } from "@/stores/lists";
-import { Check, Plus, Trash2 } from "react-feather";
+import { Plus, Trash2 } from "react-feather";
 import { v4 as uuidv4 } from "uuid";
 import { useUnitData } from "@/hooks/data";
 import { ChangeEvent } from "react";
 import { UnitIcon } from "@/app/unit-icon";
 
-interface Props {
+interface ListBuilderProps {
   params: {
     listId: string;
   };
 }
 
-export default function ListBuilder({ params: { listId } }: Props) {
-  const list = useListStore((state) => state.getList(listId));
+export default function ListBuilder({ params: { listId } }: ListBuilderProps) {
+  return (
+    <div className="grid h-full grid-cols-2">
+      <div>
+        <UnitPickerList listId={listId} section="characters" />
+        <UnitPickerList listId={listId} section="infantry" />
+        <UnitPickerList listId={listId} section="nonInfantry" />
+      </div>
+      <UnitCustomizerList listId={listId} />
+    </div>
+  );
+}
+
+interface UnitPickerListProps {
+  listId: string;
+  section: Immutable.Section;
+}
+
+const UnitPickerList = ({ listId, section }: UnitPickerListProps) => {
   const { data, error } = useUnitData();
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
 
-  const { unitOrder } = data;
+  const order = data.orders[section];
 
   return (
-    <div className="grid h-full grid-cols-2">
-      <div className="flex flex-col gap-2 pl-2 pr-1 py-2 max-h-full overflow-auto">
-        {unitOrder.map((type) => (
-          <UnitPickerCard key={type} type={type} listId={list.listId} />
-        ))}
-      </div>
-      <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
-        {list.units.map((unit) => (
-          <UnitCard key={unit.type} unit={unit} listId={list.listId} />
-        ))}
-      </div>
+    <div className="flex flex-col gap-2 pl-2 pr-1 py-2 max-h-full overflow-auto">
+      {order.map((type) => (
+        <UnitPickerCard key={type} type={type} listId={listId} />
+      ))}
     </div>
   );
+};
+
+interface UnitCustomizerListProps {
+  listId: string;
 }
+
+const UnitCustomizerList = ({ listId }: UnitCustomizerListProps) => {
+  const list = useListStore((state) => state.getList(listId));
+
+  return (
+    <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
+      {Array.from(list.units).map(([type, unit]) => (
+        <UnitCuztomizer key={type} unit={unit} listId={list.listId} />
+      ))}
+    </div>
+  );
+};
 
 interface UnitPickerCardProps {
   listId: string;
@@ -45,9 +71,12 @@ interface UnitPickerCardProps {
 
 const UnitPickerCard = ({ listId, type }: UnitPickerCardProps) => {
   const addUnit = useListStore((state) => state.addUnit(listId));
-  const { data } = useUnitData();
+  const { data, error } = useUnitData();
 
-  const { indexedUnits } = data!;
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
+  const { indexedUnits } = data;
   const unitData = indexedUnits.get(type)!;
 
   return (
@@ -70,17 +99,24 @@ const UnitPickerCard = ({ listId, type }: UnitPickerCardProps) => {
   );
 };
 
-interface UnitCardProps {
+interface UnitCustomizerProps {
   listId: string;
   unit: ListBuilder.Unit;
 }
 
-const UnitCard = ({ listId, unit }: UnitCardProps) => {
+const UnitCuztomizer = ({ listId, unit }: UnitCustomizerProps) => {
   const removeUnit = useListStore((state) => state.removeUnit(listId, unit.id));
-  const { data } = useUnitData();
+  const { data, error } = useUnitData();
 
-  const { indexedUnits } = data!;
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
+  const { indexedUnits } = data;
   const unitData = indexedUnits.get(unit.type)!;
+
+  const ranged = unit.options.get("ranged")!;
+  const melee = unit.options.get("melee")!;
+  const wargear = unit.options.get("wargear")!;
 
   return (
     <div className="flex flex-col gap-2 p-4 rounded-lg bg-white shadow-md">
@@ -96,35 +132,38 @@ const UnitCard = ({ listId, unit }: UnitCardProps) => {
         </div>
       </div>
       <ul className="flex flex-wrap gap-2">
-        {unit.rangedWeaponOptions.map((weapon) => (
-          <li key={weapon.type}>
+        {Array.from(ranged).map(([weapon, selected]) => (
+          <li key={weapon}>
             <SelectableOption
               listId={listId}
               unitId={unit.id}
               option={weapon}
-              type="weapon"
+              selected={selected}
+              location="ranged"
             />
           </li>
         ))}
-        {unit.meleeWeaponOptions.map((weapon) => (
-          <li key={weapon.type}>
+        {Array.from(melee).map(([weapon, selected]) => (
+          <li key={weapon}>
             <SelectableOption
               listId={listId}
               unitId={unit.id}
               option={weapon}
-              type="weapon"
+              selected={selected}
+              location="melee"
             />
           </li>
         ))}
       </ul>
       <ul>
-        {unit.wargearOptions.map((wargear) => (
-          <li key={wargear.type}>
+        {Array.from(wargear).map(([wargear, selected]) => (
+          <li key={wargear}>
             <SelectableOption
               listId={listId}
               unitId={unit.id}
               option={wargear}
-              type="wargear"
+              selected={selected}
+              location="wargear"
             />
           </li>
         ))}
@@ -136,42 +175,30 @@ const UnitCard = ({ listId, unit }: UnitCardProps) => {
 interface SelectableOptionProps {
   listId: string;
   unitId: string;
-  option: ListBuilder.Selectable;
-  type: "weapon" | "wargear";
+  option: string;
+  selected: boolean;
+  location: ListBuilder.Location;
 }
 
 const SelectableOption = (props: SelectableOptionProps) => {
-  const { listId, unitId, option, type } = props;
-  const { data } = useUnitData();
+  const { listId, unitId, option, selected, location } = props;
+  const { data, error } = useUnitData();
 
-  let location: "melee" | "ranged" | "wargear";
-  let glyph: number;
-  let weaponData: Immutable.Weapon;
-  let wargearData: Immutable.Ability;
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
 
-  if (type == "weapon") {
-    const { indexedWeapons } = data!;
-    weaponData = indexedWeapons.get(option.type)!;
-    location = weaponData.range === "melee" ? "melee" : "ranged";
-    glyph = weaponData.glyph;
-  } else {
-    const { indexedAbilities } = data!;
-    wargearData = indexedAbilities.get(option.type)!;
-    location = "wargear";
-    glyph = wargearData.glyph;
-  }
+  const isWeapon = location === "ranged" || location === "melee";
+  const index = isWeapon ? data.indexedWeapons : data.indexedAbilities;
+  const { glyph } = index.get(option)!;
 
-  const selected = useListStore((state) =>
-    state.isSelected(listId, unitId, option.type, location)
-  );
   const setOption = useListStore((state) =>
-    state.setOption(listId, unitId, option.type, location)
+    state.setOption(listId, unitId, location, option)
   );
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setOption(e.target.checked);
   };
 
-  const id = `${unitId}-${option.type}`;
+  const id = `${unitId}-${option}`;
   const visibility = selected ? "visible" : "invisible";
 
   return (
@@ -188,10 +215,10 @@ const SelectableOption = (props: SelectableOptionProps) => {
         className="flex items-center gap-2 w-70 px-2 py-1 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 hover:text-slate-800 hover:bg-gray-50"
       >
         <div className="block">
-          {type === "weapon" ? (
-            <Weapon weapon={weaponData!} />
+          {isWeapon ? (
+            <Weapon weapon={data.indexedWeapons.get(option)!} />
           ) : (
-            <Wargear wargear={wargearData!} />
+            <Wargear wargear={data.indexedAbilities.get(option)!} />
           )}
         </div>
         <div className={`flex justify-center ${visibility}`}>
@@ -234,26 +261,24 @@ const newUnit = (data: Immutable.Unit): ListBuilder.Unit => {
   return {
     id: uuidv4(),
     type: data.type,
-    rangedWeaponOptions: newWeapons(data.rangedWeapons),
-    meleeWeaponOptions: newWeapons(data.meleeWeapons),
-    wargearOptions: newWargear(data.abilities),
+    options: new Map([
+      ["ranged", toggleMap(data.rangedWeapons)],
+      ["melee", toggleMap(data.meleeWeapons)],
+      ["wargear", toggleMap(data.abilities)],
+    ]),
   };
 };
 
-const newWeapons = (weapons: Immutable.Weapon[]): ListBuilder.Weapon[] => {
-  return weapons
-    .filter((weapon) => weapon.optional)
-    .map((weapon) => ({
-      type: weapon.type,
-      selected: false,
-    }));
-};
+interface Optional {
+  type: string;
+  optional?: boolean;
+}
 
-const newWargear = (abilities: Immutable.Ability[]): ListBuilder.Ability[] => {
-  return abilities
-    .filter((ability) => ability.wargearOption)
-    .map((wargear) => ({
-      type: wargear.type,
-      selected: false,
-    }));
+const toggleMap = (options: Optional[]): Map<string, boolean> => {
+  return options
+    .filter((options) => options.optional)
+    .reduce((map, options) => {
+      map.set(options.type, false);
+      return map;
+    }, new Map());
 };

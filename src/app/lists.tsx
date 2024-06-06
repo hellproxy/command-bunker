@@ -14,8 +14,8 @@ export const Lists = () => {
 
   return (
     <div className="flex flex-col space-y-2">
-      {lists.map((list) => (
-        <ListEntry listId={list.listId} key={list.listId} />
+      {Array.from(lists).map(([listId, list]) => (
+        <ListEntry listId={listId} key={listId} />
       ))}
       <div className="grid justify-items-center p-2 min-h-20">
         <button className="btn btn-green self-center" onClick={addList}>

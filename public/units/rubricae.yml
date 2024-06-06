@@ -1,6 +1,7 @@
 type: rubricae
 name: Rubric Marines
 image: /images/rubricae.jpg
+section: infantry
 cabalPoints: 1
 statsLine:
   movement: 5

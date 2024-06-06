@@ -17,8 +17,10 @@ interface Indices {
   indexedUnits: Map<string, Immutable.Unit>;
   indexedWeapons: Map<string, Immutable.Weapon>;
   indexedAbilities: Map<string, Immutable.Ability>;
-  unitOrder: string[];
+  orders: Orders;
 }
+
+type Orders = { [section in Immutable.Section]: string[] };
 
 export const unitFiles = ["/units/rubricae.yml"];
 
@@ -36,31 +38,41 @@ const indexUnits = (units: OrderedUnit[]): Indices => {
   const indexedUnits = units.reduce((map, { unit }) => {
     map.set(unit.type, unit);
     return map;
-  }, new Map());
+  }, new Map<string, Immutable.Unit>());
 
   const indexedWeapons = units
     .flatMap(({ unit }) => unit.rangedWeapons.concat(unit.meleeWeapons))
     .reduce((map, weapon) => {
       map.set(weapon.type, weapon);
       return map;
-    }, new Map());
+    }, new Map<string, Immutable.Weapon>());
 
   const indexedAbilities = units
     .flatMap(({ unit }) => unit.abilities)
     .reduce((map, ability) => {
       map.set(ability.type, ability);
       return map;
-    }, new Map());
+    }, new Map<string, Immutable.Ability>());
 
   const orderedUnits = units.reduce((map, { unit, order }) => {
-    map.set(order, unit.type);
+    map.set(order, unit);
     return map;
-  }, new Map());
+  }, new Map<number, Immutable.Unit>());
 
-  const unitOrder = [];
+  const orders: Orders = {
+    characters: [],
+    infantry: [],
+    nonInfantry: [],
+  };
   for (let order = 0; order < orderedUnits.size; order++) {
-    unitOrder.push(orderedUnits.get(order));
+    const unit = orderedUnits.get(order)!;
+    orders[unit.section].push(unit.type);
   }
 
-  return { indexedUnits, indexedWeapons, indexedAbilities, unitOrder };
+  return {
+    indexedUnits,
+    indexedWeapons,
+    indexedAbilities,
+    orders,
+  };
 };
