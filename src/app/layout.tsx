@@ -15,8 +15,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mongolian&display=swap"
+          rel="stylesheet"
+        ></link>
+      </head>
+      <html lang="en">
+        <body className={inter.className}>{children}</body>
+      </html>
+    </>
   );
 }
