@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useUnitData } from "@/hooks/data";
 import { ChangeEvent } from "react";
 import { UnitIcon } from "@/app/unit-icon";
+import dynamic from "next/dynamic";
 
 interface ListBuilderProps {
   params: {
@@ -53,14 +54,45 @@ interface UnitCustomizerListProps {
 }
 
 const UnitCustomizerList = ({ listId }: UnitCustomizerListProps) => {
-  const list = useListStore((state) => state.getList(listId));
-
   return (
     <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
-      {Array.from(list.units).map(([type, unit]) => (
-        <UnitCuztomizer key={type} unit={unit} listId={list.listId} />
-      ))}
+      <UnitCustomizerSection listId={listId} section="characters" />
+      <UnitCustomizerSection listId={listId} section="infantry" />
+      <UnitCustomizerSection listId={listId} section="nonInfantry" />
     </div>
+  );
+};
+
+interface UnitCustomizerSectionProps {
+  listId: string;
+  section: Immutable.Section;
+}
+
+const UnitCustomizerSection = dynamic(
+  () => Promise.resolve(UnitCustomizerSectionSSR),
+  { ssr: false }
+);
+
+const UnitCustomizerSectionSSR = ({
+  listId,
+  section,
+}: UnitCustomizerSectionProps) => {
+  const list = useListStore((state) => state.getList(listId));
+  const { data, error } = useUnitData();
+
+  if (error) return <div>Failed to load</div>;
+  if (!data || !list) return <div>Loading...</div>;
+
+  const { indexedUnits } = data;
+
+  return (
+    <>
+      {Array.from(list.units)
+        .filter(([, unit]) => indexedUnits.get(unit.type)?.section === section)
+        .map(([id, unit]) => (
+          <UnitCuztomizer key={id} unit={unit} listId={list.listId} />
+        ))}
+    </>
   );
 };
 

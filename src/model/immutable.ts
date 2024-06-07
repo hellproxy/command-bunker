@@ -30,7 +30,7 @@ namespace Immutable {
     readonly skill: Skill;
     readonly strength: number;
     readonly ap: number;
-    readonly damage: number;
+    readonly damage: Damage;
     readonly tags: string[];
     readonly optional?: boolean;
     readonly supercharge: {
@@ -39,7 +39,7 @@ namespace Immutable {
       readonly skill: Skill;
       readonly strength: number;
       readonly ap: number;
-      readonly damage: number;
+      readonly damage: Damage;
       readonly tags: string[];
     };
   }
@@ -54,6 +54,7 @@ namespace Immutable {
 
   export type Section = "characters" | "infantry" | "nonInfantry";
   export type Range = number | "melee";
-  export type Attacks = number | string;
+  export type Attacks = number | `D${number}`;
   export type Skill = number | "N/A";
+  export type Damage = number | `D${number}`;
 }
