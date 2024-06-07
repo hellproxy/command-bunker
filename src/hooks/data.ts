@@ -22,7 +22,14 @@ interface Indices {
 
 type Orders = { [section in Immutable.Section]: string[] };
 
-export const unitFiles = ["/units/exalted-sorcerer.yml", "/units/rubricae.yml"];
+export const unitFiles = [
+  "/units/magnus-the-red.yml",
+  "/units/daemon-prince.yml",
+  "/units/daemon-prince-with-wings.yml",
+  "/units/exalted-sorcerer.yml",
+  "/units/sorcerer-in-terminator-armour.yml",
+  "/units/rubricae.yml",
+];
 
 export const fetchAllUnits = (urls: string[]): Promise<Indices> =>
   Promise.all(urls.map(fetchUnit)).then(indexUnits);

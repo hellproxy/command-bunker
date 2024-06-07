@@ -8,6 +8,7 @@ namespace Immutable {
     readonly statsLine: StatsLine;
     readonly rangedWeapons: Weapon[];
     readonly meleeWeapons: Weapon[];
+    readonly coreAbilities: string[];
     readonly abilities: Ability[];
   }
 
@@ -24,22 +25,24 @@ namespace Immutable {
   export interface Weapon {
     readonly type: string;
     readonly name: string;
+    readonly profileName: string;
     readonly range: Range;
     readonly attacks: Attacks;
     readonly skill: Skill;
     readonly strength: number;
     readonly ap: number;
     readonly damage: Damage;
-    readonly tags: string[];
+    readonly tags?: string[];
     readonly optional?: boolean;
-    readonly supercharge: {
+    readonly alt: {
+      readonly profileName: string;
       readonly range: Range;
       readonly attacks: Attacks;
       readonly skill: Skill;
       readonly strength: number;
       readonly ap: number;
       readonly damage: Damage;
-      readonly tags: string[];
+      readonly tags?: string[];
     };
   }
 
@@ -48,11 +51,13 @@ namespace Immutable {
     readonly name: string;
     readonly description: string;
     readonly wargearOption?: boolean;
+    readonly tags?: string[];
+    readonly subAbilities?: 
   }
 
   export type Section = "characters" | "infantry" | "nonInfantry";
   export type Range = number | "melee";
-  export type Attacks = number | `D${number}`;
+  export type Attacks = number | `D${number}` | `${number}D${number}`;
   export type Skill = number | "N/A";
-  export type Damage = number | `D${number}`;
+  export type Damage = number | `D${number}` | `${number}D${number}`;
 }

@@ -1,0 +1,84 @@
+type: sorcerer-in-terminator-armour
+name: Thousand Sons Sorcerer in Terminator Armour
+image: /images/sorcerer-in-terminator-armour.jpg
+section: characters
+cabalPoints: 2
+statsLine:
+  movement: 5
+  toughness: 5
+  armourSave: 2
+  invulnerableSave: 4
+  wounds: 5
+  leadership: 6
+  objectiveControl: 1
+rangedWeapons:
+  - type: sorcerer-in-terminator-armour-coruscating-flames
+    name: Coruscating Flames
+    range: 18
+    attacks: 3
+    skill: 3
+    strength: 4
+    ap: -3
+    damange: 2
+    tags:
+      - Anti-monster 4+
+      - Anti-vehicle 4+
+      - Devastating Wounds
+      - Psychic
+  - type: sorcerer-in-terminator-armour-inferno-combi-bolter
+    name: Inferno combi-bolter
+    range: 24
+    attacks: 2
+    skill: 3
+    strength: 4
+    ap: -1
+    damage: 1
+    tags:
+      - Rapid Fire 2
+    optional: true
+  - type: sorcerer-in-terminator-armour-inferno-combi-weapon
+    name: Inferno combi-weapon
+    range: 24
+    attacks: 1
+    skill: 4
+    strength: 4
+    ap: -1
+    damage: 1
+    tags:
+      - Anti-infantry 4+
+      - Devastating Wounds
+      - Rapid Fire 1
+    optional: true
+meleeWeapons:
+  - type: sorcerer-in-terminator-armour-force-weapon
+    name: Force weapon
+    range: "melee"
+    attacks: 5
+    skill: 3
+    strength: 6
+    ap: -1
+    damage: D3
+    tags:
+      - Psychic
+  - type: sorcerer-in-terminator-armour-prosperine-khopesh
+    name: Prosperine khopesh
+    range: "melee"
+    attacks: 4
+    skill: 3
+    strength: 5
+    ap: -2
+    damage: 2
+    optional: true
+coreAbilities:
+  - Deep Strike
+abilities:
+  - type: sorcerer-in-terminator-armour-empyric-guidance
+    name: Empyric guidance
+    description: While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.
+    tags:
+      - Psychic
+  - type: sorcerer-in-terminator-armour-marked-by-fate
+    name: Marked by fate
+    description: In your Shooting phase, you can select on enemy unit within 18" of and visible to this model. Until the end of the turn, each time a friendly Thousand Sons model makes and attack that targets that unit, re-roll a Hit roll of 1.
+    tags:
+      - Psychic

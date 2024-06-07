@@ -46,7 +46,7 @@ rangedWeapons:
       - Devastating Wounds
     optional: true
   - type: rubricae-inferno-bolt-pistol
-    name: Inferno Bolt Pistol
+    name: Inferno bolt pistol
     range: 12
     attacks: 1
     skill: 3
@@ -57,7 +57,7 @@ rangedWeapons:
       - Pistol
     optional: true
   - type: rubricae-warpflame-pistol
-    name: Warpflame Pistol
+    name: Warpflame pistol
     range: 12
     attacks: D6
     skill: N/A
@@ -70,7 +70,8 @@ rangedWeapons:
       - Torrent
     optional: true
   - type: rubricae-plasma-pistol
-    name: Plasma Pistol
+    name: Plasma pistol
+    profileName: Plasma pistol - standard
     range: 12
     attacks: 1
     skill: 3
@@ -80,7 +81,8 @@ rangedWeapons:
     tags:
       - Pistol
     optional: true
-    supercharge:
+    alt:
+      profileName: Plasma pistol - supercharge
       range: 12
       attacks: 1
       skill: 3
@@ -99,7 +101,6 @@ meleeWeapons:
     strength: 4
     ap: 0
     damage: 1
-    tags: []
 abilities:
   - type: rubricae-bringers-of-change
     name: Bringers of change

@@ -1,5 +1,5 @@
 type: exalted-sorcerer
-name: Exhalted Sorcerer
+name: Thousand Sons Exalted Sorcerer
 image: /images/exalted-sorcerer.jpg
 section: characters
 cabalPoints: 2
@@ -25,7 +25,7 @@ rangedWeapons:
       - Devastating Wounds
       - Psychic
   - type: exalted-sorcerer-inferno-bolt-pistol
-    name: Inferno Bolt Pistol
+    name: Inferno bolt pistol
     range: 12
     attacks: 1
     skill: 2
@@ -36,7 +36,7 @@ rangedWeapons:
       - Pistol
     optional: true
   - type: exalted-sorcerer-warpflame-pistol
-    name: Warpflame Pistol
+    name: Warpflame pistol
     range: 12
     attacks: D6
     skill: N/A
@@ -49,7 +49,8 @@ rangedWeapons:
       - Torrent
     optional: true
   - type: exalted-sorcerer-plasma-pistol
-    name: Plasma Pistol
+    name: Plasma pistol
+    profileName: Plasma pistol - standard
     range: 12
     attacks: 1
     skill: 2
@@ -59,7 +60,8 @@ rangedWeapons:
     tags:
       - Pistol
     optional: true
-    supercharge:
+    alt:
+      profileName: Plasma pistol - supercharge
       range: 12
       attacks: 1
       skill: 2
@@ -88,12 +90,15 @@ meleeWeapons:
     strength: 5
     ap: -2
     damage: 2
-    tags: []
     optional: true
 abilities:
   - type: exalted-sorcerer-arcane-shield
-    name: Arcane shield (psychic)
+    name: Arcane shield
     description: While this model is leading a unit, models in that unit have a 4+ invulnerable save.
+    tags:
+      - Psychic
   - type: exalted-sorcerer-rebind-rubricae
-    name: Rebind rubricae (psychic)
+    name: Rebind rubricae
     description: "In your Command phase, if this model is leading a unit, your can roll one D6: on a 1, that unit suffers D3 moral wounds; on a 2-5, you can return 1 destroyed Bodyguard model to that unit; on a 6, you can return up to 2 destroyed Bodyguard models to that unit."
+    tags:
+      - Psychic
