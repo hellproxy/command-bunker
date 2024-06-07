@@ -20,7 +20,6 @@ rangedWeapons:
     strength: 4
     ap: -1
     damange: 1
-    tags: []
     optional: true
   - type: rubricae-warpflamer
     name: Warpflamers

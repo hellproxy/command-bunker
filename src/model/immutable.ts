@@ -52,7 +52,11 @@ namespace Immutable {
     readonly description: string;
     readonly wargearOption?: boolean;
     readonly tags?: string[];
-    readonly subAbilities?: 
+    readonly subAbilities?: {
+      readonly name: string;
+      readonly description: string;
+      readonly tags?: string[];
+    };
   }
 
   export type Section = "characters" | "infantry" | "nonInfantry";

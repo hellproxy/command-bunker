@@ -20,7 +20,6 @@ rangedWeapons:
     strength: 5
     ap: -1
     damange: 2
-    tags: []
 meleeWeapons:
   - type: daemon-prince-with-wings-hellforged-weapons
     name: Hellforged weapons

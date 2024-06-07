@@ -216,6 +216,9 @@ interface SelectableOptionProps {
 const SelectableOption = (props: SelectableOptionProps) => {
   const { listId, unitId, option, selected, location } = props;
   const { data, error } = useUnitData();
+  const setOption = useListStore((state) =>
+    state.setOption(listId, unitId, location, option)
+  );
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
@@ -224,9 +227,6 @@ const SelectableOption = (props: SelectableOptionProps) => {
   const index = isWeapon ? data.indexedWeapons : data.indexedAbilities;
   const { name } = index.get(option)!;
 
-  const setOption = useListStore((state) =>
-    state.setOption(listId, unitId, location, option)
-  );
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setOption(e.target.checked);
   };

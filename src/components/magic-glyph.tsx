@@ -1,5 +1,10 @@
 import { useGlyphs } from "@/hooks/glyphs";
-import { createHash } from "crypto";
+import { Noto_Sans_Mongolian } from "next/font/google";
+
+const mongolian = Noto_Sans_Mongolian({
+  weight: "400",
+  subsets: ["mongolian"],
+});
 
 interface MagicGlyphProps {
   name: string;
@@ -17,7 +22,7 @@ export const MagicGlyph = ({ name, reloadKey }: MagicGlyphProps) => {
   const codePoint = glyph.index + 6144;
 
   return (
-    <div className="text-blue-600 select-none font-mongolian">
+    <div className={`text-blue-600 select-none ${mongolian.className}`}>
       <div
         key={reloadKey}
         className="relative max-h-[24px] text-2xl nova"
