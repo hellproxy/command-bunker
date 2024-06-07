@@ -5,7 +5,8 @@ import { Plus, Trash2 } from "react-feather";
 import { v4 as uuidv4 } from "uuid";
 import { useUnitData } from "@/hooks/data";
 import { ChangeEvent } from "react";
-import { UnitIcon } from "@/app/unit-icon";
+import { UnitIcon } from "@/components/unit-icon";
+import { MagicGlyph } from "@/components/magic-glyph";
 import dynamic from "next/dynamic";
 
 interface ListBuilderProps {
@@ -221,7 +222,7 @@ const SelectableOption = (props: SelectableOptionProps) => {
 
   const isWeapon = location === "ranged" || location === "melee";
   const index = isWeapon ? data.indexedWeapons : data.indexedAbilities;
-  const { glyph } = index.get(option)!;
+  const { name } = index.get(option)!;
 
   const setOption = useListStore((state) =>
     state.setOption(listId, unitId, location, option)
@@ -254,14 +255,7 @@ const SelectableOption = (props: SelectableOptionProps) => {
           )}
         </div>
         <div className={`flex justify-center ${visibility}`}>
-          <div className="text-blue-600 select-none font-mongolian">
-            <div
-              key={visibility}
-              className="relative bottom-[8px] max-h-[24px] text-2xl nova"
-            >
-              {String.fromCodePoint(glyph)}
-            </div>
-          </div>
+          <MagicGlyph name={name} reloadKey={visibility} />
         </div>
       </label>
     </>
