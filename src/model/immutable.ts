@@ -24,7 +24,6 @@ namespace Immutable {
   export interface Weapon {
     readonly type: string;
     readonly name: string;
-    readonly glyph: number;
     readonly range: Range;
     readonly attacks: Attacks;
     readonly skill: Skill;
@@ -47,7 +46,6 @@ namespace Immutable {
   export interface Ability {
     readonly type: string;
     readonly name: string;
-    readonly glyph: number;
     readonly description: string;
     readonly wargearOption?: boolean;
   }

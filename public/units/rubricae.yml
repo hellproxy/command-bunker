@@ -14,7 +14,6 @@ statsLine:
 rangedWeapons:
   - type: rubricae-inferno-boltgun
     name: Inferno boltguns
-    glyph: 0x182C
     range: 24
     attacks: 2
     skill: 3
@@ -25,7 +24,6 @@ rangedWeapons:
     optional: true
   - type: rubricae-warpflamer
     name: Warpflamers
-    glyph: 0x182A
     range: 12
     attacks: D6
     skill: N/A
@@ -38,7 +36,6 @@ rangedWeapons:
     optional: true
   - type: rubricae-soulreaper-cannon
     name: Soulreaper cannon
-    glyph: 0x1880
     range: 24
     attacks: 6
     skill: 3
@@ -50,7 +47,6 @@ rangedWeapons:
     optional: true
   - type: rubricae-inferno-bolt-pistol
     name: Inferno Bolt Pistol
-    glyph: 0x1897
     range: 12
     attacks: 1
     skill: 3
@@ -62,7 +58,6 @@ rangedWeapons:
     optional: true
   - type: rubricae-warpflame-pistol
     name: Warpflame Pistol
-    glyph: 0x1899
     range: 12
     attacks: D6
     skill: N/A
@@ -76,7 +71,6 @@ rangedWeapons:
     optional: true
   - type: rubricae-plasma-pistol
     name: Plasma Pistol
-    glyph: 0x189A
     range: 12
     attacks: 1
     skill: 3
@@ -99,7 +93,6 @@ rangedWeapons:
 meleeWeapons:
   - type: rubricae-close-combat-weapon
     name: Close combat weapon
-    glyph: 0x182F
     range: "melee"
     attacks: 2
     skill: 3
@@ -110,10 +103,8 @@ meleeWeapons:
 abilities:
   - type: rubricae-bringers-of-change
     name: Bringers of change
-    glyph: 0x1892
     description: Each time a model in this unit makes a range attack, re-roll a Wound roll of 1. If the target of that attack is within range of an objective marker you do not control, you can re-roll the Wound roll instead.
   - type: rubricae-icon-of-flame
     name: Icon of flame
-    glyph: 0x1830
     description: Each time a model in the bearer's unit makes a ranged attack, if a Critial Wound is scored, improve the Armour Penetration characteristic of that attacak by 1.
     wargearOption: true

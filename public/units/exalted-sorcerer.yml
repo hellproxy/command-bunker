@@ -14,7 +14,6 @@ statsLine:
 rangedWeapons:
   - type: exalted-sorcerer-astral-blast
     name: Astral Blast
-    glyph: 0x182C
     range: 18
     attacks: D6
     skill: 2
@@ -27,7 +26,6 @@ rangedWeapons:
       - Psychic
   - type: exalted-sorcerer-inferno-bolt-pistol
     name: Inferno Bolt Pistol
-    glyph: 0x182C
     range: 12
     attacks: 1
     skill: 2
@@ -39,7 +37,6 @@ rangedWeapons:
     optional: true
   - type: exalted-sorcerer-warpflame-pistol
     name: Warpflame Pistol
-    glyph: 0x182C
     range: 12
     attacks: D6
     skill: N/A
@@ -53,7 +50,6 @@ rangedWeapons:
     optional: true
   - type: exalted-sorcerer-plasma-pistol
     name: Plasma Pistol
-    glyph: 0x182C
     range: 12
     attacks: 1
     skill: 2
@@ -76,7 +72,6 @@ rangedWeapons:
 meleeWeapons:
   - type: exalted-sorcerer-force-weapon
     name: Force weapon
-    glyph: 0x182C
     range: "melee"
     attacks: 5
     skill: 2
@@ -87,7 +82,6 @@ meleeWeapons:
       - Psychic
   - type: exalted-sorcerer-prosperine-khopesh
     name: Prosperine khopesh
-    glyph: 0x182C
     range: "melee"
     attacks: 4
     skill: 3
@@ -99,9 +93,7 @@ meleeWeapons:
 abilities:
   - type: exalted-sorcerer-arcane-shield
     name: Arcane shield (psychic)
-    glyph: 0x182C
     description: While this model is leading a unit, models in that unit have a 4+ invulnerable save.
   - type: exalted-sorcerer-rebind-rubricae
     name: Rebind rubricae (psychic)
-    glyph: 0x182C
     description: "In your Command phase, if this model is leading a unit, your can roll one D6: on a 1, that unit suffers D3 moral wounds; on a 2-5, you can return 1 destroyed Bodyguard model to that unit; on a 6, you can return up to 2 destroyed Bodyguard models to that unit."
