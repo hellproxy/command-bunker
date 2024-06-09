@@ -18,7 +18,7 @@ interface ListBuilderProps {
 export default function ListBuilder({ params: { listId } }: ListBuilderProps) {
   return (
     <div className="grid h-full grid-cols-2">
-      <div>
+      <div className="max-h-full overflow-auto">
         <UnitPickerList listId={listId} section="characters" />
         <UnitPickerList listId={listId} section="infantry" />
         <UnitPickerList listId={listId} section="nonInfantry" />
@@ -43,7 +43,7 @@ const UnitPickerList = ({ listId, section }: UnitPickerListProps) => {
   const order = data.orders[section];
 
   return (
-    <div className="flex flex-col gap-2 pl-2 pr-1 py-2 max-h-full overflow-auto">
+    <div className="flex flex-col gap-2 pl-2 pr-1 py-2">
       {order.map((type) => (
         <UnitPickerCard key={type} type={type} listId={listId} />
       ))}

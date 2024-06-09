@@ -13,7 +13,7 @@ statLine:
 meleeWeapons:
   - type: screamers-lamprey-bite
     name: Force weapon
-    range: "melee"
+    range: melee
     attacks: 3
     skill: 4
     strength: 6
@@ -24,4 +24,5 @@ coreAbilities:
 abilities:
   - type: screamers-slashing-dive
     name: Slashing dive
-    description: "In your Movement phase, after this unit ends a Normal move, you can select one enemy it moved over during that move and roll one D6 for each model in this unit: for each 4+ that enemy suffers 1 mortal wound"
+    description: >-
+      In your Movement phase, after this unit ends a Normal move, you can select one enemy it moved over during that move and roll one D6 for each model in this unit: for each 4+ that enemy suffers 1 mortal wound

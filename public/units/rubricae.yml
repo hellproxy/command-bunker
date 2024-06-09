@@ -94,7 +94,7 @@ rangedWeapons:
 meleeWeapons:
   - type: rubricae-close-combat-weapon
     name: Close combat weapon
-    range: "melee"
+    range: melee
     attacks: 2
     skill: 3
     strength: 4
@@ -102,7 +102,7 @@ meleeWeapons:
     damage: 1
   - type: rubricae-force-weapon
     name: Force weapon
-    range: "melee"
+    range: melee
     attacks: 3
     skill: 3
     strength: 6
@@ -113,8 +113,10 @@ meleeWeapons:
 abilities:
   - type: rubricae-bringers-of-change
     name: Bringers of change
-    description: Each time a model in this unit makes a range attack, re-roll a Wound roll of 1. If the target of that attack is within range of an objective marker you do not control, you can re-roll the Wound roll instead.
+    description: >-
+      Each time a model in this unit makes a range attack, re-roll a Wound roll of 1. If the target of that attack is within range of an objective marker you do not control, you can re-roll the Wound roll instead.
   - type: rubricae-icon-of-flame
     name: Icon of flame
-    description: Each time a model in the bearer's unit makes a ranged attack, if a Critial Wound is scored, improve the Armour Penetration characteristic of that attacak by 1.
+    description: >-
+      Each time a model in the bearer's unit makes a ranged attack, if a Critial Wound is scored, improve the Armour Penetration characteristic of that attacak by 1.
     optional: true

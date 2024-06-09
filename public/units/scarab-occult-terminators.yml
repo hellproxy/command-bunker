@@ -70,7 +70,7 @@ rangedWeapons:
 meleeWeapons:
   - type: scarab-occult-terminators-force-weapon
     name: Force weapon
-    range: "melee"
+    range: melee
     attacks: 4
     skill: 3
     strength: 6
@@ -80,7 +80,7 @@ meleeWeapons:
       - Psychic
   - type: scarab-occult-terminators-prosperine-khopesh
     name: Prosperine khopesh
-    range: "melee"
+    range: melee
     attacks: 3
     skill: 3
     strength: 5
@@ -91,4 +91,5 @@ coreAbilities:
 abilities:
   - type: scarab-occult-terminators-implacable-guardians
     name: Implacable guardians
-    description: While this unit contains one or more Psyker models, each time an attack is made against this unit, if the Strength characteristic is greater than this unit's Toughness characteristic, subtract 1 from the Wound roll.
+    description: >-
+      While this unit contains one or more Psyker models, each time an attack is made against this unit, if the Strength characteristic is greater than this unit's Toughness characteristic, subtract 1 from the Wound roll.

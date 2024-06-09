@@ -24,7 +24,7 @@ meleeWeapons:
   - type: daemon-prince-with-wings-hellforged-weapons
     name: Hellforged weapons
     profileName: Hellforged weapons - strike
-    range: "melee"
+    range: melee
     attacks: 6
     skill: 2
     strength: 8
@@ -34,7 +34,7 @@ meleeWeapons:
       - Psychic
     alts:
       - profileName: Hellforged weapons - sweep
-        range: "melee"
+        range: melee
         attacks: 14
         skill: 2
         strength: 6
@@ -47,11 +47,13 @@ coreAbilities:
 abilities:
   - type: daemon-prince-with-wings-sorcerous-fire
     name: Sorcerous fire
-    description: "Each time this model ends a Normal move, you can select one enemy unit it moved over this phase and role nine D6: for each 6, that unit suffers 1 moral wound."
+    description: >-
+      Each time this model ends a Normal move, you can select one enemy unit it moved over this phase and role nine D6: for each 6, that unit suffers 1 moral wound.
     tags:
       - Psychic
   - type: daemon-prince-with-wings-aetherstride
     name: Aetherstride
-    description: At the end of your opponent's turn, if this model is not within Engagement Range of any enemy units, you can remove it from the battlefield and then, in the Reinforcements step of your next Movement phase, set it up anywhere on the battlefield that is more than 9" horizontally away from all enemy models. If the battle ends and this model is not on the battlefield, it is destroyed.
+    description: >-
+      At the end of your opponent's turn, if this model is not within Engagement Range of any enemy units, you can remove it from the battlefield and then, in the Reinforcements step of your next Movement phase, set it up anywhere on the battlefield that is more than 9" horizontally away from all enemy models. If the battle ends and this model is not on the battlefield, it is destroyed.
     tags:
       - Psychic

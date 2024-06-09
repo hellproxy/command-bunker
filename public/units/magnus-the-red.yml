@@ -38,7 +38,7 @@ meleeWeapons:
   - type: magnus-the-red-blade-of-magnus
     name: Blade of Magnus
     profileName: Blade of Magnus - strike
-    range: "melee"
+    range: melee
     attacks: 7
     skill: 2
     strength: 16
@@ -49,7 +49,7 @@ meleeWeapons:
       - Psychic
     alts:
       - profileName: Blade of Magnus - sweep
-        range: "melee"
+        range: melee
         attacks: 14
         skill: 2
         strength: 8
@@ -67,25 +67,30 @@ abilities:
     subAbilities:
       - type: magnus-the-red-impossible-form
         name: Impossible Form
-        description: Each time an attack is made against the Psyker (excluding Psychic Attacks), subtract 1 from that attack's Damage characteristic.
+        description: >-
+          Each time an attack is made against the Psyker (excluding Psychic Attacks), subtract 1 from that attack's Damage characteristic.
         tags:
           - Psychic
       - type: magnus-the-red-treason-of-tzeentch
         name: Treason of Tzeentch
-        description: At the start of your opponent's Shooting phase, you can select on enemy unit within 24" of and visible to this Psyker. Until the end of the phase, ranged weapons equipped by models in that unit have the [HAZARDOUS] ability.
+        description: >-
+          At the start of your opponent's Shooting phase, you can select on enemy unit within 24" of and visible to this Psyker. Until the end of the phase, ranged weapons equipped by models in that unit have the [HAZARDOUS] ability.
         tags:
           - Psychic
       - type: magnus-the-red-time-flux
         name: Time Flux
-        description: While a friendly Thousand Sons unit is within 6" of this Psyker, add 2" to the Move characteristic of models in that unit.
+        description: >-
+          While a friendly Thousand Sons unit is within 6" of this Psyker, add 2" to the Move characteristic of models in that unit.
         tags:
           - Aura
           - Psychic
   - type: magnus-the-red-lord-of-the-planet-of-the-sorcerers
     name: Lord of the Planet of the Sorcerers
-    description: While a friendly Thousand Sons Psyker unit is within 6" of this model, each time a model in that unit makes a Psychic Attack, add 1 to the Hit roll and add 1 to the Wound roll.
+    description: >-
+      While a friendly Thousand Sons Psyker unit is within 6" of this model, each time a model in that unit makes a Psychic Attack, add 1 to the Hit roll and add 1 to the Wound roll.
     tags:
       - Aura
   - type: magnus-the-red-damaged
     name: "Damaged: 1-6 wounds remaining"
-    description: While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.
+    description: >-
+      While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.

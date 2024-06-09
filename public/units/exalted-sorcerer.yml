@@ -74,7 +74,7 @@ rangedWeapons:
 meleeWeapons:
   - type: exalted-sorcerer-force-weapon
     name: Force weapon
-    range: "melee"
+    range: melee
     attacks: 5
     skill: 2
     strength: 6
@@ -84,7 +84,7 @@ meleeWeapons:
       - Psychic
   - type: exalted-sorcerer-prosperine-khopesh
     name: Prosperine khopesh
-    range: "melee"
+    range: melee
     attacks: 4
     skill: 3
     strength: 5
@@ -94,11 +94,13 @@ meleeWeapons:
 abilities:
   - type: exalted-sorcerer-arcane-shield
     name: Arcane shield
-    description: While this model is leading a unit, models in that unit have a 4+ invulnerable save.
+    description: >-
+      While this model is leading a unit, models in that unit have a 4+ invulnerable save.
     tags:
       - Psychic
   - type: exalted-sorcerer-rebind-rubricae
     name: Rebind rubricae
-    description: "In your Command phase, if this model is leading a unit, your can roll one D6: on a 1, that unit suffers D3 moral wounds; on a 2-5, you can return 1 destroyed Bodyguard model to that unit; on a 6, you can return up to 2 destroyed Bodyguard models to that unit."
+    description: >-
+      In your Command phase, if this model is leading a unit, your can roll one D6: on a 1, that unit suffers D3 moral wounds; on a 2-5, you can return 1 destroyed Bodyguard model to that unit; on a 6, you can return up to 2 destroyed Bodyguard models to that unit.
     tags:
       - Psychic

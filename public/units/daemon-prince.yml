@@ -24,7 +24,7 @@ meleeWeapons:
   - type: daemon-prince-hellforged-weapons
     name: Hellforged weapons
     profileName: Hellforged weapons - strike
-    range: "melee"
+    range: melee
     attacks: 6
     skill: 2
     strength: 8
@@ -34,7 +34,7 @@ meleeWeapons:
       - Psychic
     alts:
       - profileName: Hellforged weapons - sweep
-        range: "melee"
+        range: melee
         attacks: 14
         skill: 2
         strength: 6
@@ -47,12 +47,14 @@ coreAbilities:
 abilities:
   - type: daemon-prince-the-weave-of-fate
     name: The weave of fate
-    description: Once per battle, at the start of any phase, you can select one friendly Rubric Marines or Scarab Occult Terminators unit within 6" of this model. Until the end of the phase, weapon equipped by models in that unit have the [PRECISION] ability.
+    description: >-
+      Once per battle, at the start of any phase, you can select one friendly Rubric Marines or Scarab Occult Terminators unit within 6" of this model. Until the end of the phase, weapon equipped by models in that unit have the [PRECISION] ability.
     tags:
       - Psychic
   - type: daemon-prince-glamour-of-tzeentch
     name: Glamour of Tzeentch (aura, psychic)
-    description: While a friendly Thousand Sons unit is within 6" of this model, models in that unit have the Stealth ability.
+    description: >-
+      While a friendly Thousand Sons unit is within 6" of this model, models in that unit have the Stealth ability.
     tags:
       - Aura
       - Psychic

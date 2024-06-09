@@ -34,6 +34,7 @@ export const unitFiles = [
   "/units/scarab-occult-terminators.yml",
   // nonInfantry
   "/units/heldrake.yml",
+  "/units/tzaangor-enlightened.yml",
   // allies
   "/units/pink-horrors.yml",
   "/units/screamers.yml",
