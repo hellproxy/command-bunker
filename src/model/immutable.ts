@@ -5,14 +5,15 @@ namespace Immutable {
     readonly image: string;
     readonly section: Section;
     readonly cabalPoints?: number;
-    readonly statsLine: StatsLine;
+    readonly statLine: StatLine;
+    readonly altStatLines?: StatLine[];
     readonly rangedWeapons?: Weapon[];
     readonly meleeWeapons?: Weapon[];
     readonly coreAbilities?: string[];
     readonly abilities?: Ability[];
   }
 
-  export interface StatsLine {
+  export interface StatLine {
     movement: number;
     toughness: number;
     armourSave: number;
@@ -22,9 +23,14 @@ namespace Immutable {
     objectiveControl: number;
   }
 
-  export interface Weapon {
+  export interface Weapon extends WeaponProfile {
     readonly type: string;
     readonly name: string;
+    readonly optional?: boolean;
+    readonly alts: WeaponProfile[];
+  }
+
+  export interface WeaponProfile {
     readonly profileName: string;
     readonly range: Range;
     readonly attacks: Attacks;
@@ -33,17 +39,6 @@ namespace Immutable {
     readonly ap: number;
     readonly damage: Damage;
     readonly tags?: string[];
-    readonly optional?: boolean;
-    readonly alt: {
-      readonly profileName: string;
-      readonly range: Range;
-      readonly attacks: Attacks;
-      readonly skill: Skill;
-      readonly strength: number;
-      readonly ap: number;
-      readonly damage: Damage;
-      readonly tags?: string[];
-    };
   }
 
   export interface Ability {

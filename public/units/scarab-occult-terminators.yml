@@ -3,7 +3,7 @@ name: Scarab Occult Terminators
 image: /images/scarab-occult-terminators.jpg
 section: infantry
 cabalPoints: 1
-statsLine:
+statLine:
   movement: 5
   toughness: 5
   armourSave: 2

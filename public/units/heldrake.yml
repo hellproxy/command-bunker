@@ -2,7 +2,7 @@ type: heldrake
 name: Thousand Sons Heldrake
 image: /images/heldrake.jpg
 section: nonInfantry
-statsLine:
+statLine:
   movement: 20
   toughness: 9
   armourSave: 3

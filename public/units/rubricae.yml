@@ -3,7 +3,7 @@ name: Rubric Marines
 image: /images/rubricae.jpg
 section: infantry
 cabalPoints: 1
-statsLine:
+statLine:
   movement: 5
   toughness: 4
   armourSave: 3
@@ -80,17 +80,17 @@ rangedWeapons:
     tags:
       - Pistol
     optional: true
-    alt:
-      profileName: Plasma pistol - supercharge
-      range: 12
-      attacks: 1
-      skill: 3
-      strength: 8
-      ap: -3
-      damage: 2
-      tags:
-        - Hazardous
-        - Pistol
+    alts:
+      - profileName: Plasma pistol - supercharge
+        range: 12
+        attacks: 1
+        skill: 3
+        strength: 8
+        ap: -3
+        damage: 2
+        tags:
+          - Hazardous
+          - Pistol
 meleeWeapons:
   - type: rubricae-close-combat-weapon
     name: Close combat weapon

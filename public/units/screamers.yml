@@ -2,7 +2,7 @@ type: screamers
 name: Screamers
 image: /images/screamers.jpg
 section: allies
-statsLine:
+statLine:
   movement: 14
   toughness: 4
   armourSave: 6

@@ -3,7 +3,7 @@ name: Thousand Sons Sorcerer in Terminator Armour
 image: /images/sorcerer-in-terminator-armour.jpg
 section: characters
 cabalPoints: 2
-statsLine:
+statLine:
   movement: 5
   toughness: 5
   armourSave: 2

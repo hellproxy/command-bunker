@@ -3,7 +3,7 @@ name: Thousand Sons Exalted Sorcerer
 image: /images/exalted-sorcerer.jpg
 section: characters
 cabalPoints: 2
-statsLine:
+statLine:
   movement: 6
   toughness: 4
   armourSave: 3
@@ -60,17 +60,17 @@ rangedWeapons:
     tags:
       - Pistol
     optional: true
-    alt:
-      profileName: Plasma pistol - supercharge
-      range: 12
-      attacks: 1
-      skill: 2
-      strength: 8
-      ap: -3
-      damage: 2
-      tags:
-        - Hazardous
-        - Pistol
+    alts:
+      - profileName: Plasma pistol - supercharge
+        range: 12
+        attacks: 1
+        skill: 2
+        strength: 8
+        ap: -3
+        damage: 2
+        tags:
+          - Hazardous
+          - Pistol
 meleeWeapons:
   - type: exalted-sorcerer-force-weapon
     name: Force weapon
