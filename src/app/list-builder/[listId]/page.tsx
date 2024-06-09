@@ -4,7 +4,7 @@ import { useListStore } from "@/stores/lists";
 import { Plus, Trash2 } from "react-feather";
 import { v4 as uuidv4 } from "uuid";
 import { useUnitData } from "@/hooks/data";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import { UnitIcon } from "@/components/unit-icon";
 import { MagicGlyph } from "@/components/magic-glyph";
 import dynamic from "next/dynamic";
@@ -141,7 +141,19 @@ interface UnitCustomizerProps {
 
 const UnitCuztomizer = ({ listId, unit }: UnitCustomizerProps) => {
   const removeUnit = useListStore((state) => state.removeUnit(listId, unit.id));
+  const justAdded = useListStore((state) => state.wasJustAdded(unit.id));
   const { data, error } = useUnitData();
+  const ref = useRef<null | HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (justAdded) {
+      ref.current?.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, []);
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
@@ -153,8 +165,13 @@ const UnitCuztomizer = ({ listId, unit }: UnitCustomizerProps) => {
   const melee = unit.options.get("melee")!;
   const wargear = unit.options.get("wargear")!;
 
+  const boxNova = justAdded ? "box-nova" : "";
+
   return (
-    <div className="flex flex-col gap-2 p-4 rounded-lg bg-white shadow-md">
+    <div
+      className={`flex flex-col gap-2 p-4 rounded-lg bg-white shadow-md ${boxNova}`}
+      ref={ref}
+    >
       <div className="grid grid-cols-9 items-center space-x-4">
         <div className="col-span-1">
           <UnitIcon src={unitData.image} alt={unitData.name} />

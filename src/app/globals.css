@@ -60,7 +60,7 @@ body {
   }
 }
 
-@keyframes nova {
+@keyframes text-nova {
   0% {
     text-shadow: 0 #fff;
     color: #fff;
@@ -74,8 +74,26 @@ body {
   }
 }
 
-.nova {
-  animation: nova 1.5s ease-out 1;
+.text-nova {
+  animation: text-nova 1.5s ease-out 1;
+}
+
+@keyframes box-nova {
+  0% {
+    box-shadow: 0 #fff;
+    color: #fff;
+  }
+  5% {
+    box-shadow: 0 0 9px #1ff, 0 0 18px #1ff;
+    color: #1ff;
+  }
+  100% {
+    box-shadow: 0 #fff;
+  }
+}
+
+.box-nova {
+  animation: box-nova 1.5s ease-out 1;
 }
 
 @layer utilities {

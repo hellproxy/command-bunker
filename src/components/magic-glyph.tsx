@@ -25,7 +25,7 @@ export const MagicGlyph = ({ name, reloadKey }: MagicGlyphProps) => {
     <div className={`text-blue-600 select-none ${mongolian.className}`}>
       <div
         key={reloadKey}
-        className="relative max-h-[24px] text-2xl nova"
+        className="relative max-h-[24px] text-2xl text-nova"
         style={{ bottom: `${adj}px` }}
       >
         {String.fromCodePoint(codePoint)}

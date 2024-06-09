@@ -7,14 +7,18 @@ import { stat } from "fs";
 enableMapSet();
 
 interface ListState {
-  // lists
   lists: Map<string, ListBuilder.List>;
+  unitJustAdded?: string;
+  // list functions
   getList: (listId: string) => ListBuilder.List;
   addList: () => void;
   removeList: (listId: string) => () => void;
   setName: (listId: string) => (name: string) => void;
+  // unit functions
   addUnit: (listId: string) => (unit: ListBuilder.Unit) => void;
+  wasJustAdded: (unitId: string) => boolean;
   removeUnit: (listId: string, unitId: string) => () => void;
+  // weapons and wargear
   isSelected: (
     listId: string,
     unitId: string,
@@ -58,10 +62,12 @@ export const useListStore = create<ListState>()(
       addUnit: (listId) => (unit) => {
         set(
           produce((state: ListState) => {
+            state.unitJustAdded = unit.id;
             state.lists.get(listId)!.units.set(unit.id, unit);
           })
         );
       },
+      wasJustAdded: (unitId) => get().unitJustAdded === unitId,
       removeUnit: (listId, unitId) => () => {
         set(
           produce((state: ListState) => {
