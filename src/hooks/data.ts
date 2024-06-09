@@ -35,6 +35,7 @@ export const unitFiles = [
   // nonInfantry
   "/units/heldrake.yml",
   // allies
+  "/units/pink-horrors.yml",
   "/units/screamers.yml",
 ];
 

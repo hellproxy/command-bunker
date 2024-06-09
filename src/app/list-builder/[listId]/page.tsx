@@ -61,6 +61,7 @@ const UnitCustomizerList = ({ listId }: UnitCustomizerListProps) => {
       <UnitCustomizerSection listId={listId} section="characters" />
       <UnitCustomizerSection listId={listId} section="infantry" />
       <UnitCustomizerSection listId={listId} section="nonInfantry" />
+      <UnitCustomizerSection listId={listId} section="allies" />
     </div>
   );
 };
@@ -188,8 +189,6 @@ const UnitCuztomizer = ({ listId, unit }: UnitCustomizerProps) => {
             />
           </li>
         ))}
-      </ul>
-      <ul>
         {Array.from(wargear).map(([wargear, selected]) => (
           <li key={wargear}>
             <SelectableOption
@@ -249,37 +248,12 @@ const SelectableOption = (props: SelectableOptionProps) => {
         className="flex items-center gap-2 w-70 px-2 py-1 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 hover:text-slate-800 hover:bg-gray-50"
       >
         <div className="block">
-          {isWeapon ? (
-            <Weapon weapon={data.indexedWeapons.get(option)!} />
-          ) : (
-            <Wargear wargear={data.indexedAbilities.get(option)!} />
-          )}
+          <div className="select-none">{name}</div>
         </div>
         <div className={`flex justify-center ${visibility}`}>
           <MagicGlyph name={name} reloadKey={visibility} />
         </div>
       </label>
-    </>
-  );
-};
-
-interface WeaponProps {
-  weapon: Immutable.Weapon;
-}
-
-const Weapon = ({ weapon }: WeaponProps) => {
-  return <div className="select-none">{weapon.name}</div>;
-};
-
-interface WargearProps {
-  wargear: Immutable.Ability;
-}
-
-const Wargear = ({ wargear }: WargearProps) => {
-  return (
-    <>
-      <div className="w-full select-none">{wargear.name}</div>
-      <div className="w-full text-sm select-none">{wargear.description}</div>
     </>
   );
 };

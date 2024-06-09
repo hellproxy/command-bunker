@@ -14,6 +14,7 @@ namespace Immutable {
   }
 
   export interface StatLine {
+    name?: string;
     movement: number;
     toughness: number;
     armourSave: number;
@@ -45,7 +46,7 @@ namespace Immutable {
     readonly type: string;
     readonly name: string;
     readonly description: string;
-    readonly wargearOption?: boolean;
+    readonly optional?: boolean;
     readonly tags?: string[];
     readonly subAbilities?: {
       readonly name: string;

@@ -1,0 +1,108 @@
+type: pink-horrors
+name: Pink Horrors
+image: /images/pink-horrors.jpg
+section: allies
+statLine:
+  name: Pink Horror
+  movement: 6
+  toughness: 3
+  armourSave: 7
+  invulnerableSave: 4
+  wounds: 1
+  leadership: 7
+  objectiveControl: 2
+altStatLines:
+  - name: Blue Horror
+    movement: 6
+    toughness: 3
+    armourSave: 7
+    invulnerableSave: 4
+    wounds: 1
+    leadership: 8
+    objectiveControl: 1
+  - name: Brimstone Horror
+    movement: 6
+    toughness: 3
+    armourSave: 7
+    invulnerableSave: 4
+    wounds: 1
+    leadership: 8
+    objectiveControl: 1
+rangedWeapons:
+  - type: pink-horrors-coruscating-pink-flames
+    name: Coruscating Pink Flames
+    range: 18
+    attacks: 2
+    skill: 3
+    strength: 4
+    ap: -1
+    damage: 1
+    tags:
+      - Psychic
+  - type: pink-horrors-coruscating-blue-flames
+    name: Coruscating Blue Flames
+    range: 18
+    attacks: 2
+    skill: 4
+    strength: 3
+    ap: -1
+    damage: 1
+    tags:
+      - Psychic
+  - type: pink-horrors-coruscating-yellow-flames
+    name: Coruscating Blue Flames
+    range: 18
+    attacks: 2
+    skill: 5
+    strength: 2
+    ap: -1
+    damage: 1
+    tags:
+      - Psychic
+meleeWeapons:
+  - type: pink-horrors-pink-claws
+    name: Pink claws
+    range: "melee"
+    attacks: 1
+    skill: 4
+    strength: 3
+    ap: 0
+    damage: 1
+  - type: pink-horrors-blue-claws
+    name: Pink claws
+    range: "melee"
+    attacks: 1
+    skill: 5
+    strength: 3
+    ap: 0
+    damage: 1
+  - type: pink-horrors-yellow-claws
+    name: Pink claws
+    range: "melee"
+    attacks: 2
+    skill: 5
+    strength: 2
+    ap: 0
+    damage: 1
+coreAbilities:
+  - Deep Strike
+abilities:
+  - type: pink-horrors-split
+    name: Split
+    description: Each time a Pink Horror or Blue Horror model in this unit is destroyed, after the attacking unit has finished making its attacks, if this unit is not destroyed, roll one D6 for that model. On a 4+, if it was a Pink Horror, add two Blue Horror models to this unit, and if it was a Blue Horror, add one Brimstone Horror model to this unit.
+  - type: pink-horrors-crackling-horrors
+    name: Crackling Horrors
+    description: While an enemy unit is within 6" of this unit, if this unit contains no Pink Horror models and one or more Blue Horror models, worsen the leadership characteristic of models in that enemy unit by 1.
+    tags:
+      - Aura
+  - type: pink-horrors-exploding-horrors
+    name: Exploding Horrors
+    description: "Each time this unit is selected to fight, if this unit contains no Pink Horror models, you can select one enemy unit withing Engagement Range of it, then select one or more Brimstone Horror models in this unit. For each Brimstone Horror model you select, roll one D6: on a 4+, that model is destroyed and that enemy unit suffers 1 mortal wound."
+  - type: pink-horrors-daemonic-icon
+    name: Daemonic Icon
+    description: Models in the bearer's unit have a Leadership characteristic of 6+.
+    optional: true
+  - type: pink-horrors-instrument-of-chaos
+    name: Instrument of Chaos
+    description: Add 1 to charge rolls made for the bearer's unit.
+    optional: true
