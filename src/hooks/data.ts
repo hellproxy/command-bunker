@@ -23,12 +23,19 @@ interface Indices {
 type Orders = { [section in Immutable.Section]: string[] };
 
 export const unitFiles = [
+  // leaders
   "/units/magnus-the-red.yml",
   "/units/daemon-prince.yml",
   "/units/daemon-prince-with-wings.yml",
   "/units/exalted-sorcerer.yml",
   "/units/sorcerer-in-terminator-armour.yml",
+  // infantry
   "/units/rubricae.yml",
+  "/units/scarab-occult-terminators.yml",
+  // nonInfantry
+  "/units/heldrake.yml",
+  // allies
+  "/units/screamers.yml",
 ];
 
 export const fetchAllUnits = (urls: string[]): Promise<Indices> =>
@@ -48,14 +55,16 @@ const indexUnits = (units: OrderedUnit[]): Indices => {
   }, new Map<string, Immutable.Unit>());
 
   const indexedWeapons = units
-    .flatMap(({ unit }) => unit.rangedWeapons.concat(unit.meleeWeapons))
+    .flatMap(({ unit }) =>
+      (unit.rangedWeapons || []).concat(unit.meleeWeapons || [])
+    )
     .reduce((map, weapon) => {
       map.set(weapon.type, weapon);
       return map;
     }, new Map<string, Immutable.Weapon>());
 
   const indexedAbilities = units
-    .flatMap(({ unit }) => unit.abilities)
+    .flatMap(({ unit }) => unit.abilities || [])
     .reduce((map, ability) => {
       map.set(ability.type, ability);
       return map;
@@ -70,6 +79,7 @@ const indexUnits = (units: OrderedUnit[]): Indices => {
     characters: [],
     infantry: [],
     nonInfantry: [],
+    allies: [],
   };
   for (let order = 0; order < orderedUnits.size; order++) {
     const unit = orderedUnits.get(order)!;

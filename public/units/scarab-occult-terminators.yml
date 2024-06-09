@@ -1,0 +1,94 @@
+type: scarab-occult-terminators
+name: Scarab Occult Terminators
+image: /images/scarab-occult-terminators.jpg
+section: infantry
+cabalPoints: 1
+statsLine:
+  movement: 5
+  toughness: 5
+  armourSave: 2
+  invulnerableSave: 4
+  wounds: 3
+  leadership: 6
+  objectiveControl: 1
+rangedWeapons:
+  - type: scarab-occult-terminators-inferno-combi-bolter
+    name: Inferno combi-bolter
+    range: 24
+    attacks: 2
+    skill: 3
+    strength: 4
+    ap: -1
+    damange: 1
+    tags:
+      - Rapid Fire 2
+  - type: scarab-occult-terminators-warpflamer
+    name: Heavy warpflamer
+    range: 12
+    attacks: D6
+    skill: N/A
+    strength: 5
+    ap: -2
+    damage: 1
+    tags:
+      - Ignores Cover
+      - Torrent
+    optional: true
+  - type: scarab-occult-terminators-soulreaper-cannon
+    name: Soulreaper cannon
+    range: 24
+    attacks: 6
+    skill: 3
+    strength: 6
+    ap: -1
+    damage: 1
+    tags:
+      - Devastating Wounds
+    optional: true
+  - type: scarab-occult-terminators-hellfyre-missible-rack
+    name: Hellfyre missile rack
+    range: 36
+    attacks: 2
+    skill: 3
+    strength: 10
+    ap: -2
+    damage: 3
+    optional: true
+  - type: scarab-occult-terminators-warpsmite
+    name: Warpsmite
+    range: 18
+    attacks: 3
+    skill: 3
+    strength: 4
+    ap: -3
+    damage: 1
+    tags:
+      - Anti-infantry 4+
+      - Devastating Wounds
+      - Pistol
+      - Psychic
+meleeWeapons:
+  - type: scarab-occult-terminators-force-weapon
+    name: Force weapon
+    range: "melee"
+    attacks: 4
+    skill: 3
+    strength: 6
+    ap: -1
+    damage: D3
+    tags:
+      - Psychic
+  - type: scarab-occult-terminators-prosperine-khopesh
+    name: Prosperine khopesh
+    range: "melee"
+    attacks: 3
+    skill: 3
+    strength: 5
+    ap: -2
+    damage: 2
+coreAbilities:
+  - Deep Strike
+abilities:
+  - type: scarab-occult-terminators-implacable-guardians
+    name: Implacable guardians
+    description: While this unit contains one or more Psyker models, each time an attack is made against this unit, if the Strength characteristic is greater than this unit's Toughness characteristic, subtract 1 from the Wound roll.

@@ -1,0 +1,54 @@
+type: heldrake
+name: Thousand Sons Heldrake
+image: /images/heldrake.jpg
+section: nonInfantry
+statsLine:
+  movement: 20
+  toughness: 9
+  armourSave: 3
+  invulnerableSave: 5
+  wounds: 12
+  leadership: 6
+  objectiveControl: 0
+rangedWeapons:
+  - type: heldrake-baleflamer
+    name: Baleflamer
+    range: 12
+    attacks: D6+3
+    skill: N/A
+    strength: 6
+    ap: -1
+    damange: 2
+    tags:
+      - Ignores Cover
+      - Torrent
+  - type: heldrake-hades-autocannon
+    name: Hades autocannon
+    range: "melee"
+    attacks: 6
+    skill: 3
+    strength: 8
+    ap: -1
+    damage: 2
+meleeWeapons:
+  - type: heldrake-claws
+    name: Heldrake claws
+    range: melee
+    attacks: 5
+    skill: 3
+    strength: 7
+    ap: -1
+    damange: 2
+    tags:
+      - Anti-fly 2+
+      - Devastating Wounds
+coreAbilities:
+  - Deadly Demise D3
+  - Hover
+abilities:
+  - type: heldrake-flame-wreathed
+    name: Flame-wreathed
+    description: Each time this model ends a Normal move, you can select one enemy unit it moved over during that move. Until the end of the turn, models in that unit cannot have the Benefit of Cover.
+  - type: heldrake-damaged
+    name: "Damaged: 1-4 wounds remaining"
+    description: While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.

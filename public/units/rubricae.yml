@@ -100,6 +100,16 @@ meleeWeapons:
     strength: 4
     ap: 0
     damage: 1
+  - type: rubricae-force-weapon
+    name: Force weapon
+    range: "melee"
+    attacks: 3
+    skill: 3
+    strength: 6
+    ap: -1
+    damage: D3
+    tags:
+      - Psychic
 abilities:
   - type: rubricae-bringers-of-change
     name: Bringers of change

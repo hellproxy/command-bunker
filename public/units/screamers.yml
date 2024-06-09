@@ -1,0 +1,27 @@
+type: screamers
+name: Screamers
+image: /images/screamers.jpg
+section: allies
+statsLine:
+  movement: 14
+  toughness: 4
+  armourSave: 6
+  invulnerableSave: 4
+  wounds: 3
+  leadership: 7
+  objectiveControl: 1
+meleeWeapons:
+  - type: screamers-lamprey-bite
+    name: Force weapon
+    range: "melee"
+    attacks: 3
+    skill: 4
+    strength: 6
+    ap: -2
+    damage: 2
+coreAbilities:
+  - Deep Strike
+abilities:
+  - type: screamers-slashing-dive
+    name: Slashing dive
+    description: "In your Movement phase, after this unit ends a Normal move, you can select one enemy it moved over during that move and roll one D6 for each model in this unit: for each 4+ that enemy suffers 1 mortal wound"

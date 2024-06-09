@@ -22,6 +22,7 @@ export default function ListBuilder({ params: { listId } }: ListBuilderProps) {
         <UnitPickerList listId={listId} section="characters" />
         <UnitPickerList listId={listId} section="infantry" />
         <UnitPickerList listId={listId} section="nonInfantry" />
+        <UnitPickerList listId={listId} section="allies" />
       </div>
       <UnitCustomizerList listId={listId} />
     </div>
@@ -300,8 +301,8 @@ interface Optional {
   optional?: boolean;
 }
 
-const toggleMap = (options: Optional[]): Map<string, boolean> => {
-  return options
+const toggleMap = (options?: Optional[]): Map<string, boolean> => {
+  return (options || [])
     .filter((options) => options.optional)
     .reduce((map, options) => {
       map.set(options.type, false);

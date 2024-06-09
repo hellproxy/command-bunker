@@ -6,10 +6,10 @@ namespace Immutable {
     readonly section: Section;
     readonly cabalPoints?: number;
     readonly statsLine: StatsLine;
-    readonly rangedWeapons: Weapon[];
-    readonly meleeWeapons: Weapon[];
-    readonly coreAbilities: string[];
-    readonly abilities: Ability[];
+    readonly rangedWeapons?: Weapon[];
+    readonly meleeWeapons?: Weapon[];
+    readonly coreAbilities?: string[];
+    readonly abilities?: Ability[];
   }
 
   export interface StatsLine {
@@ -59,9 +59,10 @@ namespace Immutable {
     };
   }
 
-  export type Section = "characters" | "infantry" | "nonInfantry";
+  export type Section = "characters" | "infantry" | "nonInfantry" | "allies";
+  export type DiceRoll = `${number | ""}D${number}${`+${number}` | ""}`;
+  export type Attacks = number | DiceRoll;
+  export type Damage = number | DiceRoll;
   export type Range = number | "melee";
-  export type Attacks = number | `D${number}` | `${number}D${number}`;
   export type Skill = number | "N/A";
-  export type Damage = number | `D${number}` | `${number}D${number}`;
 }
