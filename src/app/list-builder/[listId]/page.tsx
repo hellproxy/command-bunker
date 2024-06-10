@@ -4,7 +4,7 @@ import { useListStore } from "@/stores/lists";
 import { Plus, Trash2 } from "react-feather";
 import { v4 as uuidv4 } from "uuid";
 import { useUnitData } from "@/hooks/data";
-import { ChangeEvent, useEffect, useRef } from "react";
+import { ChangeEvent, useEffect, useRef, PropsWithChildren } from "react";
 import { UnitIcon } from "@/components/unit-icon";
 import { MagicGlyph } from "@/components/magic-glyph";
 import dynamic from "next/dynamic";
@@ -18,23 +18,41 @@ interface ListBuilderProps {
 export default function ListBuilder({ params: { listId } }: ListBuilderProps) {
   return (
     <div className="grid h-full grid-cols-2">
-      <div className="max-h-full overflow-auto">
-        <UnitPickerList listId={listId} section="characters" />
-        <UnitPickerList listId={listId} section="infantry" />
-        <UnitPickerList listId={listId} section="nonInfantry" />
-        <UnitPickerList listId={listId} section="allies" />
+      <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
+        <SectionHeader>Characters</SectionHeader>
+        <UnitPickerSection listId={listId} section="characters" />
+        <SectionHeader>Infantry</SectionHeader>
+        <UnitPickerSection listId={listId} section="infantry" />
+        <SectionHeader>Non-Infantry</SectionHeader>
+        <UnitPickerSection listId={listId} section="nonInfantry" />
+        <SectionHeader>Allies</SectionHeader>
+        <UnitPickerSection listId={listId} section="allies" />
       </div>
-      <UnitCustomizerList listId={listId} />
+      <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
+        <SectionHeader>Characters</SectionHeader>
+        <UnitCustomizerSection listId={listId} section="characters" />
+        <SectionHeader>Infantry</SectionHeader>
+        <UnitCustomizerSection listId={listId} section="infantry" />
+        <SectionHeader>Non-Infantry</SectionHeader>
+        <UnitCustomizerSection listId={listId} section="nonInfantry" />
+        <SectionHeader>Allies</SectionHeader>
+        <UnitCustomizerSection listId={listId} section="allies" />
+      </div>
     </div>
   );
 }
+const SectionHeader = ({ children }: PropsWithChildren) => {
+  return (
+    <div className="px-4 py-3 bg-slate-700 text-white text-lg">{children}</div>
+  );
+};
 
-interface UnitPickerListProps {
+interface UnitPickerSectionProps {
   listId: string;
   section: Immutable.Section;
 }
 
-const UnitPickerList = ({ listId, section }: UnitPickerListProps) => {
+const UnitPickerSection = ({ listId, section }: UnitPickerSectionProps) => {
   const { data, error } = useUnitData();
 
   if (error) return <div>Failed to load</div>;
@@ -43,25 +61,10 @@ const UnitPickerList = ({ listId, section }: UnitPickerListProps) => {
   const order = data.orders[section];
 
   return (
-    <div className="flex flex-col gap-2 pl-2 pr-1 py-2">
+    <div className="flex flex-col gap-2">
       {order.map((type) => (
         <UnitPickerCard key={type} type={type} listId={listId} />
       ))}
-    </div>
-  );
-};
-
-interface UnitCustomizerListProps {
-  listId: string;
-}
-
-const UnitCustomizerList = ({ listId }: UnitCustomizerListProps) => {
-  return (
-    <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
-      <UnitCustomizerSection listId={listId} section="characters" />
-      <UnitCustomizerSection listId={listId} section="infantry" />
-      <UnitCustomizerSection listId={listId} section="nonInfantry" />
-      <UnitCustomizerSection listId={listId} section="allies" />
     </div>
   );
 };
