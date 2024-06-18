@@ -19,7 +19,7 @@ rangedWeapons:
     skill: 2
     strength: 6
     ap: -2
-    damange: D3
+    damage: D3
     tags:
       - Blast
       - Devastating Wounds
@@ -50,7 +50,7 @@ rangedWeapons:
     optional: true
   - type: exalted-sorcerer-plasma-pistol
     name: Plasma pistol
-    profileName: Plasma pistol - standard
+    profileName: standard
     range: 12
     attacks: 1
     skill: 2
@@ -61,7 +61,7 @@ rangedWeapons:
       - Pistol
     optional: true
     alts:
-      - profileName: Plasma pistol - supercharge
+      - profileName: supercharge
         range: 12
         attacks: 1
         skill: 2

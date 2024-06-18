@@ -19,11 +19,11 @@ rangedWeapons:
     skill: 2
     strength: 5
     ap: -1
-    damange: 2
+    damage: 2
 meleeWeapons:
   - type: daemon-prince-with-wings-hellforged-weapons
     name: Hellforged weapons
-    profileName: Hellforged weapons - strike
+    profileName: strike
     range: melee
     attacks: 6
     skill: 2
@@ -33,7 +33,7 @@ meleeWeapons:
     tags:
       - Psychic
     alts:
-      - profileName: Hellforged weapons - sweep
+      - profileName: sweep
         range: melee
         attacks: 14
         skill: 2

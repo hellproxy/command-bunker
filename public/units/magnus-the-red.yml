@@ -19,25 +19,25 @@ rangedWeapons:
     skill: 2
     strength: 9
     ap: -2
-    damange: 3
+    damage: 3
     tags:
       - Devastating Wounds
       - Psychic
-  - type: magnus-the-red-tzeenchs-firestorm
-    name: Gaze of Magnus
+  - type: magnus-the-red-tzeentchs-firestorm
+    name: Tzeentch's Firestorm
     range: 24
     attacks: D6+3
     skill: 2
     strength: 5
     ap: -1
-    damange: 2
+    damage: 2
     tags:
       - Blast
       - Psychic
 meleeWeapons:
   - type: magnus-the-red-blade-of-magnus
     name: Blade of Magnus
-    profileName: Blade of Magnus - strike
+    profileName: strike
     range: melee
     attacks: 7
     skill: 2
@@ -48,7 +48,7 @@ meleeWeapons:
       - Devastating Wounds
       - Psychic
     alts:
-      - profileName: Blade of Magnus - sweep
+      - profileName: sweep
         range: melee
         attacks: 14
         skill: 2

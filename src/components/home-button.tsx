@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Home } from "react-feather";
+import { Home } from "lucide-react";
 import { MouseEvent } from "react";
 
 export const HomeButton = () => {

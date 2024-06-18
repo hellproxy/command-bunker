@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useListStore } from "../stores/lists";
 import { useOnClickOutside } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
-import { Edit2, Play, Plus, Trash2, X } from "react-feather";
+import { Edit2, Play, Plus, Trash2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
 
@@ -14,7 +14,7 @@ export const Lists = () => {
 
   return (
     <div className="flex flex-col space-y-2">
-      {Array.from(lists).map(([listId, list]) => (
+      {Array.from(lists).map(([listId]) => (
         <ListEntry listId={listId} key={listId} />
       ))}
       <div className="grid justify-items-center p-2 min-h-20">
@@ -79,7 +79,7 @@ const Builder = ({ listId }: { listId: string }) => {
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    router.push(`/list-builder/${listId}`);
+    router.push(`/build/${listId}`);
   };
 
   return (
@@ -90,8 +90,15 @@ const Builder = ({ listId }: { listId: string }) => {
 };
 
 const Bunker = ({ listId }: { listId: string }) => {
+  const router = useRouter();
+
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    router.push(`/play/${listId}`);
+  };
+
   return (
-    <button className="btn btn-green">
+    <button className="btn btn-green" onClick={handleClick}>
       <Play />
     </button>
   );

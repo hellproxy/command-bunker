@@ -18,7 +18,7 @@ rangedWeapons:
     skill: N/A
     strength: 6
     ap: -1
-    damange: 2
+    damage: 2
     tags:
       - Ignores Cover
       - Torrent
@@ -38,7 +38,7 @@ meleeWeapons:
     skill: 3
     strength: 7
     ap: -1
-    damange: 2
+    damage: 2
     tags:
       - Anti-fly 2+
       - Devastating Wounds

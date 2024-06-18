@@ -8,12 +8,8 @@ export const useUnitData = () => {
   });
 };
 
-interface OrderedUnit {
-  unit: Immutable.Unit;
-  order: number;
-}
-
 interface Indices {
+  units: Immutable.Unit[];
   indexedUnits: Map<string, Immutable.Unit>;
   indexedWeapons: Map<string, Immutable.Weapon>;
   indexedAbilities: Map<string, Immutable.Ability>;
@@ -43,21 +39,20 @@ export const unitFiles = [
 export const fetchAllUnits = (urls: string[]): Promise<Indices> =>
   Promise.all(urls.map(fetchUnit)).then(indexUnits);
 
-const fetchUnit = async (path: string, order: number): Promise<OrderedUnit> => {
+const fetchUnit = async (path: string): Promise<Immutable.Unit> => {
   const response = await fetch(path);
   const text = await response.text();
-  const unit: Immutable.Unit = parse(text);
-  return { unit, order };
+  return parse(text);
 };
 
-const indexUnits = (units: OrderedUnit[]): Indices => {
-  const indexedUnits = units.reduce((map, { unit }) => {
+const indexUnits = (units: Immutable.Unit[]): Indices => {
+  const indexedUnits = units.reduce((map, unit) => {
     map.set(unit.type, unit);
     return map;
   }, new Map<string, Immutable.Unit>());
 
   const indexedWeapons = units
-    .flatMap(({ unit }) =>
+    .flatMap((unit) =>
       (unit.rangedWeapons || []).concat(unit.meleeWeapons || [])
     )
     .reduce((map, weapon) => {
@@ -66,16 +61,11 @@ const indexUnits = (units: OrderedUnit[]): Indices => {
     }, new Map<string, Immutable.Weapon>());
 
   const indexedAbilities = units
-    .flatMap(({ unit }) => unit.abilities || [])
+    .flatMap((unit) => unit.abilities || [])
     .reduce((map, ability) => {
       map.set(ability.type, ability);
       return map;
     }, new Map<string, Immutable.Ability>());
-
-  const orderedUnits = units.reduce((map, { unit, order }) => {
-    map.set(order, unit);
-    return map;
-  }, new Map<number, Immutable.Unit>());
 
   const orders: Orders = {
     characters: [],
@@ -83,12 +73,11 @@ const indexUnits = (units: OrderedUnit[]): Indices => {
     nonInfantry: [],
     allies: [],
   };
-  for (let order = 0; order < orderedUnits.size; order++) {
-    const unit = orderedUnits.get(order)!;
-    orders[unit.section].push(unit.type);
-  }
+
+  units.forEach((unit) => orders[unit.section].push(unit.type));
 
   return {
+    units,
     indexedUnits,
     indexedWeapons,
     indexedAbilities,

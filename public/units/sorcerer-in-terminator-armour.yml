@@ -19,7 +19,7 @@ rangedWeapons:
     skill: 3
     strength: 4
     ap: -3
-    damange: 2
+    damage: 2
     tags:
       - Anti-monster 4+
       - Anti-vehicle 4+

@@ -1,13 +1,14 @@
 "use client";
 
 import { useListStore } from "@/stores/lists";
-import { Plus, Trash2 } from "react-feather";
+import { Plus, Trash2 } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import { useUnitData } from "@/hooks/data";
-import { ChangeEvent, useEffect, useRef, PropsWithChildren } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import { UnitIcon } from "@/components/unit-icon";
 import { MagicGlyph } from "@/components/magic-glyph";
 import dynamic from "next/dynamic";
+import { SectionHeader } from "@/components/section-header";
 
 interface ListBuilderProps {
   params: {
@@ -41,11 +42,6 @@ export default function ListBuilder({ params: { listId } }: ListBuilderProps) {
     </div>
   );
 }
-const SectionHeader = ({ children }: PropsWithChildren) => {
-  return (
-    <div className="px-4 py-3 bg-slate-700 text-white text-lg">{children}</div>
-  );
-};
 
 interface UnitPickerSectionProps {
   listId: string;
@@ -186,41 +182,45 @@ const UnitCuztomizer = ({ listId, unit }: UnitCustomizerProps) => {
           </button>
         </div>
       </div>
-      <ul className="flex flex-wrap gap-2">
-        {Array.from(ranged).map(([weapon, selected]) => (
-          <li key={weapon}>
-            <SelectableOption
-              listId={listId}
-              unitId={unit.id}
-              option={weapon}
-              selected={selected}
-              location="ranged"
-            />
-          </li>
-        ))}
-        {Array.from(melee).map(([weapon, selected]) => (
-          <li key={weapon}>
-            <SelectableOption
-              listId={listId}
-              unitId={unit.id}
-              option={weapon}
-              selected={selected}
-              location="melee"
-            />
-          </li>
-        ))}
-        {Array.from(wargear).map(([wargear, selected]) => (
-          <li key={wargear}>
-            <SelectableOption
-              listId={listId}
-              unitId={unit.id}
-              option={wargear}
-              selected={selected}
-              location="wargear"
-            />
-          </li>
-        ))}
-      </ul>
+      {ranged.size || melee.size || wargear.size ? (
+        <ul className="flex flex-wrap gap-2">
+          {Array.from(ranged).map(([weapon, selected]) => (
+            <li key={weapon}>
+              <SelectableOption
+                listId={listId}
+                unitId={unit.id}
+                option={weapon}
+                selected={selected}
+                location="ranged"
+              />
+            </li>
+          ))}
+          {Array.from(melee).map(([weapon, selected]) => (
+            <li key={weapon}>
+              <SelectableOption
+                listId={listId}
+                unitId={unit.id}
+                option={weapon}
+                selected={selected}
+                location="melee"
+              />
+            </li>
+          ))}
+          {Array.from(wargear).map(([wargear, selected]) => (
+            <li key={wargear}>
+              <SelectableOption
+                listId={listId}
+                unitId={unit.id}
+                option={wargear}
+                selected={selected}
+                location="wargear"
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

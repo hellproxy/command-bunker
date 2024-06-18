@@ -10,9 +10,10 @@ export const UnitIcon = ({ src, alt }: UnitIconProps) => {
     <Image
       src={src}
       alt={alt}
-      width={50}
-      height={50}
-      className="w-16 rounded-xl border-2"
+      quality={60}
+      width={100}
+      height={100}
+      className="object-cover rounded-xl border-2"
     />
   );
 };

@@ -12,7 +12,7 @@ statLine:
   objectiveControl: 1
 meleeWeapons:
   - type: screamers-lamprey-bite
-    name: Force weapon
+    name: Lamprey bite
     range: melee
     attacks: 3
     skill: 4

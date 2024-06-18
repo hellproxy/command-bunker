@@ -1,8 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Home } from "react-feather";
-import { MouseEvent } from "react";
 import { HomeButton } from "@/components/home-button";
 
 const inter = Inter({ subsets: ["latin"] });

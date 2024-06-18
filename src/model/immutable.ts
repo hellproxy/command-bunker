@@ -52,7 +52,7 @@ namespace Immutable {
       readonly name: string;
       readonly description: string;
       readonly tags?: string[];
-    };
+    }[];
   }
 
   export type Section = "characters" | "infantry" | "nonInfantry" | "allies";

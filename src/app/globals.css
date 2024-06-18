@@ -58,6 +58,26 @@ body {
   .btn-green:hover {
     @apply bg-green-700 text-white;
   }
+  .search:focus-within {
+    outline-color: currentcolor;
+    outline-style: auto;
+    outline-width: medium;
+  }
+  .statline > div {
+    @apply mr-auto;
+  }
+  .statline > div:last-child {
+    @apply mr-0;
+  }
+  .statline > div > div {
+    @apply text-center;
+  }
+  .statsline-box {
+    @apply inline-block p-1.5 mt-1 text-white bg-slate-700 aspect-square border h-10;
+  }
+  .weapon-statline > div {
+    @apply text-center;
+  }
 }
 
 @keyframes text-nova {

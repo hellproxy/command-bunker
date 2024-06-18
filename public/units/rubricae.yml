@@ -19,7 +19,7 @@ rangedWeapons:
     skill: 3
     strength: 4
     ap: -1
-    damange: 1
+    damage: 1
     optional: true
   - type: rubricae-warpflamer
     name: Warpflamers
@@ -70,7 +70,7 @@ rangedWeapons:
     optional: true
   - type: rubricae-plasma-pistol
     name: Plasma pistol
-    profileName: Plasma pistol - standard
+    profileName: standard
     range: 12
     attacks: 1
     skill: 3
@@ -81,7 +81,7 @@ rangedWeapons:
       - Pistol
     optional: true
     alts:
-      - profileName: Plasma pistol - supercharge
+      - profileName: supercharge
         range: 12
         attacks: 1
         skill: 3

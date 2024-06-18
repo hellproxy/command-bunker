@@ -19,7 +19,7 @@ rangedWeapons:
     skill: 3
     strength: 4
     ap: -1
-    damange: 1
+    damage: 1
     tags:
       - Rapid Fire 2
   - type: scarab-occult-terminators-warpflamer
