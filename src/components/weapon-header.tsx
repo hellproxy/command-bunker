@@ -1,9 +1,9 @@
 interface WeaponHeaderProps {
-  range: Immutable.Range;
+  ranged: boolean;
   className?: string;
 }
 
-export const WeaponHeader = ({ range, className }: WeaponHeaderProps) => {
+export const WeaponHeader = ({ ranged, className }: WeaponHeaderProps) => {
   return (
     <div
       className={`grid grid-cols-6 weapon-statline bg-gray-200 ${
@@ -12,7 +12,7 @@ export const WeaponHeader = ({ range, className }: WeaponHeaderProps) => {
     >
       <div>Range</div>
       <div>A</div>
-      <div>{range === "melee" ? "WS" : "BS"}</div>
+      <div>{ranged ? "BS" : "WS"}</div>
       <div>S</div>
       <div>AP</div>
       <div>D</div>

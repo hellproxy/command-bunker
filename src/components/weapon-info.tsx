@@ -2,6 +2,7 @@ import { Crosshair, Sword } from "lucide-react";
 import { Tags } from "./tags";
 import { WeaponHeader } from "./weapon-header";
 import { WeaponStatLine } from "./weapon-statline";
+import { immutable } from "swr/immutable";
 
 interface WeaponInfoProps {
   weapon: Immutable.Weapon;
@@ -26,59 +27,93 @@ export const WeaponInfo = ({ weapon, unitName }: WeaponInfoProps) => {
           <div className="text-gray-400 grow text-right">{unitName}</div>
         </div>
       </div>
-      <div className="grid grid-cols-11 gap-y-2">
+      <div className="flex flex-col gap-y-2">
         {hasProfiles ? (
-          <>
+          <div className="grid grid-cols-11">
             <div className="col-span-2 bg-gray-200 pl-2 pr-1 py-1">Profile</div>
+            <WeaponHeader className="col-span-5 pl-1 py-1" ranged={ranged} />
             <div className="col-span-4 bg-gray-200 px-1 py-1">Tags</div>
-            <WeaponHeader className="col-span-5 pl-1 py-1" range={range} />
-          </>
+          </div>
         ) : (
-          <>
+          <div className="grid grid-cols-11">
+            <WeaponHeader className="col-span-5 pl-1 py-1" ranged={ranged} />
             <div className="col-span-6 bg-gray-200 pl-2 pr-1 py-1">Tags</div>
-            <WeaponHeader className="col-span-5 pl-1 py-1" range={range} />
-          </>
+          </div>
         )}
-        <WeaponLine weapon={weapon} hasProfiles={hasProfiles} />
+        <WeaponRow weaponProfile={weapon} hasProfiles={hasProfiles} />
         {(alts || []).map((alt, index) => (
-          <WeaponLine key={index} weapon={alt} hasProfiles={hasProfiles} />
+          <WeaponRow
+            key={index}
+            weaponProfile={alt}
+            hasProfiles={hasProfiles}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-interface WeaponLineProps {
-  weapon: Immutable.WeaponProfile;
+interface WeaponRowProps {
+  weaponProfile: Immutable.WeaponProfile;
   hasProfiles: boolean;
 }
 
-const WeaponLine = ({ weapon, hasProfiles }: WeaponLineProps) => {
+export const WeaponRow = ({ weaponProfile, hasProfiles }: WeaponRowProps) => {
+  const { profileName } = weaponProfile;
+
   return hasProfiles ? (
-    <>
-      <div className="flex items-center col-span-2 pl-2 pr-1">
-        {weapon.profileName}
-      </div>
-      <Tags
-        className="col-span-4 px-1"
-        tags={weapon.tags}
-        placeholder={NoTags}
-      />
-      <div className="flex flex-col justify-center pl-1 col-span-5">
-        <WeaponStatLine weapon={weapon} />
-      </div>
-    </>
+    <WeaponRow3 weaponProfile={weaponProfile} title={profileName} />
   ) : (
-    <>
-      <Tags
-        className="col-span-6 pr-1"
-        tags={weapon.tags}
-        placeholder={NoTags}
-      />
-      <div className="flex flex-col justify-center pl-1 col-span-5">
-        <WeaponStatLine weapon={weapon} />
+    <WeaponRow2 weaponProfile={weaponProfile} />
+  );
+};
+
+interface WeaponRow3Props {
+  weaponProfile: Immutable.WeaponProfile;
+  title: string;
+  className?: string;
+  titleClassName?: string;
+}
+
+export const WeaponRow3 = ({
+  weaponProfile,
+  title,
+  className,
+  titleClassName,
+}: WeaponRow3Props) => {
+  const { tags } = weaponProfile;
+
+  return (
+    <div className={`grid grid-cols-11 ${className || ""}`}>
+      <div
+        className={`flex items-center col-span-2 pl-2 pr-1 ${
+          titleClassName || ""
+        }`}
+      >
+        {title}
       </div>
-    </>
+      <div className="flex flex-col justify-center pl-1 col-span-5">
+        <WeaponStatLine weapon={weaponProfile} />
+      </div>
+      <Tags className="col-span-4 px-1" tags={tags} placeholder={NoTags} />
+    </div>
+  );
+};
+
+interface WeaponRow2Props {
+  weaponProfile: Immutable.WeaponProfile;
+}
+
+export const WeaponRow2 = ({ weaponProfile }: WeaponRow2Props) => {
+  const { tags } = weaponProfile;
+
+  return (
+    <div className="grid grid-cols-11">
+      <div className="flex flex-col justify-center pl-1 col-span-5">
+        <WeaponStatLine weapon={weaponProfile} />
+      </div>
+      <Tags className="col-span-6 pr-1" tags={tags} placeholder={NoTags} />
+    </div>
   );
 };
 
