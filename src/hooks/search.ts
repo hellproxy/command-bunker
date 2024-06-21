@@ -4,6 +4,10 @@ import { useUnitData } from "./data";
 
 const options: IFuseOptions<SearchValue> = {
   keys: [
+    {
+      name: "weightedUnitName",
+      weight: 4,
+    },
     "value.name",
     "value.coreAbilities",
     "value.tags",
@@ -13,10 +17,12 @@ const options: IFuseOptions<SearchValue> = {
   ],
   threshold: 0.3,
   includeMatches: true,
+  ignoreFieldNorm: true,
 };
 
 export interface SearchableUnit {
   model: "unit";
+  weightedUnitName: string;
   value: Immutable.Unit;
 }
 
@@ -44,7 +50,11 @@ const toSearchData = (units: Immutable.Unit[]) => {
   const searchData: SearchValue[] = [];
 
   units
-    .map<SearchableUnit>((unit) => ({ model: "unit", value: unit }))
+    .map<SearchableUnit>((unit) => ({
+      model: "unit",
+      weightedUnitName: unit.name,
+      value: unit,
+    }))
     .forEach((unit) => searchData.push(unit));
 
   units
