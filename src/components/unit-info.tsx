@@ -1,7 +1,7 @@
 import { StatLine } from "./statline";
 import { UnitIcon } from "./unit-icon";
 import { WeaponHeader } from "./weapon-header";
-import { WeaponRow3, WeaponRow } from "./weapon-info";
+import { WeaponRow3 } from "./weapon-info";
 
 interface UnitInfoProps {
   unit: Immutable.Unit;
@@ -65,8 +65,9 @@ const UnitWeapon = ({ weapon, title }: UnitWeaponRowProps) => {
       <div className="flex flex-col gap-1 mt-1 pb-1 border-l bg-slate-100">
         <div className="flex items-center pl-2 pr-1 min-h-8">{name}</div>
         <WeaponRow3 weaponProfile={weapon} title={profileName} />
-        {alts.map((alt) => (
+        {alts.map((alt, index) => (
           <WeaponRow3
+            key={index}
             weaponProfile={alt}
             title={alt.profileName}
             className="min-h-8"
