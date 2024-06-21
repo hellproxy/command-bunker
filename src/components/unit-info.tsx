@@ -119,11 +119,11 @@ const UnitAbility = ({ ability }: UnitAbilityProps) => {
   return (
     <div
       className={`flex flex-col px-2 gap-1 ${
-        subAbilities ? "border-l bg-slate-100 py-1" : ""
+        subAbilities ? "border-l bg-slate-100 py-2" : ""
       }`}
     >
       <div className="flex flew-row">
-        <div className="flex items-center font-bold py-1">{name}</div>
+        <div className="flex items-center font-bold">{name}</div>
         <div className="flex flex-row grow justify-end">
           <Tags tags={tags} className="justify-right" />
         </div>
