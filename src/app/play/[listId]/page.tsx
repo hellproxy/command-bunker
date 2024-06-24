@@ -4,26 +4,14 @@ import { SectionHeader } from "@/components/section-header";
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { useListStore } from "@/stores/lists";
-import { SearchValue, useSearch } from "@/hooks/search";
-import { StatLine } from "@/components/statline";
-import { UnitInfo } from "@/components/unit-info";
-import { WeaponInfo } from "@/components/weapon-info";
-import { AbilityInfo } from "@/components/ability-info";
+import { SearchValue } from "@/hooks/search";
+import { SearchList } from "@/components/search/search-list";
+import { ArmyList } from "@/components/army/army-list";
 
 interface CommandBunkerProps {
-  params: ListId;
-}
-
-interface ListId {
-  listId: string;
-}
-
-interface SearchString {
-  searchString: string;
-}
-
-interface SearchResult {
-  searchValue: SearchValue;
+  params: {
+    listId: string;
+  };
 }
 
 export default function CommandBunker({
@@ -39,7 +27,11 @@ export default function CommandBunker({
   );
 }
 
-const ReferencePane = ({ listId }: ListId) => {
+interface ReferencePaneProps {
+  listId: string;
+}
+
+const ReferencePane = ({ listId }: ReferencePaneProps) => {
   const [searchString, setSearchString] = useState("");
 
   return (
@@ -54,68 +46,10 @@ const ReferencePane = ({ listId }: ListId) => {
         />
       </div>
       {!searchString ? (
-        <FullReferenceList listId={listId} />
+        <ArmyList listId={listId} />
       ) : (
-        <FilteredReferenceList listId={listId} searchString={searchString} />
+        <SearchList listId={listId} searchString={searchString} />
       )}
     </>
   );
-};
-
-const FullReferenceList = ({ listId }: ListId) => {
-  return (
-    <>
-      <SectionHeader>Characters</SectionHeader>
-      <SectionHeader>Infantry</SectionHeader>
-      <SectionHeader>Non-Infantry</SectionHeader>
-      <SectionHeader>Allies</SectionHeader>
-    </>
-  );
-};
-
-const FilteredReferenceList = ({
-  listId,
-  searchString,
-}: ListId & SearchString) => {
-  const list = useListStore((state) => state.getList(listId));
-  const { searchEngine, searchError } = useSearch();
-
-  if (searchError) return <div>Failed to load</div>;
-  if (!searchEngine || !list) return <div>Loading...</div>;
-
-  const searchResults = searchEngine.search(searchString);
-
-  return (
-    <>
-      <div className="flex flex-col gap-2">
-        {searchResults.map((result) => (
-          <FilteredReferenceValue
-            key={result.item.value.type}
-            searchValue={result.item}
-          />
-        ))}
-      </div>
-    </>
-  );
-};
-
-const FilteredReferenceValue = ({ searchValue }: SearchResult) => {
-  switch (searchValue.model) {
-    case "unit":
-      return <UnitInfo unit={searchValue.value} />;
-    case "weapon":
-      return (
-        <WeaponInfo
-          weapon={searchValue.value}
-          unitName={searchValue.unitName}
-        />
-      );
-    case "ability":
-      return (
-        <AbilityInfo
-          ability={searchValue.value}
-          unitName={searchValue.unitName}
-        />
-      );
-  }
 };

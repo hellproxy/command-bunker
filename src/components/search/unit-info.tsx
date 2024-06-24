@@ -1,7 +1,7 @@
-import { StatLine } from "./statline";
-import { Tags } from "./tags";
-import { UnitIcon } from "./unit-icon";
-import { WeaponHeader } from "./weapon-header";
+import { StatLine } from "../statline";
+import { Tags } from "../tags";
+import { UnitIcon } from "../unit-icon";
+import { WeaponHeader } from "../weapon-header";
 import { WeaponRow3 } from "./weapon-info";
 
 interface UnitInfoProps {

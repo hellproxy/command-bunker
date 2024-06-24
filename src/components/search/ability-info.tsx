@@ -1,12 +1,5 @@
-import {
-  Award,
-  Briefcase,
-  Flag,
-  Flame,
-  FlaskRound,
-  Sparkles,
-} from "lucide-react";
-import { Tags } from "./tags";
+import { FlaskRound, Sparkles } from "lucide-react";
+import { Tags } from "../tags";
 
 interface AbilityInfoProps {
   ability: Immutable.Ability;

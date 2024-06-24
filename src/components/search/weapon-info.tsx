@@ -1,7 +1,7 @@
 import { Crosshair, Sword } from "lucide-react";
-import { Tags } from "./tags";
-import { WeaponHeader } from "./weapon-header";
-import { WeaponStatLine } from "./weapon-statline";
+import { Tags } from "../tags";
+import { WeaponHeader } from "../weapon-header";
+import { WeaponStatLine } from "../weapon-statline";
 
 interface WeaponInfoProps {
   weapon: Immutable.Weapon;
