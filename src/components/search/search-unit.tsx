@@ -2,13 +2,13 @@ import { StatLine } from "../statline";
 import { Tags } from "../tags";
 import { UnitIcon } from "../unit-icon";
 import { WeaponHeader } from "../weapon-header";
-import { WeaponRow3 } from "./weapon-info";
+import { WeaponRow3 } from "./search-weapon";
 
-interface UnitInfoProps {
+interface SearchUnitProps {
   unit: Immutable.Unit;
 }
 
-export const UnitInfo = ({ unit }: UnitInfoProps) => {
+export const SearchUnit = ({ unit }: SearchUnitProps) => {
   const {
     name,
     image,

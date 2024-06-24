@@ -1,12 +1,12 @@
 import { FlaskRound, Sparkles } from "lucide-react";
 import { Tags } from "../tags";
 
-interface AbilityInfoProps {
+interface SearchAbilityProps {
   ability: Immutable.Ability;
   unitName: string;
 }
 
-export const AbilityInfo = ({ ability, unitName }: AbilityInfoProps) => {
+export const SearchAbility = ({ ability, unitName }: SearchAbilityProps) => {
   const { name, description, tags, subAbilities } = ability;
   const isWargear = ability.optional;
 

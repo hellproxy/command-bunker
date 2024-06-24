@@ -8,6 +8,9 @@ interface ArmyListProps {
 export const ArmyList = ({ listId }: ArmyListProps) => {
   const list = useListStore((state) => state.getList(listId));
 
+  // 1. dropdown top right with dead/removed/etc
+  // 2. chosen weapon options displayed along bottom below statline
+
   return (
     <>
       <SectionHeader>Characters</SectionHeader>

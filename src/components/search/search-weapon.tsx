@@ -3,12 +3,12 @@ import { Tags } from "../tags";
 import { WeaponHeader } from "../weapon-header";
 import { WeaponStatLine } from "../weapon-statline";
 
-interface WeaponInfoProps {
+interface SearchWeaponProps {
   weapon: Immutable.Weapon;
   unitName: string;
 }
 
-export const WeaponInfo = ({ weapon, unitName }: WeaponInfoProps) => {
+export const SearchWeapon = ({ weapon, unitName }: SearchWeaponProps) => {
   const { name, range, alts, profileName } = weapon;
 
   const ranged = "melee" !== weapon.range;

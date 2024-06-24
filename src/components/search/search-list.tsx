@@ -1,7 +1,7 @@
 import { useListStore } from "@/stores/lists";
-import { AbilityInfo } from "./ability-info";
-import { UnitInfo } from "./unit-info";
-import { WeaponInfo } from "./weapon-info";
+import { SearchAbility } from "./search-ability";
+import { SearchUnit } from "./search-unit";
+import { SearchWeapon } from "./search-weapon";
 import { SearchValue, useSearch } from "@/hooks/search";
 
 interface SearchListProps {
@@ -36,17 +36,17 @@ interface SearchValueProps {
 const SearchItem = ({ searchValue }: SearchValueProps) => {
   switch (searchValue.model) {
     case "unit":
-      return <UnitInfo unit={searchValue.value} />;
+      return <SearchUnit unit={searchValue.value} />;
     case "weapon":
       return (
-        <WeaponInfo
+        <SearchWeapon
           weapon={searchValue.value}
           unitName={searchValue.unitName}
         />
       );
     case "ability":
       return (
-        <AbilityInfo
+        <SearchAbility
           ability={searchValue.value}
           unitName={searchValue.unitName}
         />
