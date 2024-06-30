@@ -1,10 +1,7 @@
 "use client";
 
-import { SectionHeader } from "@/components/section-header";
 import { useRef, useState } from "react";
 import { Search } from "lucide-react";
-import { useListStore } from "@/stores/lists";
-import { SearchValue } from "@/hooks/search";
 import { SearchList } from "@/components/search/search-list";
 import { ArmyList } from "@/components/army/army-list";
 import { useHotkey } from "@/hooks/hotkey";
@@ -36,7 +33,13 @@ const ReferencePane = ({ listId }: ReferencePaneProps) => {
   const [searchString, setSearchString] = useState("");
 
   const ref = useRef<HTMLInputElement | null>(null);
-  useHotkey(() => ref.current?.focus());
+  useHotkey((event) => {
+    if (event.key === "Escape") {
+      setSearchString("");
+    } else {
+      ref.current?.focus();
+    }
+  });
 
   return (
     <>
