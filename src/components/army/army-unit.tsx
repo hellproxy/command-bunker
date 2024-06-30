@@ -44,7 +44,7 @@ export const ArmyUnit = ({ unit, unitData }: ArmyUnitProps) => {
       {status && (
         <div
           className={`absolute left-0 w-full h-full rounded-lg pointer-events-none opacity-50 ${
-            status === "dead" ? "bg-red-800" : "bg-gray-600"
+            status === "dead" ? "bg-red-900" : "bg-gray-600"
           }`}
         />
       )}
