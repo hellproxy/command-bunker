@@ -1,12 +1,13 @@
 "use client";
 
 import { SectionHeader } from "@/components/section-header";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { useListStore } from "@/stores/lists";
 import { SearchValue } from "@/hooks/search";
 import { SearchList } from "@/components/search/search-list";
 import { ArmyList } from "@/components/army/army-list";
+import { useHotkey } from "@/hooks/hotkey";
 
 interface CommandBunkerProps {
   params: {
@@ -34,6 +35,9 @@ interface ReferencePaneProps {
 const ReferencePane = ({ listId }: ReferencePaneProps) => {
   const [searchString, setSearchString] = useState("");
 
+  const ref = useRef<HTMLInputElement | null>(null);
+  useHotkey(() => ref.current?.focus());
+
   return (
     <>
       <div className="flex flex-row items-center p-3 gap-3 rounded bg-white search">
@@ -43,6 +47,7 @@ const ReferencePane = ({ listId }: ReferencePaneProps) => {
           placeholder="Search..."
           value={searchString}
           onChange={(event) => setSearchString(event.target.value)}
+          ref={ref}
         />
       </div>
       {!searchString ? (
