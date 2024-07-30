@@ -6,7 +6,7 @@ interface CabalPointsProps {
 }
 
 export const CabalPoints = ({ listId }: CabalPointsProps) => {
-  const cabalPoints = useGameStore((state) => state.cabalPoints);
+  const cabalPoints = useGameStore((state) => state.current().cabalPoints);
   const { totalCabalPoints, error } = useTotalCabalPoints(listId);
 
   if (error) return <div>Failed to load</div>;

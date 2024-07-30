@@ -1,20 +1,44 @@
-import { useGameStore } from "@/stores/game";
+import { UnitStatus, useGameStore } from "@/stores/game";
 import { useListStore } from "@/stores/lists";
-import { useUnitData } from "./data";
+import { Indices, useUnitData } from "./data";
+import { useCallback } from "react";
 
-export const useTotalCabalPoints = (listId: string) => {
-  const statuses = useGameStore((state) => state.unitStatuses);
+interface UseCabalPoints {
+  totalCabalPoints?: number;
+  resetCabalPoints?: () => void;
+  error: any;
+  isLoading: boolean;
+}
+
+export const useTotalCabalPoints = (listId: string): UseCabalPoints => {
+  const statuses = useGameStore((state) => state.unitStatuses());
+  const setCabalPoints = useGameStore((state) => state.setCabalPoints);
+
   const list = useListStore((state) => state.getList(listId));
   const { data, error, isLoading } = useUnitData();
+
+  const totalCabalPoints = data
+    ? calculateTotalCabalPoints(list, data, statuses)
+    : 0;
+
+  const resetCabalPoints = useCallback(() => {
+    setCabalPoints(totalCabalPoints);
+  }, [totalCabalPoints]);
 
   if (!data) {
     return { error, isLoading };
   }
 
-  const totalCabalPoints = Array.from(list.units)
-    .filter(([id]) => statuses.get(id) === undefined)
-    .map(([, { type }]) => data.indexedUnits.get(type)!)
-    .reduce((sum, { cabalPoints }) => sum + (cabalPoints || 0), 0);
+  return { totalCabalPoints, resetCabalPoints, error, isLoading };
+};
 
-  return { totalCabalPoints, error, isLoading };
+const calculateTotalCabalPoints = (
+  list: ListBuilder.List,
+  indices: Indices,
+  statuses: Map<string, UnitStatus>
+) => {
+  return Array.from(list.units)
+    .filter(([id]) => statuses.get(id) === undefined)
+    .map(([, { type }]) => indices.indexedUnits.get(type)!)
+    .reduce((sum, { cabalPoints }) => sum + (cabalPoints || 0), 0);
 };

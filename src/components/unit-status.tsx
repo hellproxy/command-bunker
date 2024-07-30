@@ -9,7 +9,7 @@ interface UnitStatusTogglesProps {
 }
 
 export const UnitStatusToggles = ({ unitId }: UnitStatusTogglesProps) => {
-  const status = useGameStore((state) => state.unitStatuses.get(unitId));
+  const status = useGameStore((state) => state.unitStatuses().get(unitId));
   const [showToggles, setShowToggles] = useState(false);
 
   const ref = useRef(null);

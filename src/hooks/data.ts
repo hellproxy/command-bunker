@@ -8,7 +8,7 @@ export const useUnitData = () => {
   });
 };
 
-interface Indices {
+export interface Indices {
   units: Immutable.Unit[];
   indexedUnits: Map<string, Immutable.Unit>;
   indexedWeapons: Map<string, Immutable.Weapon>;

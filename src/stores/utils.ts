@@ -1,3 +1,4 @@
+import { GameHistory } from "@/stores/history-utils";
 import { PersistStorage, StorageValue } from "zustand/middleware";
 
 export function createMapStorage<S>(baseState: () => S): PersistStorage<S> {
@@ -29,9 +30,15 @@ export function replacer(_: any, value: any) {
 }
 
 export function reviver(_: any, value: any) {
-  if (value["__type"] === "Map") {
-    const data = value["__data"];
-    return new Map(data);
+  const type = value["__type"];
+
+  if (type !== undefined) {
+    switch (type) {
+      case "Map":
+        const data = value["__data"];
+        return new Map(data);
+    }
   }
+
   return value;
 }

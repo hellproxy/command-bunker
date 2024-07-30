@@ -1,11 +1,15 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Search } from "lucide-react";
+import { ArrowLeft, ArrowRight, Search } from "lucide-react";
 import { SearchList } from "@/components/search/search-list";
 import { ArmyList } from "@/components/army/army-list";
 import { useHotkey } from "@/hooks/hotkey";
-import { CabalPoints } from "@/components/points/cabal-points";
+import { CabalPoints } from "@/components/state/cabal-points";
+import { CommandPoints } from "@/components/state/command-points";
+import { Turn } from "@/components/state/turn";
+import { VictoryPoints } from "@/components/state/victory-points";
+import { UndoRedo } from "@/components/state/undo-redo";
 
 interface CommandBunkerProps {
   params: {
@@ -34,21 +38,34 @@ interface GameStatePaneProps {
 
 const GameStatePane = ({ listId }: GameStatePaneProps) => {
   return (
-    <div className="grid grid-cols-3 p-2 bg-white rounded shadow-md">
-      <div className="flex flex-col">
-        <div className="text-sm text-center">Command Points</div>
-        <div className="text-center">0</div>
-      </div>
-      <div>
-        <div className="text-sm text-center">Cabal Points</div>
-        <div className="flex justify-center">
-          <CabalPoints listId={listId} />
+    <div className="flex divide-x bg-white rounded shadow-md">
+      <div className="grow grid grid-cols-4 divide-x">
+        <div className="flex flex-col gap-1 py-2">
+          <div className="text-sm text-center">Turn</div>
+          <div className="flex justify-center">
+            <Turn />
+          </div>
+        </div>
+        <div className="flex flex-col gap-1 py-2">
+          <div className="text-sm text-center">Victory</div>
+          <div className="flex justify-center">
+            <VictoryPoints />
+          </div>
+        </div>
+        <div className="flex flex-col gap-1 py-2">
+          <div className="text-sm text-center">Command</div>
+          <div className="flex justify-center">
+            <CommandPoints />
+          </div>
+        </div>
+        <div className="flex flex-col gap-1 py-2">
+          <div className="text-sm text-center">Cabal</div>
+          <div className="flex justify-center">
+            <CabalPoints listId={listId} />
+          </div>
         </div>
       </div>
-      <div>
-        <div className="text-sm text-center">Victory Points</div>
-        <div className="flex justify-center">0</div>
-      </div>
+      <UndoRedo />
     </div>
   );
 };

@@ -16,7 +16,7 @@ interface ArmyUnitProps {
 export const ArmyUnit = ({ unit, unitData }: ArmyUnitProps) => {
   const { options } = unit;
   const { data, error } = useUnitData();
-  const status = useGameStore((state) => state.unitStatuses.get(unit.id));
+  const status = useGameStore((state) => state.unitStatuses().get(unit.id));
   const [showData, setShowData] = useState(false);
 
   const ref = useRef<null | HTMLDivElement>(null);
