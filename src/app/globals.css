@@ -78,6 +78,9 @@ body {
   .weapon-statline > div {
     @apply text-center;
   }
+  .game-interaction {
+    @apply flex rounded p-2 hover:bg-slate-100;
+  }
 }
 
 @keyframes text-nova {

@@ -1,12 +1,9 @@
 import { useTotalCabalPoints } from "@/hooks/cabal-points";
-import { useGameValues } from "@/stores/game";
+import { useGameStore, useGameValues } from "@/stores/game";
 
-interface CabalPointsProps {
-  listId: string;
-}
-
-export const CabalPoints = ({ listId }: CabalPointsProps) => {
+export const CabalPoints = () => {
   const cabalPoints = useGameValues(({ cabalPoints }) => cabalPoints);
+  const listId = useGameStore((state) => state.listId!);
   const { totalCabalPoints, error } = useTotalCabalPoints(listId);
 
   if (error) return <div>Failed to load</div>;

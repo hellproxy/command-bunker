@@ -2,11 +2,12 @@ import { useGameStore, useGameValues } from "@/stores/game";
 import { PreGame } from "./pre-game";
 
 export const GameDisplay = () => {
-  const { turn, phase, attacking } = useGameValues(
-    ({ turn, phase, attacking }) => ({
+  const { turn, phase, attacking, attackersTurn } = useGameValues(
+    ({ turn, phase, attacking, attackersTurn }) => ({
       turn,
       phase,
       attacking,
+      attackersTurn,
     })
   );
 
@@ -14,10 +15,11 @@ export const GameDisplay = () => {
     return <PreGame />;
   }
 
-  if (attacking) {
+  const playersTurn = attacking === attackersTurn;
+  if (playersTurn) {
     switch (phase) {
       case "command":
-        return <></>;
+        return <>It's your command phase</>;
       case "movement":
         return <></>;
       case "shooting":
@@ -30,7 +32,7 @@ export const GameDisplay = () => {
   } else {
     switch (phase) {
       case "command":
-        return <></>;
+        return <>It's their command phase</>;
       case "movement":
         return <></>;
       case "shooting":

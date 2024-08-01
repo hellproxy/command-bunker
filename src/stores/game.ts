@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, subscribeWithSelector } from "zustand/middleware";
 import { createMapStorage } from "./utils";
 import { produce } from "immer";
 import {
@@ -12,6 +12,7 @@ import {
   GameHistory,
   push,
 } from "./history-utils";
+import { useTotalCabalPoints } from "@/hooks/cabal-points";
 
 export type UnitStatus = "dead" | "reserve" | undefined;
 export type Phase = "command" | "movement" | "shooting" | "fight" | "turn-end";
@@ -19,6 +20,7 @@ export type Phase = "command" | "movement" | "shooting" | "fight" | "turn-end";
 interface GameValues {
   turn: number;
   phase?: Phase;
+  attackersTurn?: boolean;
   attacking: boolean;
   victoryPoints: number;
   commandPoints: number;
@@ -36,23 +38,33 @@ interface GameHooks {
   back: () => void;
   forward: () => void;
   // mutate
+  setListId: (listId: string) => void;
   toggleAttacking: () => void;
   toggleStatus: (unitId: string, target: UnitStatus) => void;
   setCabalPoints: (points: number) => void;
   adjustCommandPoints: (by: number) => void;
+  advancePhase: (to: Phase, totalCabalPoints: number) => void;
 }
 
 export function useGameValues<T>(selector: (values: GameValues) => T): T {
-  return useGameStore((state) => {
+  return useGameStore((state: GameState) => {
     return selector(current(state.history));
   });
 }
 
 export function useNavigation(): { canGoBack: boolean; canGoForward: boolean } {
-  return useGameStore((state) => ({
+  return useGameStore((state: GameState) => ({
     canGoBack: canGoBack(state.history),
     canGoForward: canGoForward(state.history),
   }));
+}
+
+export function useAdvancePhase(): (to: Phase) => void {
+  const advancePhase = useGameStore((state) => state.advancePhase);
+  const listId = useGameStore((state) => state.listId!);
+  const { totalCabalPoints } = useTotalCabalPoints(listId);
+
+  return (to) => advancePhase(to, totalCabalPoints);
 }
 
 export const useGameStore = create<GameState & GameHooks>()(
@@ -75,9 +87,16 @@ export const useGameStore = create<GameState & GameHooks>()(
         );
       },
       // mutate
+      setListId: (listId) => {
+        set(
+          produce((state: GameState) => {
+            state.listId = listId;
+          })
+        );
+      },
       toggleAttacking: () => {
         set(
-          produce((state) => {
+          produce((state: GameState) => {
             updateHistory(state, (values) => {
               values.attacking = !values.attacking;
             });
@@ -86,7 +105,7 @@ export const useGameStore = create<GameState & GameHooks>()(
       },
       toggleStatus: (unitId, target) => {
         set(
-          produce((state) => {
+          produce((state: GameState) => {
             updateHistory(state, ({ unitStatuses }) => {
               const status = unitStatuses.get(unitId);
               const newStatus = target === status ? undefined : target;
@@ -97,7 +116,7 @@ export const useGameStore = create<GameState & GameHooks>()(
       },
       setCabalPoints: (points) =>
         set(
-          produce((state) => {
+          produce((state: GameState) => {
             updateHistory(state, (values) => {
               values.cabalPoints = points;
             });
@@ -105,7 +124,7 @@ export const useGameStore = create<GameState & GameHooks>()(
         ),
       adjustCommandPoints: (by) =>
         set(
-          produce((state) => {
+          produce((state: GameState) => {
             const { history } = state;
             const values = copy(current(history));
             const target = values.commandPoints + by;
@@ -113,6 +132,26 @@ export const useGameStore = create<GameState & GameHooks>()(
               values.commandPoints = target;
               push(history, values);
             }
+          })
+        ),
+      advancePhase: (to, totalCabalPoints) =>
+        set(
+          produce((state: GameState) => {
+            updateHistory(state, (values) => {
+              values.phase = to;
+              if (to === "command") {
+                // always bump command points
+                values.commandPoints += 1;
+                // toggle turn
+                values.attackersTurn = !values.attackersTurn;
+                // if now attacker's turn, increase turn counter
+                if (values.attackersTurn) values.turn += 1;
+                // increase cabal points
+                if (values.attackersTurn === values.attacking) {
+                  values.cabalPoints = totalCabalPoints;
+                }
+              }
+            });
           })
         ),
     }),

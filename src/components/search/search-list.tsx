@@ -1,15 +1,16 @@
-import { useGetList, useListStore } from "@/stores/lists";
+import { useGetList } from "@/stores/lists";
 import { SearchAbility } from "./search-ability";
 import { SearchUnit } from "./search-unit";
 import { SearchWeapon } from "./search-weapon";
 import { SearchValue, useSearch } from "@/hooks/search";
+import { useGameStore } from "@/stores/game";
 
 interface SearchListProps {
-  listId: string;
   searchString: string;
 }
 
-export const SearchList = ({ listId, searchString }: SearchListProps) => {
+export const SearchList = ({ searchString }: SearchListProps) => {
+  const listId = useGameStore((state) => state.listId!);
   const list = useGetList(listId);
   const { searchEngine, searchError } = useSearch();
 

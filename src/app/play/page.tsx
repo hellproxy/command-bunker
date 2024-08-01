@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { SearchList } from "@/components/search/search-list";
 import { ArmyList } from "@/components/army/army-list";
 import { useHotkey } from "@/hooks/hotkey";
@@ -11,34 +11,34 @@ import { Turn } from "@/components/state/turn";
 import { VictoryPoints } from "@/components/state/victory-points";
 import { UndoRedo } from "@/components/state/undo-redo";
 import { GameDisplay } from "@/components/play/game-display";
+import { useGameStore } from "@/stores/game";
+import Link from "next/link";
 
-interface CommandBunkerProps {
-  params: {
-    listId: string;
-  };
-}
+export default function CommandBunker() {
+  const listId = useGameStore((state) => state.listId!);
 
-export default function CommandBunker({
-  params: { listId },
-}: CommandBunkerProps) {
-  return (
+  return listId ? (
     <div className="grid h-full grid-cols-2">
       <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
-        <GameStatePane listId={listId} />
+        <GameStatePane />
         <GameDisplay />
       </div>
       <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
-        <ReferencePane listId={listId} />
+        <ReferencePane />
       </div>
+    </div>
+  ) : (
+    <div>
+      No list selected, click{" "}
+      <Link className="font-semibold" href="/">
+        here
+      </Link>{" "}
+      to return home
     </div>
   );
 }
 
-interface GameStatePaneProps {
-  listId: string;
-}
-
-const GameStatePane = ({ listId }: GameStatePaneProps) => {
+const GameStatePane = () => {
   return (
     <div className="flex divide-x bg-white rounded shadow-md">
       <div className="grow grid grid-cols-4 divide-x">
@@ -49,21 +49,21 @@ const GameStatePane = ({ listId }: GameStatePaneProps) => {
           </div>
         </div>
         <div className="flex flex-col gap-1 py-2">
-          <div className="text-sm text-center">Victory</div>
+          <div className="text-sm text-center">Victory Points</div>
           <div className="flex justify-center">
             <VictoryPoints />
           </div>
         </div>
         <div className="flex flex-col gap-1 py-2">
-          <div className="text-sm text-center">Command</div>
+          <div className="text-sm text-center">Command Points</div>
           <div className="flex justify-center">
             <CommandPoints />
           </div>
         </div>
         <div className="flex flex-col gap-1 py-2">
-          <div className="text-sm text-center">Cabal</div>
+          <div className="text-sm text-center">Cabal Points</div>
           <div className="flex justify-center">
-            <CabalPoints listId={listId} />
+            <CabalPoints />
           </div>
         </div>
       </div>
@@ -72,11 +72,7 @@ const GameStatePane = ({ listId }: GameStatePaneProps) => {
   );
 };
 
-interface ReferencePaneProps {
-  listId: string;
-}
-
-const ReferencePane = ({ listId }: ReferencePaneProps) => {
+const ReferencePane = () => {
   const [searchString, setSearchString] = useState("");
 
   const ref = useRef<HTMLInputElement | null>(null);
@@ -101,9 +97,9 @@ const ReferencePane = ({ listId }: ReferencePaneProps) => {
         />
       </div>
       {!searchString ? (
-        <ArmyList listId={listId} />
+        <ArmyList />
       ) : (
-        <SearchList listId={listId} searchString={searchString} />
+        <SearchList searchString={searchString} />
       )}
     </>
   );

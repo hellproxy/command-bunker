@@ -1,35 +1,29 @@
-import { UnitStatus, useGameStore, useGameValues } from "@/stores/game";
-import { useGetList, useListStore } from "@/stores/lists";
+import { UnitStatus, useGameValues } from "@/stores/game";
+import { useGetList } from "@/stores/lists";
 import { Indices, useUnitData } from "./data";
-import { useCallback } from "react";
 
 interface UseCabalPoints {
-  totalCabalPoints?: number;
-  resetCabalPoints?: () => void;
-  error: any;
+  totalCabalPoints: number;
+  error?: any;
   isLoading: boolean;
 }
 
+// export const useCalculateTotalCabalPoints = () => (listId: string)
+
 export const useTotalCabalPoints = (listId: string): UseCabalPoints => {
   const statuses = useGameValues(({ unitStatuses }) => unitStatuses);
-  const setCabalPoints = useGameStore((state) => state.setCabalPoints);
-
   const list = useGetList(listId);
   const { data, error, isLoading } = useUnitData();
+
+  if (!listId) {
+    return { totalCabalPoints: 0, isLoading: true };
+  }
 
   const totalCabalPoints = data
     ? calculateTotalCabalPoints(list, data, statuses)
     : 0;
 
-  const resetCabalPoints = useCallback(() => {
-    setCabalPoints(totalCabalPoints);
-  }, [totalCabalPoints]);
-
-  if (!data) {
-    return { error, isLoading };
-  }
-
-  return { totalCabalPoints, resetCabalPoints, error, isLoading };
+  return { totalCabalPoints, error, isLoading };
 };
 
 const calculateTotalCabalPoints = (

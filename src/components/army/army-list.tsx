@@ -2,12 +2,10 @@ import { useGetList, useListStore } from "@/stores/lists";
 import { SectionHeader } from "../section-header";
 import { ArmyUnit } from "./army-unit";
 import { useUnitData } from "@/hooks/data";
+import { useGameStore } from "@/stores/game";
 
-interface ArmyListProps {
-  listId: string;
-}
-
-export const ArmyList = ({ listId }: ArmyListProps) => {
+export const ArmyList = () => {
+  const listId = useGameStore((state) => state.listId);
   const list = useGetList(listId);
   const { data, error } = useUnitData();
 
