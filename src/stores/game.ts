@@ -14,11 +14,12 @@ import {
 } from "./history-utils";
 
 export type UnitStatus = "dead" | "reserve" | undefined;
-export type Phase = "pre-game" | "command" | "movement" | "fight" | "turn-end";
+export type Phase = "command" | "movement" | "shooting" | "fight" | "turn-end";
 
 interface GameValues {
   turn: number;
-  phase: Phase;
+  phase?: Phase;
+  attacking: boolean;
   victoryPoints: number;
   commandPoints: number;
   cabalPoints: number;
@@ -31,30 +32,34 @@ interface GameState {
 }
 
 interface GameHooks {
-  // get
-  current: () => GameValues;
-  unitStatuses: () => Map<string, UnitStatus>;
   // navigate
-  canGoBack: () => boolean;
-  canGoForward: () => boolean;
   back: () => void;
   forward: () => void;
   // mutate
+  toggleAttacking: () => void;
   toggleStatus: (unitId: string, target: UnitStatus) => void;
   setCabalPoints: (points: number) => void;
   adjustCommandPoints: (by: number) => void;
 }
 
+export function useGameValues<T>(selector: (values: GameValues) => T): T {
+  return useGameStore((state) => {
+    return selector(current(state.history));
+  });
+}
+
+export function useNavigation(): { canGoBack: boolean; canGoForward: boolean } {
+  return useGameStore((state) => ({
+    canGoBack: canGoBack(state.history),
+    canGoForward: canGoForward(state.history),
+  }));
+}
+
 export const useGameStore = create<GameState & GameHooks>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       ...baseState(),
       // get
-      current: () => current(get().history),
-      unitStatuses: () => current(get().history).unitStatuses,
-      // navigate
-      canGoBack: () => canGoBack(get().history),
-      canGoForward: () => canGoForward(get().history),
       back: () => {
         set(
           produce(({ history }: GameState) => {
@@ -70,9 +75,18 @@ export const useGameStore = create<GameState & GameHooks>()(
         );
       },
       // mutate
+      toggleAttacking: () => {
+        set(
+          produce((state) => {
+            updateHistory(state, (values) => {
+              values.attacking = !values.attacking;
+            });
+          })
+        );
+      },
       toggleStatus: (unitId, target) => {
         set(
-          produce((state: GameState) => {
+          produce((state) => {
             updateHistory(state, ({ unitStatuses }) => {
               const status = unitStatuses.get(unitId);
               const newStatus = target === status ? undefined : target;
@@ -83,7 +97,7 @@ export const useGameStore = create<GameState & GameHooks>()(
       },
       setCabalPoints: (points) =>
         set(
-          produce((state: GameState) => {
+          produce((state) => {
             updateHistory(state, (values) => {
               values.cabalPoints = points;
             });
@@ -91,7 +105,7 @@ export const useGameStore = create<GameState & GameHooks>()(
         ),
       adjustCommandPoints: (by) =>
         set(
-          produce((state: GameState) => {
+          produce((state) => {
             const { history } = state;
             const values = copy(current(history));
             const target = values.commandPoints + by;
@@ -105,6 +119,14 @@ export const useGameStore = create<GameState & GameHooks>()(
     {
       name: "game-storage",
       storage: createMapStorage(baseState),
+      onRehydrateStorage: () => {
+        return (_, error) => {
+          if (error) {
+            console.log("Error rehydrating storage");
+            console.log(error);
+          }
+        };
+      },
     }
   )
 );
@@ -113,7 +135,7 @@ function baseState(): GameState {
   const history = createHistory<GameValues>(20);
   push(history, {
     turn: 0,
-    phase: "pre-game",
+    attacking: true,
     victoryPoints: 0,
     commandPoints: 0,
     cabalPoints: 0,

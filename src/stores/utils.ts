@@ -1,12 +1,11 @@
-import { GameHistory } from "@/stores/history-utils";
-import { PersistStorage, StorageValue } from "zustand/middleware";
+import { PersistStorage } from "zustand/middleware";
 
 export function createMapStorage<S>(baseState: () => S): PersistStorage<S> {
   return {
     getItem(name) {
       const str = localStorage.getItem(name);
       return {
-        state: str == null ? baseState() : JSON.parse(str, reviver),
+        state: !str ? null : JSON.parse(str, reviver),
       };
     },
     setItem(name, value) {
@@ -30,6 +29,8 @@ export function replacer(_: any, value: any) {
 }
 
 export function reviver(_: any, value: any) {
+  if (!value) return value;
+
   const type = value["__type"];
 
   if (type !== undefined) {

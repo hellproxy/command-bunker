@@ -1,7 +1,7 @@
-import { useGameStore } from "@/stores/game";
+import { useGameStore, useGameValues } from "@/stores/game";
 
 export const CommandPoints = () => {
-  const commandPoints = useGameStore((state) => state.current().commandPoints);
+  const commandPoints = useGameValues(({ commandPoints }) => commandPoints);
   const adjustCommandPoints = useGameStore(
     (state) => state.adjustCommandPoints
   );

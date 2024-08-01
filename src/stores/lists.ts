@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { produce, enableMapSet } from "immer";
 import { v4 as uuidv4 } from "uuid";
-import { createMapStorage, replacer, reviver } from "./utils";
+import { createMapStorage } from "./utils";
 
 enableMapSet();
 

@@ -10,7 +10,7 @@ export function createHistory<T>(capacity: number): GameHistory<T> {
     head: 0,
     size: 0,
     offset: 0,
-    items: Array(capacity).fill(undefined),
+    items: Array(capacity).fill(null),
   };
 }
 
@@ -18,7 +18,7 @@ export function push<T>(history: GameHistory<T>, item: T): void {
   const { head, size, offset, items } = history;
   const capacity = items.length;
 
-  const index = (head + size - offset + 1) % capacity;
+  const index = (head + size - offset) % capacity;
 
   items[index] = item;
   history.size -= offset;
@@ -57,6 +57,6 @@ export function current<T>(history: GameHistory<T>): T {
   const { head, size, offset, items } = history;
   const capacity = items.length;
 
-  const index = (head + size - offset) % capacity;
+  const index = (head + size - 1 - offset) % capacity;
   return items[index];
 }

@@ -10,6 +10,7 @@ import { CommandPoints } from "@/components/state/command-points";
 import { Turn } from "@/components/state/turn";
 import { VictoryPoints } from "@/components/state/victory-points";
 import { UndoRedo } from "@/components/state/undo-redo";
+import { GameDisplay } from "@/components/play/game-display";
 
 interface CommandBunkerProps {
   params: {
@@ -24,6 +25,7 @@ export default function CommandBunker({
     <div className="grid h-full grid-cols-2">
       <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
         <GameStatePane listId={listId} />
+        <GameDisplay />
       </div>
       <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
         <ReferencePane listId={listId} />

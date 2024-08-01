@@ -1,9 +1,8 @@
-import { useGameStore } from "@/stores/game";
+import { useGameStore, useNavigation } from "@/stores/game";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const UndoRedo = () => {
-  const canGoBack = useGameStore((state) => state.canGoBack());
-  const canGoForward = useGameStore((state) => state.canGoForward());
+  const { canGoBack, canGoForward } = useNavigation();
   const back = useGameStore((state) => state.back);
   const forward = useGameStore((state) => state.forward);
 

@@ -1,4 +1,4 @@
-import { UnitStatus, useGameStore } from "@/stores/game";
+import { UnitStatus, useGameStore, useGameValues } from "@/stores/game";
 import { useListStore } from "@/stores/lists";
 import { Indices, useUnitData } from "./data";
 import { useCallback } from "react";
@@ -11,7 +11,7 @@ interface UseCabalPoints {
 }
 
 export const useTotalCabalPoints = (listId: string): UseCabalPoints => {
-  const statuses = useGameStore((state) => state.unitStatuses());
+  const statuses = useGameValues(({ unitStatuses }) => unitStatuses);
   const setCabalPoints = useGameStore((state) => state.setCabalPoints);
 
   const list = useListStore((state) => state.getList(listId));

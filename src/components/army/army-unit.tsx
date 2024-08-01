@@ -3,7 +3,7 @@ import { UnitIcon } from "../unit-icon";
 import { StatLine } from "../statline";
 import { Tags } from "../tags";
 import { UnitStatusToggles } from "../unit-status";
-import { useGameStore } from "@/stores/game";
+import { useGameValues } from "@/stores/game";
 import { UnitAbility, UnitWeapon, UnitWeaponHeader } from "../info/unit";
 import { useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
@@ -16,7 +16,7 @@ interface ArmyUnitProps {
 export const ArmyUnit = ({ unit, unitData }: ArmyUnitProps) => {
   const { options } = unit;
   const { data, error } = useUnitData();
-  const status = useGameStore((state) => state.unitStatuses().get(unit.id));
+  const status = useGameValues(({ unitStatuses }) => unitStatuses.get(unit.id));
   const [showData, setShowData] = useState(false);
 
   const ref = useRef<null | HTMLDivElement>(null);

@@ -1,5 +1,10 @@
 # Phase checklist
 
+Pre-Game
+
+- Set who goes first
+- Set up units in reserve
+
 Command Phase
 
 - Gain one CP (automatic)

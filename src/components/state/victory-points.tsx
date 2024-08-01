@@ -1,7 +1,7 @@
-import { useGameStore } from "@/stores/game";
+import { useGameValues } from "@/stores/game";
 
 export const VictoryPoints = () => {
-  const victoryPoints = useGameStore((state) => state.current().victoryPoints);
+  const victoryPoints = useGameValues(({ victoryPoints }) => victoryPoints);
 
   return (
     <div className="min-w-7 text-center text-lg border rounded shadow-inner">
