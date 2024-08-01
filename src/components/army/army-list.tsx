@@ -1,4 +1,4 @@
-import { useListStore } from "@/stores/lists";
+import { useGetList, useListStore } from "@/stores/lists";
 import { SectionHeader } from "../section-header";
 import { ArmyUnit } from "./army-unit";
 import { useUnitData } from "@/hooks/data";
@@ -8,7 +8,7 @@ interface ArmyListProps {
 }
 
 export const ArmyList = ({ listId }: ArmyListProps) => {
-  const list = useListStore((state) => state.getList(listId));
+  const list = useGetList(listId);
   const { data, error } = useUnitData();
 
   if (error) return <div>Failed to load</div>;

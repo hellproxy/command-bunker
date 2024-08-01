@@ -1,6 +1,6 @@
 "use client";
 
-import { useListStore } from "@/stores/lists";
+import { useGetList, useListStore } from "@/stores/lists";
 import { Plus, Trash2 } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import { useUnitData } from "@/hooks/data";
@@ -79,7 +79,7 @@ const UnitCustomizerSectionSSR = ({
   listId,
   section,
 }: UnitCustomizerSectionProps) => {
-  const list = useListStore((state) => state.getList(listId));
+  const list = useGetList(listId);
   const { data, error } = useUnitData();
 
   if (error) return <div>Failed to load</div>;
@@ -140,7 +140,7 @@ interface UnitCustomizerProps {
 
 const UnitCuztomizer = ({ listId, unit }: UnitCustomizerProps) => {
   const removeUnit = useListStore((state) => state.removeUnit(listId, unit.id));
-  const justAdded = useListStore((state) => state.wasJustAdded(unit.id));
+  const justAdded = useListStore((state) => state.unitJustAdded === unit.id);
   const { data, error } = useUnitData();
   const ref = useRef<null | HTMLDivElement>(null);
 

@@ -10,21 +10,13 @@ interface ListState {
   lists: Map<string, ListBuilder.List>;
   unitJustAdded?: string;
   // list functions
-  getList: (listId: string) => ListBuilder.List;
   addList: () => void;
   removeList: (listId: string) => () => void;
   setName: (listId: string) => (name: string) => void;
   // unit functions
   addUnit: (listId: string) => (unit: ListBuilder.Unit) => void;
-  wasJustAdded: (unitId: string) => boolean;
   removeUnit: (listId: string, unitId: string) => () => void;
   // weapons and wargear
-  isSelected: (
-    listId: string,
-    unitId: string,
-    location: ListBuilder.Location,
-    type: string
-  ) => boolean;
   setOption: (
     listId: string,
     unitId: string,
@@ -33,12 +25,15 @@ interface ListState {
   ) => (value: boolean) => void;
 }
 
+export function useGetList(listId: string): ListBuilder.List {
+  return useListStore((state) => state.lists.get(listId)!);
+}
+
 export const useListStore = create<ListState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       ...baseState(),
       // list functions
-      getList: (listId) => get().lists.get(listId)!,
       addList: () =>
         set(
           produce((state: ListState) => {
@@ -67,7 +62,6 @@ export const useListStore = create<ListState>()(
           })
         );
       },
-      wasJustAdded: (unitId) => get().unitJustAdded === unitId,
       removeUnit: (listId, unitId) => () => {
         set(
           produce((state: ListState) => {
@@ -76,13 +70,6 @@ export const useListStore = create<ListState>()(
         );
       },
       // weapons and wargear
-      isSelected: (listId, unitId, location, type) => {
-        return get()
-          .lists.get(listId)!
-          .units.get(unitId)!
-          .options.get(location)!
-          .get(type)!;
-      },
       setOption: (listId, unitId, location, type) => (value) => {
         set(
           produce((state: ListState) => {

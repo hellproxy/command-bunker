@@ -1,4 +1,4 @@
-import { useListStore } from "@/stores/lists";
+import { useGetList, useListStore } from "@/stores/lists";
 import { SearchAbility } from "./search-ability";
 import { SearchUnit } from "./search-unit";
 import { SearchWeapon } from "./search-weapon";
@@ -10,7 +10,7 @@ interface SearchListProps {
 }
 
 export const SearchList = ({ listId, searchString }: SearchListProps) => {
-  const list = useListStore((state) => state.getList(listId));
+  const list = useGetList(listId);
   const { searchEngine, searchError } = useSearch();
 
   if (searchError) return <div>Failed to load</div>;

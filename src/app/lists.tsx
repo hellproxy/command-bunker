@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useListStore } from "../stores/lists";
+import { useGetList, useListStore } from "../stores/lists";
 import { useOnClickOutside } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 import { Edit2, Play, Plus, Trash2, X } from "lucide-react";
@@ -36,7 +36,7 @@ const ListEntry = ({ listId }: { listId: string }) => {
 };
 
 const NameEditor = ({ listId }: { listId: string }) => {
-  const name = useListStore((state) => state.getList(listId).name);
+  const name = useGetList(listId).name;
   const setName = useListStore((state) => state.setName(listId));
 
   const [editing, setEditing] = useState(false);
