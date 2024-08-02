@@ -5,7 +5,7 @@ import { useUnitData } from "@/hooks/data";
 import { useGameStore } from "@/stores/game";
 
 export const ArmyList = () => {
-  const listId = useGameStore((state) => state.listId);
+  const listId = useGameStore((state) => state.listId!);
   const list = useGetList(listId);
   const { data, error } = useUnitData();
 

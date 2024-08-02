@@ -1,20 +1,19 @@
 import { useAdvancePhase, useGameStore, useGameValues } from "@/stores/game";
 import { Toggle } from "../toggle";
+import { Phase } from "./phase";
+import { AdvancePhaseButton } from "./advance";
 
 export const PreGame = () => {
   return (
-    <div className="flex flex-col divide-y bg-white rounded shadow-md px-4 py-2">
-      <div className="text-lg px-2 pb-1">Game setup</div>
-      <div>
-        <div className="flex flex-col py-2">
-          <AttackingPlayerToggle />
-          <UnitsReserveCheck />
-        </div>
-        <div className="flex justify-center mb-1">
-          <BeginButton />
-        </div>
+    <Phase name="Game setup">
+      <div className="flex flex-col py-2">
+        <AttackingPlayerToggle />
+        <UnitsReserveCheck />
       </div>
-    </div>
+      <div className="flex justify-center mb-1">
+        <AdvancePhaseButton nextPhase="command">Begin game</AdvancePhaseButton>
+      </div>
+    </Phase>
   );
 };
 
@@ -40,18 +39,5 @@ const UnitsReserveCheck = () => {
     <div className="game-interaction">
       <Toggle position="after">Select units to start in reserve</Toggle>
     </div>
-  );
-};
-
-const BeginButton = () => {
-  const advancePhase = useAdvancePhase();
-
-  return (
-    <button
-      className="btn btn-green w-full"
-      onClick={() => advancePhase("command")}
-    >
-      Begin game
-    </button>
   );
 };
