@@ -2,7 +2,7 @@ import { parse } from "yaml";
 import useSWR from "swr";
 
 export const useUnitData = () => {
-  return useSWR("data", () => fetchAllUnits(unitFiles), {
+  return useSWR("units", () => fetchAllUnits(unitFiles), {
     revalidateOnReconnect: false,
     revalidateOnFocus: false,
   });

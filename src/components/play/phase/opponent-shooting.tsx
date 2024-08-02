@@ -2,6 +2,7 @@ import { Toggle } from "../../toggle";
 import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
 import { RitualButton } from "../button/ritual-button";
+import { StratagemButton } from "../button/stratagem-button";
 
 export const OpponentShootingPhase = () => {
   return (
@@ -13,11 +14,12 @@ export const OpponentShootingPhase = () => {
           </span>
           <RitualButton ritual="weaver-of-fates" />
         </div>
-        <div className="game-interaction">
-          <Toggle position="after">
+        <div className="game-interaction py-1.5">
+          <span className="grow my-0.5 text-sm">
             Use Stratagem:{" "}
-            <span className="font-semibold">Destined by Fate</span>
-          </Toggle>
+            <span className="font-semibold">Destined by Fate</span>{" "}
+          </span>
+          <StratagemButton type="overwatch" />
         </div>
       </div>
       <div className="flex justify-center mb-1">

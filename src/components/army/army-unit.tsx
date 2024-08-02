@@ -1,4 +1,3 @@
-import { useUnitData } from "@/hooks/data";
 import { UnitIcon } from "../unit-icon";
 import { StatLine } from "../statline";
 import { Tags } from "../tags";
@@ -7,6 +6,7 @@ import { useGameValues } from "@/stores/game";
 import { UnitAbility, UnitWeapon, UnitWeaponHeader } from "../info/unit";
 import { useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
+import { useUnitData } from "@/hooks/unit-data";
 
 interface ArmyUnitProps {
   unit: ListBuilder.Unit;

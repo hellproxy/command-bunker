@@ -1,0 +1,5 @@
+stratagems:
+  - type: overwatch
+    cost: 1
+  - type: destined-by-fate
+    cost: 1

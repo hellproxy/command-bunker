@@ -1,6 +1,6 @@
 import { UnitStatus, useGameValues } from "@/stores/game";
 import { useGetList } from "@/stores/lists";
-import { Indices, useUnitData } from "./data";
+import { Indices, useUnitData } from "./unit-data";
 
 interface UseCabalPoints {
   totalCabalPoints: number;

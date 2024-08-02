@@ -1,6 +1,6 @@
 import Fuse, { IFuseOptions } from "fuse.js";
 import { useEffect, useState } from "react";
-import { useUnitData } from "./data";
+import { useUnitData } from "./unit-data";
 
 const options: IFuseOptions<SearchValue> = {
   keys: [

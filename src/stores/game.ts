@@ -34,6 +34,7 @@ interface GameValues {
   cabalPoints: number;
   unitStatuses: Map<string, UnitStatus>;
   ritualsUsed: Set<Ritual>;
+  stratagemsUsed: Set<string>;
 }
 
 interface GameState {
@@ -50,7 +51,7 @@ interface GameHooks {
   toggleAttacking: () => void;
   toggleStatus: (unitId: string, target: UnitStatus) => void;
   setCabalPoints: (points: number) => void;
-  adjustCommandPoints: (by: number) => void;
+  adjustCommandPoints: (by: number, stratagem?: string) => void;
   advancePhase: (to: Phase, totalCabalPoints: number) => void;
   performRitual: (ritual: Ritual) => void;
 }
@@ -115,14 +116,18 @@ export const useGameStore = create<GameState & GameHooks>()(
         withHistory(set)((values) => {
           values.cabalPoints = points;
         }),
-      adjustCommandPoints: (by) =>
+      adjustCommandPoints: (by, stratagem) =>
         set(
           produce((state: GameState) => {
+            if (by === 0) {
+              return;
+            }
             const { history } = state;
             const values = copy(current(history));
             const target = values.commandPoints + by;
             if (target >= 0) {
               values.commandPoints = target;
+              if (stratagem) values.stratagemsUsed.add(stratagem);
               push(history, values);
             }
           })
@@ -132,6 +137,7 @@ export const useGameStore = create<GameState & GameHooks>()(
           values.phase = to;
           // reset rituals used
           values.ritualsUsed = new Set();
+          values.stratagemsUsed = new Set();
 
           if (to === "movement" && values.attackersTurn === values.attacking) {
             // increase cabal points at end of player's Command Phase
@@ -183,16 +189,18 @@ function baseState(): GameState {
     cabalPoints: 0,
     unitStatuses: new Map(),
     ritualsUsed: new Set<Ritual>(),
+    stratagemsUsed: new Set<string>(),
   });
   return { history };
 }
 
 function copy(values: GameValues): GameValues {
-  const { unitStatuses, ritualsUsed, ...others } = values;
+  const { unitStatuses, ritualsUsed, stratagemsUsed, ...others } = values;
   return {
     ...others,
     unitStatuses: new Map(unitStatuses),
     ritualsUsed: new Set(ritualsUsed),
+    stratagemsUsed: new Set(stratagemsUsed),
   };
 }
 

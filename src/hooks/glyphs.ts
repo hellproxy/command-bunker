@@ -1,8 +1,7 @@
 import { parse } from "yaml";
 import useSWR from "swr";
-import { useUnitData } from "./data";
+import { useUnitData } from "./unit-data";
 import Prando from "prando";
-import { useMemo } from "react";
 
 interface Glyphs {
   glyphs: Glyph[];
