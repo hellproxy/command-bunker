@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist, subscribeWithSelector } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 import { createMapStorage } from "./utils";
 import { produce } from "immer";
 import {
@@ -13,16 +13,9 @@ import {
   push,
 } from "./history-utils";
 import { useTotalCabalPoints } from "@/hooks/cabal";
-import { canPerformRitual, cost } from "./ritual";
 
 export type UnitStatus = "dead" | "reserve" | undefined;
 export type Phase = "command" | "movement" | "shooting" | "fight" | "turn-end";
-export type Ritual =
-  | "weaver-of-fates"
-  | "temporal-surge"
-  | "echoes-of-the-warp"
-  | "doombolt"
-  | "twist-of-fate";
 
 interface GameValues {
   turn: number;
@@ -33,7 +26,7 @@ interface GameValues {
   commandPoints: number;
   cabalPoints: number;
   unitStatuses: Map<string, UnitStatus>;
-  ritualsUsed: Set<Ritual>;
+  ritualsUsed: Set<string>;
   stratagemsUsed: Set<string>;
 }
 
@@ -52,8 +45,8 @@ interface GameHooks {
   toggleStatus: (unitId: string, target: UnitStatus) => void;
   setCabalPoints: (points: number) => void;
   adjustCommandPoints: (by: number, stratagem?: string) => void;
+  performRitual: (cost: number, ritual: string) => void;
   advancePhase: (to: Phase, totalCabalPoints: number) => void;
-  performRitual: (ritual: Ritual) => void;
 }
 
 // =============== Custom Hooks ===============
@@ -77,13 +70,6 @@ export function useAdvancePhase(): (to: Phase) => void {
   const { totalCabalPoints } = useTotalCabalPoints(listId);
 
   return (to) => advancePhase(to, totalCabalPoints);
-}
-
-export function useCanPerformRitual(ritual: Ritual): boolean {
-  const cabalPoints = useGameValues((values) => values.cabalPoints);
-  const ritualsUsed = useGameValues((values) => values.ritualsUsed);
-
-  return canPerformRitual(ritual, cabalPoints, ritualsUsed);
 }
 
 // =============== Store ===============
@@ -119,17 +105,48 @@ export const useGameStore = create<GameState & GameHooks>()(
       adjustCommandPoints: (by, stratagem) =>
         set(
           produce((state: GameState) => {
-            if (by === 0) {
-              return;
-            }
+            // skip if not changing anything
+            if (by === 0) return;
+
             const { history } = state;
             const values = copy(current(history));
-            const target = values.commandPoints + by;
-            if (target >= 0) {
-              values.commandPoints = target;
-              if (stratagem) values.stratagemsUsed.add(stratagem);
-              push(history, values);
-            }
+            const { commandPoints, stratagemsUsed } = values;
+
+            // skip if already used this stratagem this phase
+            if (stratagem && stratagemsUsed.has(stratagem)) return;
+
+            const target = commandPoints + by;
+
+            // skip if trying to reduce below 0
+            if (target < 0) return;
+
+            // perform command point adjustment and record ritual used
+            values.commandPoints = target;
+            if (stratagem) stratagemsUsed.add(stratagem);
+            push(history, values);
+          })
+        ),
+      performRitual: (cost, ritual) =>
+        set(
+          produce((state: GameState) => {
+            if (cost === 0) return;
+
+            const { history } = state;
+            const values = copy(current(history));
+            const { cabalPoints, ritualsUsed } = values;
+
+            // skip if already used this ritual this phase
+            if (ritual && ritualsUsed.has(ritual)) return;
+
+            const target = cabalPoints - cost;
+
+            // skip if trying to reduce below 0
+            if (target < 0) return;
+
+            // perform cabal point adjustment and record ritual used
+            values.cabalPoints = target;
+            ritualsUsed.add(ritual);
+            push(history, values);
           })
         ),
       advancePhase: (to, totalCabalPoints) =>
@@ -151,14 +168,6 @@ export const useGameStore = create<GameState & GameHooks>()(
             values.attackersTurn = !values.attackersTurn;
             // if now attacker's turn, increase turn counter
             if (values.attackersTurn) values.turn += 1;
-          }
-        }),
-      performRitual: (ritual) =>
-        withHistory(set)((values) => {
-          const { cabalPoints, ritualsUsed } = values;
-          if (canPerformRitual(ritual, cabalPoints, ritualsUsed)) {
-            values.cabalPoints -= cost(ritual);
-            values.ritualsUsed.add(ritual);
           }
         }),
     }),
@@ -188,7 +197,7 @@ function baseState(): GameState {
     commandPoints: 0,
     cabalPoints: 0,
     unitStatuses: new Map(),
-    ritualsUsed: new Set<Ritual>(),
+    ritualsUsed: new Set<string>(),
     stratagemsUsed: new Set<string>(),
   });
   return { history };

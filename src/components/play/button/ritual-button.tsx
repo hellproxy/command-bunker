@@ -1,19 +1,14 @@
-import { Ritual, useCanPerformRitual, useGameStore } from "@/stores/game";
+import { useRitual } from "@/hooks/ritual";
 
 interface RitualButtonProps {
-  ritual: Ritual;
+  ritual: string;
 }
 
 export const RitualButton = ({ ritual }: RitualButtonProps) => {
-  const enabled = useCanPerformRitual(ritual);
-  const performRitual = useGameStore((state) => state.performRitual);
+  const { canPerform, perform } = useRitual(ritual);
 
   return (
-    <button
-      className="btn-use"
-      disabled={!enabled}
-      onClick={() => performRitual(ritual)}
-    >
+    <button className="btn-use" disabled={!canPerform} onClick={perform}>
       Use
     </button>
   );

@@ -60,6 +60,11 @@ namespace Immutable {
     readonly cost: number;
   }
 
+  export interface Ritual {
+    readonly type: string;
+    readonly cost: number;
+  }
+
   export type Section = "characters" | "infantry" | "nonInfantry" | "allies";
   export type DiceRoll = `${number | ""}D${number}${`+${number}` | ""}`;
   export type Attacks = number | DiceRoll;

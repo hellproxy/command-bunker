@@ -7,28 +7,23 @@ interface UseStratagem {
   perform: () => void;
 }
 
-function cannotUse(): UseStratagem {
-  return { canPerform: false, perform: () => {} };
-}
-
 export function useStratagem(type: string): UseStratagem {
   const { data } = useStratagemData();
-  const adjust = useGameStore((state) => state.adjustCommandPoints);
   const [commandPoints, stratagemsUsed] = useGameValues((values) => [
     values.commandPoints,
     values.stratagemsUsed,
   ]);
+  const adjust = useGameStore((state) => state.adjustCommandPoints);
 
-  if (!data) {
-    return cannotUse();
-  } else if (stratagemsUsed.has(type)) {
-    return cannotUse();
-  } else {
-    const stratagem = data.get(type);
-    const cost = stratagem?.cost;
+  const stratagem = data?.get(type);
+
+  if (stratagem && !stratagemsUsed.has(type)) {
+    const { cost } = stratagem;
     const canPerform = cost !== undefined && cost <= commandPoints;
-    const perform = () => adjust(-(cost || 0), type);
+    const perform = () => adjust(-cost, type);
 
-    return { canPerform, stratagem, perform };
+    return { stratagem, canPerform, perform };
+  } else {
+    return { canPerform: false, perform: () => {} };
   }
 }

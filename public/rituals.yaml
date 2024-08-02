@@ -1,0 +1,11 @@
+rituals:
+  - type: weaver-of-fates
+    cost: 2
+  - type: temporal-surge
+    cost: 5
+  - type: echoes-of-the-warp
+    cost: 6
+  - type: doombolt
+    cost: 7
+  - type: twist-of-fate
+    cost: 9
