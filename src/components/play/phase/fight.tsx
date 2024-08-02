@@ -1,7 +1,6 @@
-import { Toggle } from "../toggle";
-import { AdvancePhaseButton } from "./advance";
+import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
-import { RitualButton } from "./ritual-button";
+import { RitualButton } from "../button/ritual-button";
 
 export const FightPhase = () => {
   return (

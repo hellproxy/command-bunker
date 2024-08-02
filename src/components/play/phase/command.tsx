@@ -1,5 +1,5 @@
-import { Toggle } from "../toggle";
-import { AdvancePhaseButton } from "./advance";
+import { Toggle } from "../../toggle";
+import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
 
 export const CommmandPhase = () => {

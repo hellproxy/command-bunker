@@ -1,4 +1,4 @@
-import { AdvancePhaseButton } from "./advance";
+import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
 
 export const OpponentCommmandPhase = () => {

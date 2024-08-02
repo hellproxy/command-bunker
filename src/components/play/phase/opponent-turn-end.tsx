@@ -1,14 +1,15 @@
-import { Toggle } from "../toggle";
-import { AdvancePhaseButton } from "./advance";
+import { Toggle } from "../../toggle";
+import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
 
-export const TurnEndPhase = () => {
+export const OpponentTurnEndPhase = () => {
   return (
-    <Phase name="End of turn">
+    <Phase name="Opponent's end of turn">
       <div className="flex flex-col py-2">
         <div className="game-interaction">
           <Toggle position="after">
-            Draw a secondary mission card (+1 CP)
+            Remove Daemon Prince with Wings from the battlefield using{" "}
+            <span className="font-semibold">Aetherstride</span>
           </Toggle>
         </div>
       </div>

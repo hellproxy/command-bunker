@@ -1,7 +1,7 @@
 import { useAdvancePhase, useGameStore, useGameValues } from "@/stores/game";
-import { Toggle } from "../toggle";
+import { Toggle } from "../../toggle";
 import { Phase } from "./phase";
-import { AdvancePhaseButton } from "./advance";
+import { AdvancePhaseButton } from "../button/advance-button";
 
 export const PreGame = () => {
   return (
