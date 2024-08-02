@@ -45,9 +45,14 @@ Movement Phase
 
 Shooting Phase
 
-- Ritual: Destined by Fate (optional)
+- Stratagem: Destined by Fate (optional)
 - Ritual: Weaver of Fates (optional)
 
 Fight Phase
+
+- Stratagem: Overwatch (optional)
+- Stratagem: Destined by Fate (optional)
+
+End of turn
 
 - Daemon price aetherstride (optional)

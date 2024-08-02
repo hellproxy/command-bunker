@@ -5,7 +5,7 @@ import { RitualButton } from "./ritual-button";
 
 export const ShootingPhase = () => {
   return (
-    <Phase name="Shooting phase">
+    <Phase name="Shooting Phase">
       <div className="flex flex-col py-2">
         <div className="game-interaction">
           <Toggle position="after">

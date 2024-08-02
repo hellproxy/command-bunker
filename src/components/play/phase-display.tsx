@@ -5,6 +5,11 @@ import { MovementPhase } from "./phase-movement";
 import { ShootingPhase } from "./phase-shooting";
 import { FightPhase } from "./phase-fight";
 import { TurnEndPhase } from "./phase-turn-end";
+import { OpponentCommmandPhase } from "./phase-opponent-command";
+import { OpponentMovementPhase } from "./phase-opponent-movement";
+import { OpponentShootingPhase } from "./phase-opponent-shooting";
+import { OpponentFightPhase } from "./phase-opponent-fight";
+import { OpponentTurnEndPhase } from "./phase-opponent-turn-end";
 
 export const GameDisplay = () => {
   const { turn, phase, attacking, attackersTurn } = useGameValues(
@@ -37,15 +42,15 @@ export const GameDisplay = () => {
   } else {
     switch (phase) {
       case "command":
-        return <>It's their command phase</>;
+        return <OpponentCommmandPhase />;
       case "movement":
-        return <></>;
+        return <OpponentMovementPhase />;
       case "shooting":
-        return <></>;
+        return <OpponentShootingPhase />;
       case "fight":
-        return <></>;
+        return <OpponentFightPhase />;
       case "turn-end":
-        return <></>;
+        return <OpponentTurnEndPhase />;
     }
   }
 };

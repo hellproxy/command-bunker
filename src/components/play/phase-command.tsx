@@ -4,7 +4,7 @@ import { Phase } from "./phase";
 
 export const CommmandPhase = () => {
   return (
-    <Phase name="Command phase">
+    <Phase name="Command Phase">
       <div className="flex flex-col py-2">
         <div className="game-interaction">
           <Toggle position="after">Draw a secondary mission card</Toggle>

@@ -5,15 +5,15 @@ import { RitualButton } from "./ritual-button";
 
 export const MovementPhase = () => {
   return (
-    <Phase name="Movement phase">
+    <Phase name="Movement Phase">
       <div className="flex flex-col py-2">
         <div className="game-interaction">
           <Toggle position="after">Set up units from reserve</Toggle>
         </div>
         <div className="game-interaction">
           <Toggle position="after">
-            Use Daemon Prince with Wings'{" "}
-            <span className="font-semibold">Aetherstride</span> ability
+            Return Daemon Prince with Wings to the battlefield using{" "}
+            <span className="font-semibold">Aetherstride</span>
           </Toggle>
         </div>
         <div className="game-interaction py-1.5">

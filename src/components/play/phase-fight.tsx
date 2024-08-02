@@ -5,7 +5,7 @@ import { RitualButton } from "./ritual-button";
 
 export const FightPhase = () => {
   return (
-    <Phase name="Fight phase">
+    <Phase name="Fight Phase">
       <div className="flex flex-col py-2">
         <div className="game-interaction py-1.5">
           <span className="grow my-0.5 text-sm">

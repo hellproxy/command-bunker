@@ -10,7 +10,7 @@ import { CommandPoints } from "@/components/state/command-points";
 import { Turn } from "@/components/state/turn";
 import { VictoryPoints } from "@/components/state/victory-points";
 import { UndoRedo } from "@/components/state/undo-redo";
-import { GameDisplay } from "@/components/play/game-display";
+import { GameDisplay } from "@/components/play/phase-display";
 import { useGameStore } from "@/stores/game";
 import Link from "next/link";
 

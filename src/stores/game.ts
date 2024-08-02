@@ -133,6 +133,11 @@ export const useGameStore = create<GameState & GameHooks>()(
           // reset rituals used
           values.ritualsUsed = new Set();
 
+          if (to === "movement" && values.attackersTurn === values.attacking) {
+            // increase cabal points at end of player's Command Phase
+            values.cabalPoints = totalCabalPoints;
+          }
+
           if (to === "command") {
             // always bump command points
             values.commandPoints += 1;
@@ -140,10 +145,6 @@ export const useGameStore = create<GameState & GameHooks>()(
             values.attackersTurn = !values.attackersTurn;
             // if now attacker's turn, increase turn counter
             if (values.attackersTurn) values.turn += 1;
-            // increase cabal points
-            if (values.attackersTurn === values.attacking) {
-              values.cabalPoints = totalCabalPoints;
-            }
           }
         }),
       performRitual: (ritual) =>
