@@ -25,6 +25,12 @@ export function replacer(_: any, value: any) {
       __data: Array.from(value.entries()),
     };
   }
+  if (value instanceof Set) {
+    return {
+      __type: "Set",
+      __data: Array.from(value),
+    };
+  }
   return value;
 }
 
@@ -36,8 +42,9 @@ export function reviver(_: any, value: any) {
   if (type !== undefined) {
     switch (type) {
       case "Map":
-        const data = value["__data"];
-        return new Map(data);
+        return new Map(value["__data"]);
+      case "Set":
+        return new Set(value["__data"]);
     }
   }
 

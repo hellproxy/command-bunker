@@ -1,4 +1,4 @@
-import { useTotalCabalPoints } from "@/hooks/cabal-points";
+import { useTotalCabalPoints } from "@/hooks/cabal";
 import { useGameStore, useGameValues } from "@/stores/game";
 
 export const CabalPoints = () => {

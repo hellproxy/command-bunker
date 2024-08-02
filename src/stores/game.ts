@@ -12,10 +12,17 @@ import {
   GameHistory,
   push,
 } from "./history-utils";
-import { useTotalCabalPoints } from "@/hooks/cabal-points";
+import { useTotalCabalPoints } from "@/hooks/cabal";
+import { canPerformRitual, cost } from "./ritual";
 
 export type UnitStatus = "dead" | "reserve" | undefined;
 export type Phase = "command" | "movement" | "shooting" | "fight" | "turn-end";
+export type Ritual =
+  | "weaver-of-fates"
+  | "temporal-surge"
+  | "echoes-of-the-warp"
+  | "doombolt"
+  | "twist-of-fate";
 
 interface GameValues {
   turn: number;
@@ -26,6 +33,7 @@ interface GameValues {
   commandPoints: number;
   cabalPoints: number;
   unitStatuses: Map<string, UnitStatus>;
+  ritualsUsed: Set<Ritual>;
 }
 
 interface GameState {
@@ -44,7 +52,10 @@ interface GameHooks {
   setCabalPoints: (points: number) => void;
   adjustCommandPoints: (by: number) => void;
   advancePhase: (to: Phase, totalCabalPoints: number) => void;
+  performRitual: (ritual: Ritual) => void;
 }
+
+// =============== Custom Hooks ===============
 
 export function useGameValues<T>(selector: (values: GameValues) => T): T {
   return useGameStore((state: GameState) => {
@@ -67,61 +78,43 @@ export function useAdvancePhase(): (to: Phase) => void {
   return (to) => advancePhase(to, totalCabalPoints);
 }
 
+export function useCanPerformRitual(ritual: Ritual): boolean {
+  const cabalPoints = useGameValues((values) => values.cabalPoints);
+  const ritualsUsed = useGameValues((values) => values.ritualsUsed);
+
+  return canPerformRitual(ritual, cabalPoints, ritualsUsed);
+}
+
+// =============== Store ===============
+
 export const useGameStore = create<GameState & GameHooks>()(
   persist(
     (set) => ({
       ...baseState(),
-      // get
-      back: () => {
-        set(
-          produce(({ history }: GameState) => {
-            back(history);
-          })
-        );
-      },
-      forward: () => {
-        set(
-          produce(({ history }: GameState) => {
-            forward(history);
-          })
-        );
-      },
+      // navigate
+      back: () => set(produce(({ history }: GameState) => back(history))),
+      forward: () => set(produce(({ history }: GameState) => forward(history))),
       // mutate
-      setListId: (listId) => {
+      setListId: (listId) =>
         set(
           produce((state: GameState) => {
             state.listId = listId;
           })
-        );
-      },
-      toggleAttacking: () => {
-        set(
-          produce((state: GameState) => {
-            updateHistory(state, (values) => {
-              values.attacking = !values.attacking;
-            });
-          })
-        );
-      },
-      toggleStatus: (unitId, target) => {
-        set(
-          produce((state: GameState) => {
-            updateHistory(state, ({ unitStatuses }) => {
-              const status = unitStatuses.get(unitId);
-              const newStatus = target === status ? undefined : target;
-              unitStatuses.set(unitId, newStatus);
-            });
-          })
-        );
-      },
-      setCabalPoints: (points) =>
-        set(
-          produce((state: GameState) => {
-            updateHistory(state, (values) => {
-              values.cabalPoints = points;
-            });
-          })
         ),
+      toggleAttacking: () =>
+        withHistory(set)((values) => {
+          values.attacking = !values.attacking;
+        }),
+      toggleStatus: (unitId, target) =>
+        withHistory(set)(({ unitStatuses }) => {
+          const status = unitStatuses.get(unitId);
+          const newStatus = target === status ? undefined : target;
+          unitStatuses.set(unitId, newStatus);
+        }),
+      setCabalPoints: (points) =>
+        withHistory(set)((values) => {
+          values.cabalPoints = points;
+        }),
       adjustCommandPoints: (by) =>
         set(
           produce((state: GameState) => {
@@ -135,25 +128,32 @@ export const useGameStore = create<GameState & GameHooks>()(
           })
         ),
       advancePhase: (to, totalCabalPoints) =>
-        set(
-          produce((state: GameState) => {
-            updateHistory(state, (values) => {
-              values.phase = to;
-              if (to === "command") {
-                // always bump command points
-                values.commandPoints += 1;
-                // toggle turn
-                values.attackersTurn = !values.attackersTurn;
-                // if now attacker's turn, increase turn counter
-                if (values.attackersTurn) values.turn += 1;
-                // increase cabal points
-                if (values.attackersTurn === values.attacking) {
-                  values.cabalPoints = totalCabalPoints;
-                }
-              }
-            });
-          })
-        ),
+        withHistory(set)((values) => {
+          values.phase = to;
+          // reset rituals used
+          values.ritualsUsed = new Set();
+
+          if (to === "command") {
+            // always bump command points
+            values.commandPoints += 1;
+            // toggle turn
+            values.attackersTurn = !values.attackersTurn;
+            // if now attacker's turn, increase turn counter
+            if (values.attackersTurn) values.turn += 1;
+            // increase cabal points
+            if (values.attackersTurn === values.attacking) {
+              values.cabalPoints = totalCabalPoints;
+            }
+          }
+        }),
+      performRitual: (ritual) =>
+        withHistory(set)((values) => {
+          const { cabalPoints, ritualsUsed } = values;
+          if (canPerformRitual(ritual, cabalPoints, ritualsUsed)) {
+            values.cabalPoints -= cost(ritual);
+            values.ritualsUsed.add(ritual);
+          }
+        }),
     }),
     {
       name: "game-storage",
@@ -170,6 +170,8 @@ export const useGameStore = create<GameState & GameHooks>()(
   )
 );
 
+// =============== Helper Functions ===============
+
 function baseState(): GameState {
   const history = createHistory<GameValues>(20);
   push(history, {
@@ -179,21 +181,35 @@ function baseState(): GameState {
     commandPoints: 0,
     cabalPoints: 0,
     unitStatuses: new Map(),
+    ritualsUsed: new Set<Ritual>(),
   });
   return { history };
 }
 
 function copy(values: GameValues): GameValues {
-  const { unitStatuses, ...others } = values;
+  const { unitStatuses, ritualsUsed, ...others } = values;
   return {
     ...others,
     unitStatuses: new Map(unitStatuses),
+    ritualsUsed: new Set(ritualsUsed),
   };
 }
 
-function updateHistory(state: GameState, mutate: (values: GameValues) => void) {
+type Mutation = (values: GameValues) => void;
+type FullState = GameState & GameHooks;
+type Setter = (partial: (state: FullState) => FullState) => void;
+
+function updateHistory(state: GameState, mutate: Mutation) {
   const { history } = state;
   const values = copy(current(history));
   mutate(values);
   push(history, values);
 }
+
+const withHistory = (set: Setter) => (mutate: Mutation) => {
+  return set(
+    produce((state: GameState) =>
+      updateHistory(state, (values) => mutate(values))
+    )
+  );
+};

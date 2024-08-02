@@ -8,8 +8,6 @@ interface UseCabalPoints {
   isLoading: boolean;
 }
 
-// export const useCalculateTotalCabalPoints = () => (listId: string)
-
 export const useTotalCabalPoints = (listId: string): UseCabalPoints => {
   const statuses = useGameValues(({ unitStatuses }) => unitStatuses);
   const list = useGetList(listId);
