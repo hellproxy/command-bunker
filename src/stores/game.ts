@@ -44,6 +44,7 @@ interface GameHooks {
   toggleAttacking: () => void;
   toggleStatus: (unitId: string, target: UnitStatus) => void;
   setCabalPoints: (points: number) => void;
+  adjustVictoryPoints: (by: number) => void;
   adjustCommandPoints: (by: number, stratagem?: string) => void;
   performRitual: (cost: number, ritual: string) => void;
   advancePhase: (to: Phase, totalCabalPoints: number) => void;
@@ -102,6 +103,25 @@ export const useGameStore = create<GameState & GameHooks>()(
         withHistory(set)((values) => {
           values.cabalPoints = points;
         }),
+      adjustVictoryPoints: (by) =>
+        set(
+          produce((state: GameState) => {
+            // skip if not changing anything
+            if (by === 0) return;
+
+            const { history } = state;
+            const values = copy(current(history));
+            const { victoryPoints } = values;
+
+            // skip if trying to reduce below 0
+            const target = victoryPoints + by;
+            if (target < 0) return;
+
+            // perform victory point adjustment
+            values.victoryPoints = target;
+            push(history, values);
+          })
+        ),
       adjustCommandPoints: (by, stratagem) =>
         set(
           produce((state: GameState) => {
@@ -115,9 +135,8 @@ export const useGameStore = create<GameState & GameHooks>()(
             // skip if already used this stratagem this phase
             if (stratagem && stratagemsUsed.has(stratagem)) return;
 
-            const target = commandPoints + by;
-
             // skip if trying to reduce below 0
+            const target = commandPoints + by;
             if (target < 0) return;
 
             // perform command point adjustment and record ritual used
@@ -138,9 +157,8 @@ export const useGameStore = create<GameState & GameHooks>()(
             // skip if already used this ritual this phase
             if (ritual && ritualsUsed.has(ritual)) return;
 
-            const target = cabalPoints - cost;
-
             // skip if trying to reduce below 0
+            const target = cabalPoints - cost;
             if (target < 0) return;
 
             // perform cabal point adjustment and record ritual used

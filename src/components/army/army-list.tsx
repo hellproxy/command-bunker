@@ -1,8 +1,8 @@
-import { useGetList, useListStore } from "@/stores/lists";
+import { useGetList } from "@/stores/lists";
 import { SectionHeader } from "../section-header";
 import { ArmyUnit } from "./army-unit";
-import { useUnitData } from "@/hooks/unit-data";
 import { useGameStore } from "@/stores/game";
+import { useUnitData } from "@/hooks/unit-data";
 
 export const ArmyList = () => {
   const listId = useGameStore((state) => state.listId!);
