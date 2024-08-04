@@ -62,7 +62,11 @@ namespace Immutable {
 
   export interface Ritual {
     readonly type: string;
+    readonly name: string;
     readonly cost: number;
+    readonly phase: Phase | "any";
+    readonly turn: "player" | "opponent" | "any";
+    readonly text: string;
   }
 
   export type Section = "characters" | "infantry" | "nonInfantry" | "allies";
@@ -71,4 +75,10 @@ namespace Immutable {
   export type Damage = number | DiceRoll;
   export type Range = number | "melee";
   export type Skill = number | "N/A";
+  export type Phase =
+    | "command"
+    | "movement"
+    | "shooting"
+    | "fight"
+    | "turn-end";
 }

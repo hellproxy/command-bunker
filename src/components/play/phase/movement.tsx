@@ -16,12 +16,6 @@ export const MovementPhase = () => {
             <span className="font-semibold">Aetherstride</span>
           </Toggle>
         </div>
-        <div className="game-interaction py-1.5">
-          <span className="grow my-0.5 text-sm">
-            Use Ritual: <span className="font-semibold">Temporal Surge</span>
-          </span>
-          <RitualButton ritual="temporal-surge" />
-        </div>
       </div>
       <div className="flex justify-center mb-1">
         <AdvancePhaseButton nextPhase="shooting">Continue</AdvancePhaseButton>

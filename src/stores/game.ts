@@ -15,11 +15,10 @@ import {
 import { useTotalCabalPoints } from "@/hooks/cabal";
 
 export type UnitStatus = "dead" | "reserve" | undefined;
-export type Phase = "command" | "movement" | "shooting" | "fight" | "turn-end";
 
 interface GameValues {
   turn: number;
-  phase?: Phase;
+  phase?: Immutable.Phase;
   attackersTurn?: boolean;
   attacking: boolean;
   victoryPoints: number;
@@ -47,7 +46,7 @@ interface GameHooks {
   adjustVictoryPoints: (by: number) => void;
   adjustCommandPoints: (by: number, stratagem?: string) => void;
   performRitual: (cost: number, ritual: string) => void;
-  advancePhase: (to: Phase, totalCabalPoints: number) => void;
+  advancePhase: (to: Immutable.Phase, totalCabalPoints: number) => void;
 }
 
 // =============== Custom Hooks ===============
@@ -65,7 +64,7 @@ export function useNavigation(): { canGoBack: boolean; canGoForward: boolean } {
   }));
 }
 
-export function useAdvancePhase(): (to: Phase) => void {
+export function useAdvancePhase(): (to: Immutable.Phase) => void {
   const advancePhase = useGameStore((state) => state.advancePhase);
   const listId = useGameStore((state) => state.listId!);
   const { totalCabalPoints } = useTotalCabalPoints(listId);

@@ -1,8 +1,8 @@
-import { Phase, useAdvancePhase } from "@/stores/game";
+import { useAdvancePhase } from "@/stores/game";
 import { PropsWithChildren } from "react";
 
 type Props = PropsWithChildren<{
-  nextPhase: Phase;
+  nextPhase: Immutable.Phase;
 }>;
 
 export const AdvancePhaseButton = ({ nextPhase, children }: Props) => {

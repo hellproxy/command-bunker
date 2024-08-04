@@ -2,7 +2,7 @@ import { useGameValues } from "@/stores/game";
 import { PreGame } from "./phase/pre-game";
 import { CommmandPhase } from "./phase/command";
 import { MovementPhase } from "./phase/movement";
-import { ShootingPhase } from "./phase/phase-shooting";
+import { ShootingPhase } from "./phase/shooting";
 import { FightPhase } from "./phase/fight";
 import { TurnEndPhase } from "./phase/turn-end";
 import { OpponentCommmandPhase } from "./phase/opponent-command";
@@ -11,7 +11,7 @@ import { OpponentShootingPhase } from "./phase/opponent-shooting";
 import { OpponentFightPhase } from "./phase/opponent-fight";
 import { OpponentTurnEndPhase } from "./phase/opponent-turn-end";
 
-export const GameDisplay = () => {
+export const PhaseDisplay = () => {
   const { turn, phase, attacking, attackersTurn } = useGameValues(
     ({ turn, phase, attacking, attackersTurn }) => ({
       turn,

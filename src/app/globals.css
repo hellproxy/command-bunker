@@ -84,6 +84,9 @@ body {
   .game-interaction {
     @apply flex rounded p-2 hover:bg-slate-100;
   }
+  .grid-rows-fit-content {
+    grid-template-rows: fit-content(0);
+  }
 }
 
 @keyframes text-nova {
