@@ -8,6 +8,7 @@ import {
   canGoForward,
   createHistory,
   current,
+  dropFuture,
   forward,
   GameHistory,
   push,
@@ -27,6 +28,7 @@ interface GameValues {
   unitStatuses: Map<string, UnitStatus>;
   ritualsUsed: Set<string>;
   stratagemsUsed: Set<string>;
+  sorceryChoice?: string;
 }
 
 interface GameState {
@@ -47,6 +49,7 @@ interface GameHooks {
   adjustCommandPoints: (by: number, stratagem?: string) => void;
   performRitual: (cost: number, ritual: string) => void;
   advancePhase: (to: Immutable.Phase, totalCabalPoints: number) => void;
+  setSorceryChoice: (to: string) => void;
 }
 
 // =============== Custom Hooks ===============
@@ -187,6 +190,21 @@ export const useGameStore = create<GameState & GameHooks>()(
             if (values.attackersTurn) values.turn += 1;
           }
         }),
+      setSorceryChoice: (choice) =>
+        set(
+          produce((state: GameState) => {
+            const { history } = state;
+            const values = current(history);
+
+            const { attackersTurn, attacking, phase } = values;
+            const unlocked = attackersTurn === attacking && phase === "command";
+
+            if (unlocked) {
+              values.sorceryChoice = choice;
+              dropFuture(history);
+            }
+          })
+        ),
     }),
     {
       name: "game-storage",

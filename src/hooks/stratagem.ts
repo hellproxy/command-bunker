@@ -1,5 +1,5 @@
 import { useGameStore, useGameValues } from "@/stores/game";
-import { useStratagemData } from "./stratagem-data";
+import { useStratagemData } from "./codex-data";
 
 interface UseStratagem {
   stratagem?: Immutable.Stratagem;

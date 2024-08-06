@@ -1,5 +1,5 @@
 import { useGameStore, useGameValues } from "@/stores/game";
-import { useRitualData } from "./ritual-data";
+import { useRitualData } from "./codex-data";
 
 interface UseRitual {
   ritual?: Immutable.Ritual;

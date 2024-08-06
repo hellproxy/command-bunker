@@ -1,0 +1,13 @@
+sorceries:
+  - type: malevolent-charge
+    name: Malevolent Charge
+    text: >-
+      Psychic weapons equipped by Thousand Sons models from your army have the [LETHAL HITS] ability
+  - type: psychic-maelstrom
+    name: Psychic Maelstrom
+    text: >-
+      Psychic weapons equipped by Thousand Sons models from your army have the [SUSTAINED HITS 1] ability
+  - type: wrath-of-the-immaterium
+    name: Wrath of the Immaterium
+    text: >-
+      Psychic weapons equipped by Thousand Sons models from your army have the [DEVASTATING WOUNDS] ability

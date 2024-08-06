@@ -18,8 +18,8 @@ export const InfoDisplay = () => {
         </div>
       ) : (
         <div className="text-gray-400 px-3">
-          Click any <span className="font-bold">bold text</span> to view more
-          info here
+          Click any <span className="font-semibold">bold text</span> to view
+          more info here
         </div>
       )}
     </div>

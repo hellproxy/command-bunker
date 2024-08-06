@@ -21,14 +21,18 @@ export function push<T>(history: GameHistory<T>, item: T): void {
   const index = (head + size - offset) % capacity;
 
   items[index] = item;
-  history.size -= offset;
-  history.offset = 0;
+  dropFuture(history);
 
   if (history.size == capacity) {
     history.head++;
   } else {
     history.size++;
   }
+}
+
+export function dropFuture<T>(history: GameHistory<T>): void {
+  history.size -= history.offset;
+  history.offset = 0;
 }
 
 export function canGoBack<T>(history: GameHistory<T>): boolean {

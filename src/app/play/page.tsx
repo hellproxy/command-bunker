@@ -15,6 +15,7 @@ import { useGameStore } from "@/stores/game";
 import Link from "next/link";
 import { RitualDisplay } from "@/components/play/ritual-display";
 import { InfoDisplay } from "@/components/play/info-display";
+import { SorceriesDisplay } from "@/components/play/sorceries-display";
 
 export default function CommandBunker() {
   const listId = useGameStore((state) => state.listId!);
@@ -24,9 +25,12 @@ export default function CommandBunker() {
       <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
         <GameStatePane />
         <PhaseDisplay />
-        <div className="grid grid-cols-2 grid-rows-fit-content gap-2 mt-auto">
-          <RitualDisplay />
-          <InfoDisplay />
+        <div className="flex flex-col mt-auto gap-2">
+          <SorceriesDisplay />
+          <div className="grid grid-cols-2 grid-rows-fit-content gap-2">
+            <RitualDisplay />
+            <InfoDisplay />
+          </div>
         </div>
       </div>
       <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">

@@ -69,6 +69,12 @@ namespace Immutable {
     readonly text: string;
   }
 
+  export interface Sorcery {
+    readonly type: string;
+    readonly name: string;
+    readonly text: string;
+  }
+
   export type Section = "characters" | "infantry" | "nonInfantry" | "allies";
   export type DiceRoll = `${number | ""}D${number}${`+${number}` | ""}`;
   export type Attacks = number | DiceRoll;
