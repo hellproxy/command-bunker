@@ -1,5 +1,6 @@
 import { useGameStore, useGameValues } from "@/stores/game";
 import { SetStateAction, useCallback, useEffect, useState } from "react";
+import { ValueEditor } from "./value-editor";
 
 function useShiftKey(
   setShiftHeld: (value: SetStateAction<boolean>) => void,
@@ -12,7 +13,8 @@ function useShiftKey(
 
 export const VictoryPoints = () => {
   const victoryPoints = useGameValues(({ victoryPoints }) => victoryPoints);
-  const adjust = useGameStore((state) => state.adjustVictoryPoints);
+  const adjustPoints = useGameStore((state) => state.adjustVictoryPoints);
+  const setPoints = useGameStore((state) => state.setVictoryPoints);
   const [delta, setDelta] = useState(0);
   const [shiftHeld, setShiftHeld] = useState(false);
 
@@ -35,11 +37,11 @@ export const VictoryPoints = () => {
 
   return (
     <div className="inline-flex ">
-      <div className="min-w-7 text-center text-lg border rounded shadow-inner mr-2">
-        {victoryPoints}
-      </div>
+      <ValueEditor value={victoryPoints} setValue={setPoints} />
       <button
-        className="min-w-7 text-sm font-semibold border rounded-s hover:bg-gray-100 focus:ring-2 focus:ring-blue-400 focus:z-10"
+        className="min-w-7 text-sm font-semibold border rounded-s
+        hover:bg-gray-100 focus:ring-2 focus:ring-blue-400 focus:z-10
+        ml-2"
         onClick={() =>
           setDelta((value) => Math.max(value - plusMinus, minDelta))
         }
@@ -52,7 +54,7 @@ export const VictoryPoints = () => {
           ${background}`}
         onClick={() => {
           setDelta(0);
-          adjust(delta);
+          adjustPoints(delta);
         }}
         disabled={!delta}
       >

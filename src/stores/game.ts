@@ -45,7 +45,9 @@ interface GameHooks {
   toggleAttacking: () => void;
   toggleStatus: (unitId: string, target: UnitStatus) => void;
   setCabalPoints: (points: number) => void;
+  setVictoryPoints: (points: number) => void;
   adjustVictoryPoints: (by: number) => void;
+  setCommandPoints: (points: number) => void;
   adjustCommandPoints: (by: number, stratagem?: string) => void;
   performRitual: (cost: number, ritual: string) => void;
   advancePhase: (to: Immutable.Phase, totalCabalPoints: number) => void;
@@ -105,6 +107,10 @@ export const useGameStore = create<GameState & GameHooks>()(
         withHistory(set)((values) => {
           values.cabalPoints = points;
         }),
+      setVictoryPoints: (points) =>
+        withHistory(set)((values) => {
+          values.victoryPoints = points;
+        }),
       adjustVictoryPoints: (by) =>
         set(
           produce((state: GameState) => {
@@ -124,6 +130,10 @@ export const useGameStore = create<GameState & GameHooks>()(
             push(history, values);
           })
         ),
+      setCommandPoints: (points) =>
+        withHistory(set)((values) => {
+          values.commandPoints = points;
+        }),
       adjustCommandPoints: (by, stratagem) =>
         set(
           produce((state: GameState) => {
