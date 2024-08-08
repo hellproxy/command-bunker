@@ -21,6 +21,7 @@ type Orders = { [section in Immutable.Section]: string[] };
 export const unitFiles = [
   // leaders
   "/units/magnus-the-red.yml",
+  "/units/ahriman.yml",
   "/units/daemon-prince.yml",
   "/units/daemon-prince-with-wings.yml",
   "/units/exalted-sorcerer.yml",
