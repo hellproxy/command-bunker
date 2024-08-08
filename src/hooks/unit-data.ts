@@ -29,6 +29,7 @@ export const unitFiles = [
   // infantry
   "/units/rubricae.yml",
   "/units/scarab-occult-terminators.yml",
+  "/units/tzaangors.yml",
   // nonInfantry
   "/units/heldrake.yml",
   "/units/tzaangor-enlightened.yml",

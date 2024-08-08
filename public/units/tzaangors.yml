@@ -1,0 +1,56 @@
+type: tzaangors
+name: Tzaangors
+image: /images/tzaangors.jpg
+section: infantry
+statLine:
+  movement: 6
+  toughness: 4
+  armourSave: 6
+  invulnerableSave: 6
+  wounds: 1
+  leadership: 7
+  objectiveControl: 2
+rangedWeapons:
+  - type: tzaangor-autopistol
+    name: Autopistol
+    range: 12
+    attacks: 1
+    skill: 4
+    strength: 3
+    ap: 0
+    damage: 1
+    optional: true
+    tags:
+      - Pistol
+meleeWeapons:
+  - type: tzaangor-chainsword
+    name: Chainsword
+    range: melee
+    attacks: 3
+    skill: 4
+    strength: 4
+    ap: 0
+    damage: 1
+    optional: true
+  - type: tzaangor-blades
+    name: Tzaangor blades
+    range: melee
+    attacks: 2
+    skill: 4
+    strength: 5
+    ap: -1
+    damage: 1
+    optional: true
+abilities:
+  - type: tzaangor-relic-hunters
+    name: Relic hunters
+    description: >-
+      At the end of your Command phase, roll one D6 for each objective marker you control that has one or more units from your army with this ability within range of it: for each 4+ you gain 1 Cabal point.
+  - type: tzaangor-brayhorn
+    name: Brayhorn
+    description: >-
+      You can re-roll Advance and Charge rolls made for the bearer's unit.
+  - type: tzaangor-herd-banner
+    name: Herd banner
+    description: >-
+      You can re-roll Battle-shock tests taken for the bearer's unit.

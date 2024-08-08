@@ -40,11 +40,6 @@ export const useGlyphs = (): GlyphResponse => {
 
   const glyphs = glyphData.glyphs;
   const nNames = uniqueNames.size;
-  const nGlyphs = glyphs.length;
-
-  if (nNames > nGlyphs) {
-    throw Error(`More unique names [${nNames}] than glyphs [${nGlyphs}]`);
-  }
 
   const rng = new Prando(123);
   const sortedGlyphs = glyphs
@@ -53,7 +48,7 @@ export const useGlyphs = (): GlyphResponse => {
 
   const pairedGlyphs: [string, Glyph][] = sortedGlyphs
     .filter((_, index) => index < orderedNames.length)
-    .map(({ glyph }, index) => [orderedNames[index], glyph]);
+    .map(({ glyph }, index) => [orderedNames[index % nNames], glyph]);
 
   cachedResponse.glyphs = new Map(pairedGlyphs);
 
