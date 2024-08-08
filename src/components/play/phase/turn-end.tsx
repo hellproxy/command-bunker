@@ -1,10 +1,11 @@
+import { Flag } from "lucide-react";
 import { Toggle } from "../../toggle";
 import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
 
 export const TurnEndPhase = () => {
   return (
-    <Phase name="End of turn">
+    <Phase name="End of turn" icon={<Flag size={20} />}>
       <div className="flex flex-col py-2">
         <div className="game-interaction">
           <Toggle position="after">

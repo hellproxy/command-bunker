@@ -1,11 +1,11 @@
 import { Toggle } from "../../toggle";
 import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
-import { RitualButton } from "../button/ritual-button";
+import { ArrowBigRight, CircleArrowRight } from "lucide-react";
 
 export const MovementPhase = () => {
   return (
-    <Phase name="Movement Phase">
+    <Phase name="Movement Phase" icon={<CircleArrowRight size={20} />}>
       <div className="flex flex-col py-2">
         <div className="game-interaction">
           <Toggle position="after">Set up units from reserve</Toggle>

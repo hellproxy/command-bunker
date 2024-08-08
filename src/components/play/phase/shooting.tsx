@@ -2,10 +2,11 @@ import { Toggle } from "../../toggle";
 import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
 import { RitualButton } from "../button/ritual-button";
+import { Crosshair } from "lucide-react";
 
 export const ShootingPhase = () => {
   return (
-    <Phase name="Shooting Phase">
+    <Phase name="Shooting Phase" icon={<Crosshair size={20} />}>
       <div className="flex flex-col py-2">
         <div className="game-interaction py-1.5">
           <span className="grow my-0.5 text-sm">

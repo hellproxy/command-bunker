@@ -2,10 +2,11 @@ import { useAdvancePhase, useGameStore, useGameValues } from "@/stores/game";
 import { Toggle } from "../../toggle";
 import { Phase } from "./phase";
 import { AdvancePhaseButton } from "../button/advance-button";
+import { Wrench } from "lucide-react";
 
 export const PreGame = () => {
   return (
-    <Phase name="Game setup">
+    <Phase name="Game setup" icon={<Wrench size={20} />}>
       <div className="flex flex-col py-2">
         <AttackingPlayerToggle />
         <UnitsReserveCheck />

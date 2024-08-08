@@ -1,10 +1,11 @@
 import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
 import { RitualButton } from "../button/ritual-button";
+import { Swords } from "lucide-react";
 
 export const FightPhase = () => {
   return (
-    <Phase name="Fight Phase">
+    <Phase name="Fight Phase" icon={<Swords size={20} />}>
       <div className="flex flex-col py-2">
         <div className="game-interaction py-1.5">
           <span className="grow my-0.5 text-sm">
