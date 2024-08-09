@@ -55,14 +55,22 @@ export const ArmyUnit = ({ unit, unitData }: ArmyUnitProps) => {
     );
 
   const selectedNames = selectedTypes.map((type) => type.name);
+  const overlayColor = () => {
+    switch (status) {
+      case "dead":
+        return "bg-red-900";
+      case "reserve":
+        return "bg-gray-600";
+      case "battle-shock":
+        return "bg-yellow-600";
+    }
+  };
 
   return (
     <div className="relative" ref={ref}>
       {status && (
         <div
-          className={`absolute left-0 w-full h-full rounded-lg pointer-events-none opacity-50 ${
-            status === "dead" ? "bg-red-900" : "bg-gray-600"
-          }`}
+          className={`absolute left-0 w-full h-full rounded-lg pointer-events-none opacity-50 ${overlayColor()}`}
         />
       )}
       <div className=" flex flex-col w-full px-4 py-4 gap-4 bg-white rounded-lg shadow-md">

@@ -1,5 +1,5 @@
 import { UnitStatus, useGameStore, useGameValues } from "@/stores/game";
-import { ArrowBigUp, Settings2, Skull } from "lucide-react";
+import { ArrowBigUp, Flag, Settings2, Skull } from "lucide-react";
 import { PropsWithChildren, useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import { useShallow } from "zustand/react/shallow";
@@ -34,6 +34,12 @@ export const UnitStatusToggles = ({ unitId }: UnitStatusTogglesProps) => {
                   unitId={unitId}
                   status={status}
                   target="reserve"
+                />
+                <UnitStatusToggle
+                  text="Battle-shocked"
+                  unitId={unitId}
+                  status={status}
+                  target="battle-shock"
                 />
               </fieldset>
             </div>
@@ -91,5 +97,7 @@ const UnitStatusIcon = ({ status }: UnitStatusIconProps) => {
       return <Skull size={16} />;
     case "reserve":
       return <ArrowBigUp size={16} />;
+    case "battle-shock":
+      return <Flag size={16} />;
   }
 };

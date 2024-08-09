@@ -15,7 +15,7 @@ import {
 } from "./history-utils";
 import { useTotalCabalPoints } from "@/hooks/cabal";
 
-export type UnitStatus = "dead" | "reserve" | undefined;
+export type UnitStatus = "dead" | "reserve" | "battle-shock" | undefined;
 
 interface GameValues {
   turn: number;
