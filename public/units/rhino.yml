@@ -1,0 +1,69 @@
+type: rhino
+name: Thousand Sons Rhino
+image: /images/rhino.jpg
+section: nonInfantry
+statLine:
+  movement: 12
+  toughness: 9
+  armourSave: 3
+  invulnerableSave: 5
+  wounds: 10
+  leadership: 6
+  objectiveControl: 2
+rangedWeapons:
+  - type: rhino-inferno-combi-bolter
+    name: Inferno combi-bolter
+    range: 24
+    attacks: 2
+    skill: 3
+    strength: 4
+    ap: -1
+    damage: 1
+    tags:
+      - Rapid Fire 2
+    optional: true
+  - type: rhino-inferno-combi-weapon
+    name: Inferno combi-weapon
+    range: 24
+    attacks: 1
+    skill: 4
+    strength: 4
+    ap: -1
+    damage: 1
+    tags:
+      - Anti-infantry 4+
+      - Devastating Wounds
+      - Rapid Fire 1
+    optional: true
+  - type: rhino-havoc-launcher
+    name: Havoc launcher
+    range: 48
+    attacks: D6
+    skill: 3
+    strength: 5
+    ap: 0
+    damage: 1
+    tags:
+      - Blast
+    optional: true
+meleeWeapons:
+  - type: rhino-armoured-tracks
+    name: Armoured tracks
+    range: melee
+    attacks: 3
+    skill: 4
+    strength: 6
+    ap: 0
+    damage: 1
+coreAbilities:
+  - Deadly Demise D3
+  - Firing Deck 2
+abilities:
+  - type: rhino-self-repair
+    name: Self repair
+    description: >-
+      At the start of your Command phase, this model regains 1 lost wound.
+  - type: rhino-transport
+    name: Transport
+    description: >-
+      This model has a transport capacity of 12 Thousand Sons Infantry models (excluding Cultists, Tzaangor and Terminator models).

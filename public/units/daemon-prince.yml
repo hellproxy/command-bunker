@@ -4,7 +4,7 @@ image: /images/daemon-prince.jpg
 section: characters
 cabalPoints: 2
 statLine:
-  movement: 11
+  movement: 7
   toughness: 9
   armourSave: 2
   invulnerableSave: 4

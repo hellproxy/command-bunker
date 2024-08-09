@@ -22,14 +22,16 @@ rangedWeapons:
     tags:
       - Ignores Cover
       - Torrent
+    optional: true
   - type: heldrake-hades-autocannon
     name: Hades autocannon
-    range: melee
+    range: 36
     attacks: 6
     skill: 3
     strength: 8
     ap: -1
     damage: 2
+    optional: true
 meleeWeapons:
   - type: heldrake-claws
     name: Heldrake claws

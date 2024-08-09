@@ -39,16 +39,16 @@ export const useGlyphs = (): GlyphResponse => {
   const orderedNames = Array.from(uniqueNames);
 
   const glyphs = glyphData.glyphs;
-  const nNames = uniqueNames.size;
 
   const rng = new Prando(123);
   const sortedGlyphs = glyphs
     .map((glyph) => ({ glyph, sort: rng.next(0, Number.MAX_SAFE_INTEGER) }))
     .sort((a, b) => a.sort - b.sort);
 
-  const pairedGlyphs: [string, Glyph][] = sortedGlyphs
-    .filter((_, index) => index < orderedNames.length)
-    .map(({ glyph }, index) => [orderedNames[index % nNames], glyph]);
+  const pairedGlyphs: [string, Glyph][] = orderedNames.map((name, index) => [
+    name,
+    sortedGlyphs[index % glyphs.length].glyph,
+  ]);
 
   cachedResponse.glyphs = new Map(pairedGlyphs);
 
