@@ -16,6 +16,7 @@ import {
 import { useTotalCabalPoints } from "@/hooks/cabal";
 
 export type UnitStatus = "dead" | "reserve" | "battle-shock" | undefined;
+export type PhaseAction = "discard-mission";
 
 interface GameValues {
   turn: number;
@@ -28,6 +29,7 @@ interface GameValues {
   unitStatuses: Map<string, UnitStatus>;
   ritualsUsed: Set<string>;
   stratagemsUsed: Set<string>;
+  phaseActions: Set<PhaseAction>;
   sorceryChoice?: string;
 }
 
@@ -52,6 +54,7 @@ interface GameHooks {
   performRitual: (cost: number, ritual: string) => void;
   advancePhase: (to: Immutable.Phase, totalCabalPoints: number) => void;
   setSorceryChoice: (to: string) => void;
+  discardSecondaryMission: () => void;
 }
 
 // =============== Custom Hooks ===============
@@ -185,6 +188,7 @@ export const useGameStore = create<GameState & GameHooks>()(
           // reset rituals used
           values.ritualsUsed = new Set();
           values.stratagemsUsed = new Set();
+          values.phaseActions = new Set();
 
           if (to === "movement" && values.attackersTurn === values.attacking) {
             // increase cabal points at end of player's Command Phase
@@ -215,6 +219,11 @@ export const useGameStore = create<GameState & GameHooks>()(
             }
           })
         ),
+      discardSecondaryMission: () =>
+        withHistory(set)((values) => {
+          values.phaseActions.add("discard-mission");
+          values.commandPoints += 1;
+        }),
     }),
     {
       name: "game-storage",
@@ -244,17 +253,20 @@ function baseState(): GameState {
     unitStatuses: new Map(),
     ritualsUsed: new Set<string>(),
     stratagemsUsed: new Set<string>(),
+    phaseActions: new Set<PhaseAction>(),
   });
   return { history };
 }
 
 function copy(values: GameValues): GameValues {
-  const { unitStatuses, ritualsUsed, stratagemsUsed, ...others } = values;
+  const { unitStatuses, ritualsUsed, stratagemsUsed, phaseActions, ...others } =
+    values;
   return {
     ...others,
     unitStatuses: new Map(unitStatuses),
     ritualsUsed: new Set(ritualsUsed),
     stratagemsUsed: new Set(stratagemsUsed),
+    phaseActions: new Set(phaseActions),
   };
 }
 

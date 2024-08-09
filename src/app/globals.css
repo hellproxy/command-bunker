@@ -59,7 +59,7 @@ body {
     @apply bg-green-700 text-white;
   }
   .btn-use {
-    @apply btn btn-blue py-0.5 px-1.5 text-sm disabled:bg-gray-300 disabled:text-gray-800;
+    @apply min-w-9 btn btn-blue py-0.5 px-1.5 text-sm disabled:bg-gray-300 disabled:text-gray-800;
   }
   .search:focus-within {
     outline-color: currentcolor;
