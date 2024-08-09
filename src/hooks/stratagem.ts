@@ -24,6 +24,6 @@ export function useStratagem(type: string): UseStratagem {
 
     return { stratagem, canPerform, perform };
   } else {
-    return { canPerform: false, perform: () => {} };
+    return { stratagem, canPerform: false, perform: () => {} };
   }
 }

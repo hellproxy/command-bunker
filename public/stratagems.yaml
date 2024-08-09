@@ -3,3 +3,5 @@ stratagems:
     cost: 1
   - type: destined-by-fate
     cost: 1
+  - type: ensorcelled-infusion
+    cost: 1
