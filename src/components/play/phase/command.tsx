@@ -1,11 +1,11 @@
-import { Crown } from "lucide-react";
+import { Goal } from "lucide-react";
 import { Toggle } from "../../toggle";
 import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
 
 export const CommmandPhase = () => {
   return (
-    <Phase name="Command Phase" icon={<Crown size={20} />}>
+    <Phase name="Command Phase" icon={<Goal size={20} />}>
       <div className="flex flex-col py-2">
         <div className="game-interaction">
           <Toggle position="after">Draw 2 secondary mission cards</Toggle>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Search, View } from "lucide-react";
+import { Goal, Search, View } from "lucide-react";
 import { SearchList } from "@/components/search/search-list";
 import { ArmyList } from "@/components/army/army-list";
 import { useHotkey } from "@/hooks/hotkey";
@@ -52,26 +52,29 @@ const GameStatePane = () => {
   return (
     <div className="flex divide-x bg-white rounded shadow-md">
       <div className="grow grid grid-cols-4 divide-x">
-        <div className="flex flex-col gap-1 py-2">
+        <div className="flex flex-col gap-1.5 py-2">
           <div className="text-sm text-center">Turn</div>
           <div className="flex justify-center">
             <Turn />
           </div>
         </div>
-        <div className="flex flex-col gap-1 py-2">
+        <div className="flex flex-col gap-1.5 py-2">
           <div className="text-sm text-center">Victory Points</div>
           <div className="flex justify-center">
             <VictoryPoints />
           </div>
         </div>
-        <div className="flex flex-col gap-1 py-2">
-          <div className="text-sm text-center">Command Points</div>
+        <div className="flex flex-col items-center gap-1.5 py-2">
+          <div className="flex flex-row items-center gap-1 text-sm">
+            Command Points
+            <Goal className="text-blue-400" size={17.5} />
+          </div>
           <div className="flex justify-center">
             <CommandPoints />
           </div>
         </div>
-        <div className="flex flex-col items-center gap-1 py-2">
-          <div className="flex flex-row items-center text-sm text-center gap-1">
+        <div className="flex flex-col items-center gap-1.5 py-2">
+          <div className="flex flex-row items-center gap-1 text-sm">
             Cabal Points
             <View className="text-blue-400" size={17.5} />
           </div>
