@@ -9,7 +9,7 @@ export const TurnEndPhase = () => {
       <div className="flex flex-col py-2">
         <div className="game-interaction">
           <Toggle position="after">
-            Draw a secondary mission card (+1 CP)
+            Optionally discard a secondary mission card to gain 1 CP
           </Toggle>
         </div>
       </div>

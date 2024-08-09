@@ -16,6 +16,12 @@ export const MovementPhase = () => {
             <span className="font-semibold">Aetherstride</span>
           </Toggle>
         </div>
+        <div className="game-interaction">
+          <Toggle position="after">
+            Use Daemon Prince with Wings'{" "}
+            <span className="font-semibold">Sorcerous fire</span> ability
+          </Toggle>
+        </div>
       </div>
       <div className="flex justify-center mb-1">
         <AdvancePhaseButton nextPhase="shooting">Continue</AdvancePhaseButton>

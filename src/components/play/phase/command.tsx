@@ -8,7 +8,15 @@ export const CommmandPhase = () => {
     <Phase name="Command Phase" icon={<Crown size={20} />}>
       <div className="flex flex-col py-2">
         <div className="game-interaction">
-          <Toggle position="after">Draw a secondary mission card</Toggle>
+          <Toggle position="after">Draw 2 secondary mission cards</Toggle>
+        </div>
+        <div className="game-interaction">
+          <Toggle position="after">Take Battle-shock tests</Toggle>
+        </div>
+        <div className="game-interaction">
+          <Toggle position="after">
+            Receive Victory Points from objectives held
+          </Toggle>
         </div>
         <div className="game-interaction">
           <Toggle position="after">
@@ -27,6 +35,12 @@ export const CommmandPhase = () => {
             Activate each Exalted Sorcerer's{" "}
             <span className="font-semibold">Rebind Rubricae</span> ability
           </Toggle>
+        </div>
+        <div className="game-interaction">
+          <Toggle position="after">
+            Use Tzaangors' <span className="font-semibold">Relic hunters</span>{" "}
+            ability
+          </Toggle>{" "}
         </div>
       </div>
       <div className="flex justify-center mb-1">

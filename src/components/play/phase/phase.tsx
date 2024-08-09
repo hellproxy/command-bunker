@@ -1,4 +1,3 @@
-import { ArrowBigRight, Crown } from "lucide-react";
 import { PropsWithChildren, ReactNode } from "react";
 
 type PhaseProps = PropsWithChildren<{

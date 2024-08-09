@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, View } from "lucide-react";
 import { SearchList } from "@/components/search/search-list";
 import { ArmyList } from "@/components/army/army-list";
 import { useHotkey } from "@/hooks/hotkey";
@@ -70,8 +70,11 @@ const GameStatePane = () => {
             <CommandPoints />
           </div>
         </div>
-        <div className="flex flex-col gap-1 py-2">
-          <div className="text-sm text-center">Cabal Points</div>
+        <div className="flex flex-col items-center gap-1 py-2">
+          <div className="flex flex-row items-center text-sm text-center gap-1">
+            Cabal Points
+            <View className="text-blue-400" size={17.5} />
+          </div>
           <div className="flex justify-center">
             <CabalPoints />
           </div>

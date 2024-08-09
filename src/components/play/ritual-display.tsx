@@ -1,5 +1,6 @@
 import { useRituals } from "@/hooks/ritual";
 import { useInfoStore } from "@/stores/info";
+import { View } from "lucide-react";
 
 interface RitualProps {
   ritual: Immutable.Ritual;
@@ -27,14 +28,22 @@ const RitualItem = ({ ritual, canPerform, perform }: RitualProps) => {
   const setInfo = useInfoStore((state) => state.setInfo);
 
   return (
-    <div className="game-interaction py-1.5">
+    <div className="game-interaction py-1.5 items-baseline">
       <span
         className="grow my-0.5 text-sm font-semibold hover:text-blue-600 cursor-pointer"
         onClick={() => setInfo({ title: name, text })}
       >
         {ritual.name}
       </span>
-      <button className="btn-use" disabled={!canPerform} onClick={perform}>
+      <div className="flex flex-row items-center text-gray-400 text-sm gap-1">
+        {ritual ? ritual.cost : null}
+        <View size={17.5} className="text-blue-400" />
+      </div>
+      <button
+        className="btn-use ml-3 min-w-9"
+        disabled={!canPerform}
+        onClick={perform}
+      >
         Use
       </button>
     </div>
