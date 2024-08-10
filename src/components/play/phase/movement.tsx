@@ -18,7 +18,7 @@ export const MovementPhase = () => {
         </div>
         <div className="game-interaction">
           <Toggle position="after">
-            Use Daemon Prince with Wings'{" "}
+            Use Daemon Prince with Wings&apos;{" "}
             <span className="font-semibold">Sorcerous fire</span> ability
           </Toggle>
         </div>

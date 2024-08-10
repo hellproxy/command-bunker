@@ -32,14 +32,14 @@ export const CommmandPhase = () => {
         </div>
         <div className="game-interaction">
           <Toggle position="after">
-            Activate each Exalted Sorcerer's{" "}
+            Activate each Exalted Sorcerer&apos;s{" "}
             <span className="font-semibold">Rebind Rubricae</span> ability
           </Toggle>
         </div>
         <div className="game-interaction">
           <Toggle position="after">
-            Use Tzaangors' <span className="font-semibold">Relic hunters</span>{" "}
-            ability
+            Use Tzaangors&apos;{" "}
+            <span className="font-semibold">Relic hunters</span> ability
           </Toggle>{" "}
         </div>
       </div>
