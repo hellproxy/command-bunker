@@ -26,6 +26,7 @@ interface GameValues {
   victoryPoints: number;
   commandPoints: number;
   cabalPoints: number;
+  extraCabalPoints: number;
   unitStatuses: Map<string, UnitStatus>;
   ritualsUsed: Set<string>;
   stratagemsUsed: Set<string>;
@@ -47,6 +48,7 @@ interface GameHooks {
   toggleAttacking: () => void;
   toggleStatus: (unitId: string, target: UnitStatus) => void;
   setCabalPoints: (points: number) => void;
+  addExtraCabalPoints: (points: number) => void;
   setVictoryPoints: (points: number) => void;
   adjustVictoryPoints: (by: number) => void;
   setCommandPoints: (points: number) => void;
@@ -109,6 +111,10 @@ export const useGameStore = create<GameState & GameHooks>()(
       setCabalPoints: (points) =>
         withHistory(set)((values) => {
           values.cabalPoints = points;
+        }),
+      addExtraCabalPoints: (points) =>
+        withHistory(set)((values) => {
+          values.extraCabalPoints += points;
         }),
       setVictoryPoints: (points) =>
         withHistory(set)((values) => {
@@ -196,6 +202,8 @@ export const useGameStore = create<GameState & GameHooks>()(
           }
 
           if (to === "command") {
+            // reset extra cabal points
+            values.extraCabalPoints = 0;
             // always bump command points
             values.commandPoints += 1;
             // toggle turn
@@ -250,6 +258,7 @@ function baseState(): GameState {
     victoryPoints: 0,
     commandPoints: 0,
     cabalPoints: 0,
+    extraCabalPoints: 0,
     unitStatuses: new Map(),
     ritualsUsed: new Set<string>(),
     stratagemsUsed: new Set<string>(),

@@ -10,6 +10,7 @@ interface UseCabalPoints {
 
 export const useTotalCabalPoints = (listId: string): UseCabalPoints => {
   const statuses = useGameValues(({ unitStatuses }) => unitStatuses);
+  const extraPoints = useGameValues(({ extraCabalPoints }) => extraCabalPoints);
   const list = useGetList(listId);
   const { data, error, isLoading } = useUnitData();
 
@@ -18,7 +19,7 @@ export const useTotalCabalPoints = (listId: string): UseCabalPoints => {
   }
 
   const totalCabalPoints = data
-    ? calculateTotalCabalPoints(list, data, statuses)
+    ? calculateTotalCabalPoints(list, data, statuses) + extraPoints
     : 0;
 
   return { totalCabalPoints, error, isLoading };

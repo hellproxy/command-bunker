@@ -2,6 +2,7 @@ import { Goal } from "lucide-react";
 import { Toggle } from "../../toggle";
 import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
+import { ExtraCabalPointsButton } from "../button/extra-cabal-points";
 
 export const CommmandPhase = () => {
   return (
@@ -36,11 +37,12 @@ export const CommmandPhase = () => {
             <span className="font-semibold">Rebind Rubricae</span> ability
           </Toggle>
         </div>
-        <div className="game-interaction">
-          <Toggle position="after">
+        <div className="game-interaction py-1.5">
+          <span className="grow my-0.5 text-sm">
             Use Tzaangors&apos;{" "}
             <span className="font-semibold">Relic hunters</span> ability
-          </Toggle>{" "}
+          </span>
+          <ExtraCabalPointsButton />
         </div>
       </div>
       <div className="flex justify-center mb-1">
