@@ -9,7 +9,7 @@ export const CabalPoints = () => {
   const { totalCabalPoints, error } = useTotalCabalPoints(listId);
 
   if (error) return <div>Failed to load</div>;
-  if (!totalCabalPoints) return <div>Loading...</div>;
+  if (totalCabalPoints === undefined) return <div>Loading...</div>;
 
   return (
     <div className="grid grid-cols-11 w-full">
