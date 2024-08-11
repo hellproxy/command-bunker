@@ -11,7 +11,7 @@ export const WeaponStatLine = ({
     <div className={`grid grid-cols-6 weapon-statline ${className || ""}`}>
       <div>{typeof range === "number" ? `${range}"` : range}</div>
       <div>{attacks}</div>
-      <div>{typeof skill === "number" ? `${skill}+` : range}</div>
+      <div>{typeof skill === "number" ? `${skill}+` : skill}</div>
       <div>{strength}</div>
       <div>{ap}</div>
       <div>{damage}</div>

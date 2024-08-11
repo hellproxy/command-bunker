@@ -91,6 +91,19 @@ rangedWeapons:
         tags:
           - Hazardous
           - Pistol
+  - type: rubricae-warpsmite
+    name: Warpsmite
+    range: 18
+    attacks: 2
+    skill: 3
+    strength: 4
+    ap: -3
+    damage: 1
+    tags:
+      - Anti-infantry 4+
+      - Devastating Wounds
+      - Pistol
+      - Psychic
 meleeWeapons:
   - type: rubricae-close-combat-weapon
     name: Close combat weapon
