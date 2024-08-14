@@ -202,14 +202,16 @@ export const useGameStore = create<GameState & GameHooks>()(
           }
 
           if (to === "command") {
-            // reset extra cabal points
-            values.extraCabalPoints = 0;
             // always bump command points
             values.commandPoints += 1;
             // toggle turn
             values.attackersTurn = !values.attackersTurn;
             // if now attacker's turn, increase turn counter
             if (values.attackersTurn) values.turn += 1;
+            // reset extra cabal points
+            if (values.attackersTurn === values.attacking) {
+              values.extraCabalPoints = 0;
+            }
           }
         }),
       setSorceryChoice: (choice) =>

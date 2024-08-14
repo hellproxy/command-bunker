@@ -2,11 +2,12 @@ import { UnitIcon } from "../unit-icon";
 import { StatLine } from "../statline";
 import { Tags } from "../tags";
 import { UnitStatusToggles } from "../unit-status";
-import { useGameValues } from "@/stores/game";
+import { useGameStore, useGameValues } from "@/stores/game";
 import { UnitAbility, UnitWeapon, UnitWeaponHeader } from "../info/unit";
 import { useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import { useUnitData } from "@/hooks/unit-data";
+import { useEnhancement } from "@/hooks/enhancements";
 
 interface ArmyUnitProps {
   unit: ListBuilder.Unit;
@@ -18,6 +19,10 @@ export const ArmyUnit = ({ unit, unitData }: ArmyUnitProps) => {
   const { data, error } = useUnitData();
   const status = useGameValues(({ unitStatuses }) => unitStatuses.get(unit.id));
   const [showData, setShowData] = useState(false);
+  const listId = useGameStore((state) => state.listId!);
+  const enhancement = useEnhancement(listId, unit.id);
+
+  console.log(enhancement);
 
   const ref = useRef<null | HTMLDivElement>(null);
   useOnClickOutside(ref, () => setShowData(false));
@@ -55,6 +60,8 @@ export const ArmyUnit = ({ unit, unitData }: ArmyUnitProps) => {
     );
 
   const selectedNames = selectedTypes.map((type) => type.name);
+  if (enhancement) selectedNames.push(enhancement.name);
+
   const overlayColor = () => {
     switch (status) {
       case "dead":
@@ -98,7 +105,7 @@ export const ArmyUnit = ({ unit, unitData }: ArmyUnitProps) => {
         {showData ? (
           <UnitInfo unit={unit} unitData={unitData} />
         ) : (
-          selectedTypes.length > 0 && (
+          selectedNames.length > 0 && (
             <div className="flex flex-wrap items-center">
               <Tags tags={selectedNames} />
             </div>
