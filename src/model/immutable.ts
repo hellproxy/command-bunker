@@ -75,6 +75,11 @@ namespace Immutable {
     readonly text: string;
   }
 
+  export interface Enhancement {
+    readonly type: EnhancementType;
+    readonly name: string;
+  }
+
   export type Section = "characters" | "infantry" | "nonInfantry" | "allies";
   export type DiceRoll = `${number | ""}D${number}${`+${number}` | ""}`;
   export type Attacks = number | DiceRoll;
@@ -87,4 +92,9 @@ namespace Immutable {
     | "shooting"
     | "fight"
     | "turn-end";
+  export type EnhancementType =
+    | "lord-of-forbidden-lore"
+    | "athenaean-scrolls"
+    | "umbralefic-crystal"
+    | "arcane-vortex";
 }

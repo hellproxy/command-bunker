@@ -9,6 +9,9 @@ import { MagicGlyph } from "@/components/magic-glyph";
 import dynamic from "next/dynamic";
 import { SectionHeader } from "@/components/section-header";
 import { useUnitData } from "@/hooks/unit-data";
+import { EnhancementSupply } from "@/components/enhancements/enhancement-supply";
+import { EnhancementContext } from "@/components/enhancements/enhancement-context";
+import { EnhancementTarget } from "@/components/enhancements/enhancement-drop";
 
 interface ListBuilderProps {
   params: {
@@ -18,28 +21,31 @@ interface ListBuilderProps {
 
 export default function ListBuilder({ params: { listId } }: ListBuilderProps) {
   return (
-    <div className="grid h-full grid-cols-2">
-      <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
-        <SectionHeader>Characters</SectionHeader>
-        <UnitPickerSection listId={listId} section="characters" />
-        <SectionHeader>Infantry</SectionHeader>
-        <UnitPickerSection listId={listId} section="infantry" />
-        <SectionHeader>Non-Infantry</SectionHeader>
-        <UnitPickerSection listId={listId} section="nonInfantry" />
-        <SectionHeader>Allies</SectionHeader>
-        <UnitPickerSection listId={listId} section="allies" />
+    <EnhancementContext listId={listId}>
+      <div className="grid h-full grid-cols-2">
+        <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
+          <SectionHeader>Characters</SectionHeader>
+          <UnitPickerSection listId={listId} section="characters" />
+          <SectionHeader>Infantry</SectionHeader>
+          <UnitPickerSection listId={listId} section="infantry" />
+          <SectionHeader>Non-Infantry</SectionHeader>
+          <UnitPickerSection listId={listId} section="nonInfantry" />
+          <SectionHeader>Allies</SectionHeader>
+          <UnitPickerSection listId={listId} section="allies" />
+        </div>
+        <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
+          <SectionHeader>Characters</SectionHeader>
+          <UnitCustomizerSection listId={listId} section="characters" />
+          <SectionHeader>Infantry</SectionHeader>
+          <UnitCustomizerSection listId={listId} section="infantry" />
+          <SectionHeader>Non-Infantry</SectionHeader>
+          <UnitCustomizerSection listId={listId} section="nonInfantry" />
+          <SectionHeader>Allies</SectionHeader>
+          <UnitCustomizerSection listId={listId} section="allies" />
+          <EnhancementSupply listId={listId} />
+        </div>
       </div>
-      <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
-        <SectionHeader>Characters</SectionHeader>
-        <UnitCustomizerSection listId={listId} section="characters" />
-        <SectionHeader>Infantry</SectionHeader>
-        <UnitCustomizerSection listId={listId} section="infantry" />
-        <SectionHeader>Non-Infantry</SectionHeader>
-        <UnitCustomizerSection listId={listId} section="nonInfantry" />
-        <SectionHeader>Allies</SectionHeader>
-        <UnitCustomizerSection listId={listId} section="allies" />
-      </div>
-    </div>
+    </EnhancementContext>
   );
 }
 
@@ -159,6 +165,11 @@ const UnitCuztomizer = ({ listId, unit }: UnitCustomizerProps) => {
 
   const { indexedUnits } = data;
   const unitData = indexedUnits.get(unit.type)!;
+  const { name, section, image, coreAbilities } = unitData;
+
+  const isCharacter = section === "characters";
+  const isNotLeader = !coreAbilities?.includes("Leader");
+  const canHaveEnhancements = isCharacter && isNotLeader;
 
   const ranged = unit.options.get("ranged")!;
   const melee = unit.options.get("melee")!;
@@ -173,16 +184,16 @@ const UnitCuztomizer = ({ listId, unit }: UnitCustomizerProps) => {
     >
       <div className="grid grid-cols-9 items-center space-x-4">
         <div className="col-span-1">
-          <UnitIcon src={unitData.image} alt={unitData.name} />
+          <UnitIcon src={image} alt={name} />
         </div>
-        <div className="col-span-7 justify-left">{unitData.name}</div>
+        <div className="col-span-7 justify-left">{name}</div>
         <div className="col-span-1">
           <button className="btn btn-red" onClick={removeUnit}>
             <Trash2 />
           </button>
         </div>
       </div>
-      {ranged.size || melee.size || wargear.size ? (
+      {ranged.size || melee.size || wargear.size || canHaveEnhancements ? (
         <ul className="flex flex-wrap gap-2">
           {Array.from(ranged).map(([weapon, selected]) => (
             <li key={weapon}>
@@ -217,6 +228,9 @@ const UnitCuztomizer = ({ listId, unit }: UnitCustomizerProps) => {
               />
             </li>
           ))}
+          {canHaveEnhancements && (
+            <EnhancementTarget listId={listId} unitId={unit.id} />
+          )}
         </ul>
       ) : (
         <></>
@@ -265,7 +279,9 @@ const SelectableOption = (props: SelectableOptionProps) => {
       />
       <label
         htmlFor={id}
-        className="flex items-center gap-2 w-70 px-2 py-1 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 hover:text-slate-800 hover:bg-gray-50"
+        className="flex items-center gap-2 px-2 py-1 bg-white
+          border-2 border-gray-200 rounded-lg cursor-pointer
+          peer-checked:border-blue-600 hover:text-slate-800 hover:bg-gray-50"
       >
         <div className="block">
           <div className="select-none">{name}</div>

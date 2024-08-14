@@ -6,6 +6,8 @@ import { createMapStorage } from "./utils";
 
 enableMapSet();
 
+type EnhancementType = Immutable.EnhancementType;
+
 interface ListState {
   lists: Map<string, ListBuilder.List>;
   unitJustAdded?: string;
@@ -23,6 +25,14 @@ interface ListState {
     location: ListBuilder.Location,
     type: string
   ) => (value: boolean) => void;
+  moveEnhancement: (
+    listId: string,
+    move: {
+      from?: string;
+      to?: string;
+      enhancement?: EnhancementType;
+    }
+  ) => void;
 }
 
 export function useGetList(listId: string): ListBuilder.List {
@@ -81,6 +91,16 @@ export const useListStore = create<ListState>()(
           })
         );
       },
+      moveEnhancement: (listId, move) => {
+        set(
+          produce((state: ListState) => {
+            const { from, to, enhancement } = move;
+            const enhancements = state.lists.get(listId)!.enhancements;
+            if (to && enhancement) enhancements.set(to, enhancement);
+            if (from) enhancements.delete(from);
+          })
+        );
+      },
     }),
     {
       name: "list-storage",
@@ -94,6 +114,7 @@ function newList(): ListBuilder.List {
     listId: uuidv4().substring(0, 8),
     name: "",
     units: new Map(),
+    enhancements: new Map(),
   };
 }
 

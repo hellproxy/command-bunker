@@ -3,6 +3,7 @@ namespace ListBuilder {
     listId: string;
     name: string;
     units: Map<string, Unit>;
+    enhancements: Map<string, Immutable.EnhancementType>;
   }
 
   export interface Unit {

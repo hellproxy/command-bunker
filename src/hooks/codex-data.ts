@@ -61,3 +61,17 @@ export const useStratagemData = () => {
     swrOptions()
   );
 };
+
+interface EnhancementFile {
+  enhancements: Immutable.Enhancement[];
+}
+
+export const useEnhancementData = () => {
+  const file = "/enhancements.yaml";
+  return useSWR(
+    "enhancements",
+    () =>
+      fetchYaml<EnhancementFile>(file).then((file) => index(file.enhancements)),
+    swrOptions()
+  );
+};
