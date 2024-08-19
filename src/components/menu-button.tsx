@@ -68,11 +68,7 @@ export const MenuButton = () => {
               onClick={play}
             >
               <Play />
-              {willReplace && (
-                <div className="absolute -top-1.5 -left-1.5 text-xs bg-red-500 rounded-full h-4 aspect-square font-bold">
-                  !
-                </div>
-              )}
+              {willReplace && <WarningBubble />}
             </button>
           )}
 
@@ -87,10 +83,11 @@ export const MenuButton = () => {
 
           {playing && (
             <button
-              className="p-2 bg-blue-600 text-white rounded-l-xl opacity-80 hover:opacity-100 shadow-md"
+              className="relative p-2 bg-blue-600 text-white rounded-l-xl opacity-80 hover:opacity-100 shadow-md"
               onClick={resetGame}
             >
               <RefreshCcw />
+              <WarningBubble />
             </button>
           )}
         </>
@@ -104,3 +101,11 @@ function getOpacity(showOptions: boolean, visible: boolean): string {
   else if (visible) return "opacity-40";
   else return "opacity-20";
 }
+
+const WarningBubble = () => {
+  return (
+    <div className="absolute -top-1.5 -left-1.5 text-xs bg-red-500 rounded-full h-4 aspect-square font-bold">
+      !
+    </div>
+  );
+};
