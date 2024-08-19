@@ -57,6 +57,7 @@ interface GameHooks {
   advancePhase: (to: Immutable.Phase, totalCabalPoints: number) => void;
   setSorceryChoice: (to: string) => void;
   discardSecondaryMission: () => void;
+  resetGame: () => void;
 }
 
 // =============== Custom Hooks ===============
@@ -234,6 +235,13 @@ export const useGameStore = create<GameState & GameHooks>()(
           values.phaseActions.add("discard-mission");
           values.commandPoints += 1;
         }),
+      resetGame: () =>
+        set(
+          produce((state: GameState) => {
+            const { history } = baseState();
+            state.history = history;
+          })
+        ),
     }),
     {
       name: "game-storage",

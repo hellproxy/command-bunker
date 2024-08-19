@@ -23,7 +23,7 @@ export default function ListBuilder({ params: { listId } }: ListBuilderProps) {
   return (
     <EnhancementContext listId={listId}>
       <div className="grid h-full grid-cols-2">
-        <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
+        <div className="flex flex-col gap-2 px-2 py-2 max-h-full overflow-auto">
           <SectionHeader>Characters</SectionHeader>
           <UnitPickerSection listId={listId} section="characters" />
           <SectionHeader>Infantry</SectionHeader>
@@ -33,7 +33,7 @@ export default function ListBuilder({ params: { listId } }: ListBuilderProps) {
           <SectionHeader>Allies</SectionHeader>
           <UnitPickerSection listId={listId} section="allies" />
         </div>
-        <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
+        <div className="flex flex-col gap-2 pr-2 py-2 max-h-full overflow-auto">
           <SectionHeader>Characters</SectionHeader>
           <UnitCustomizerSection listId={listId} section="characters" />
           <SectionHeader>Infantry</SectionHeader>

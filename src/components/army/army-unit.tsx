@@ -22,8 +22,6 @@ export const ArmyUnit = ({ unit, unitData }: ArmyUnitProps) => {
   const listId = useGameStore((state) => state.listId!);
   const enhancement = useEnhancement(listId, unit.id);
 
-  console.log(enhancement);
-
   const ref = useRef<null | HTMLDivElement>(null);
   useOnClickOutside(ref, () => setShowData(false));
 

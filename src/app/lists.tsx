@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useGetList, useListStore } from "../stores/lists";
 import { useOnClickOutside } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 import { Edit2, Play, Plus, Trash2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
-import { useGameStore } from "@/stores/game";
+import { usePlay } from "@/hooks/navigate-play";
 
 export const Lists = () => {
   const lists = useListStore((state) => state.lists);
@@ -91,17 +91,10 @@ const Builder = ({ listId }: { listId: string }) => {
 };
 
 const Bunker = ({ listId }: { listId: string }) => {
-  const router = useRouter();
-  const setListId = useGameStore((state) => state.setListId);
-
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
-    event.preventDefault();
-    setListId(listId);
-    router.push("/play");
-  };
+  const { play } = usePlay();
 
   return (
-    <button className="btn btn-green" onClick={handleClick}>
+    <button className="btn btn-green" onClick={play}>
       <Play />
     </button>
   );

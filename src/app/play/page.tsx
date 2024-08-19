@@ -22,7 +22,7 @@ export default function CommandBunker() {
 
   return listId ? (
     <div className="grid h-full grid-cols-2">
-      <div className="flex flex-col gap-2 pl-1 pr-2 py-2 max-h-full overflow-auto">
+      <div className="flex flex-col gap-2 pl-2 pr-1 py-2 max-h-full overflow-auto">
         <GameStatePane />
         <PhaseDisplay />
         <div className="flex flex-col mt-auto gap-2">
