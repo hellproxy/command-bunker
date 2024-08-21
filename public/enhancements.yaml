@@ -2,16 +2,16 @@ enhancements:
   - type: lord-of-forbidden-lore
     name: Lord of Forbidden Lore
     text: >-
-      Some text
+      The bearer can be selected to use a Ritual even if another Psyker from your army has already been selected to use that Ritual this phase.
   - type: athenaean-scrolls
     name: Athenaean Scrolls
     text: >-
-      Some text
+      In your Command phase, if the bearer is on the battlefield and is not Battle-shocked, it generates you 1 additional Cabal point this phase.
   - type: umbralefic-crystal
     name: Umbralefic Crystal
     text: >-
-      Some text
+      Once per battle, in your Command phase, you can remove the bearer's unit from the battlefield. If you do, in the Reinforcements step of your next Movement phase, set that unit back up anywhere on the battlefield that is more than 9" horizontally away from all enemy models.
   - type: arcane-vortex
     name: Arcane Vortex
     text: >-
-      Some text
+      Add 1 to the Strength and Damage characteristics of Psychic weapons equipped by the bearer.
