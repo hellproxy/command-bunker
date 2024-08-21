@@ -1,17 +1,13 @@
+import { useReferenceData } from "@/hooks/reference";
 import { produce } from "immer";
 import { create } from "zustand";
 
-interface DisplayableInfo {
-  title: string;
-  text: string;
-}
-
 interface InfoState {
-  info?: DisplayableInfo;
+  info?: string;
 }
 
 interface InfoHooks {
-  setInfo: (info: DisplayableInfo) => void;
+  setInfo: (info: string) => void;
   clearInfo: () => void;
 }
 
@@ -29,3 +25,10 @@ export const useInfoStore = create<InfoState & InfoHooks>()((set) => ({
       })
     ),
 }));
+
+export const useInfo = () => {
+  const refernceData = useReferenceData();
+  const type = useInfoStore((state) => state.info);
+
+  return type ? refernceData.get(type) : undefined;
+};

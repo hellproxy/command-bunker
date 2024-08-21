@@ -3,8 +3,11 @@ import { Toggle } from "../../toggle";
 import { AdvancePhaseButton } from "../button/advance-button";
 import { Phase } from "./phase";
 import { ExtraCabalPointsButton } from "../button/extra-cabal-points";
+import { useInfoStore } from "@/stores/info";
 
 export const CommmandPhase = () => {
+  const setInfo = useInfoStore((state) => state.setInfo);
+
   return (
     <Phase name="Command Phase" icon={<Goal size={20} />}>
       <div className="flex flex-col py-2">
@@ -28,7 +31,15 @@ export const CommmandPhase = () => {
         <div className="game-interaction">
           <Toggle position="after">
             Move a unit to reserve by activating{" "}
-            <span className="font-semibold">Umbralefic Crystal</span>
+            <span
+              className="info-on-click"
+              onClick={(e) => {
+                e.preventDefault();
+                setInfo("umbralefic-crystal");
+              }}
+            >
+              Umbralefic Crystal
+            </span>
           </Toggle>
         </div>
         <div className="game-interaction">

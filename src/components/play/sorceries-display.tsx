@@ -44,7 +44,7 @@ const SorceryButton = ({ type, name, text }: Immutable.Sorcery) => {
       type="button"
       onClick={() => {
         if (unlocked) setSorceryChoice(type);
-        setInfo({ title: name, text });
+        setInfo(type);
       }}
       value={name}
     >

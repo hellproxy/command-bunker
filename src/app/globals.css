@@ -87,6 +87,9 @@ body {
   .grid-rows-fit-content {
     grid-template-rows: fit-content(0);
   }
+  .info-on-click {
+    @apply font-semibold hover:text-blue-600 cursor-pointer;
+  }
 }
 
 @keyframes text-nova {

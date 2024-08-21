@@ -58,6 +58,8 @@ namespace Immutable {
   export interface Stratagem {
     readonly type: string;
     readonly cost: number;
+    readonly name: string;
+    readonly text: string;
   }
 
   export interface Ritual {
@@ -78,6 +80,7 @@ namespace Immutable {
   export interface Enhancement {
     readonly type: EnhancementType;
     readonly name: string;
+    readonly text: string;
   }
 
   export type Section = "characters" | "infantry" | "nonInfantry" | "allies";

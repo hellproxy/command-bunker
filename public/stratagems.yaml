@@ -1,7 +1,16 @@
 stratagems:
   - type: overwatch
     cost: 1
+    name: Overwatch
+    text: >-
+      Some text
   - type: destined-by-fate
     cost: 1
+    name: Destined by Fate
+    text: >-
+      Some text
   - type: ensorcelled-infusion
     cost: 1
+    name: Ensorcelled Infusion
+    text: >-
+      Some text

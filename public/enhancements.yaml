@@ -1,9 +1,17 @@
 enhancements:
   - type: lord-of-forbidden-lore
     name: Lord of Forbidden Lore
+    text: >-
+      Some text
   - type: athenaean-scrolls
     name: Athenaean Scrolls
+    text: >-
+      Some text
   - type: umbralefic-crystal
     name: Umbralefic Crystal
+    text: >-
+      Some text
   - type: arcane-vortex
     name: Arcane Vortex
+    text: >-
+      Some text

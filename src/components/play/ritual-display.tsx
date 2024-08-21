@@ -24,14 +24,13 @@ export const RitualDisplay = () => {
 };
 
 const RitualItem = ({ ritual, canPerform, perform }: RitualProps) => {
-  const { name, text } = ritual;
   const setInfo = useInfoStore((state) => state.setInfo);
 
   return (
     <div className="game-interaction py-1.5 items-baseline">
       <span
-        className="grow my-0.5 text-sm font-semibold hover:text-blue-600 cursor-pointer"
-        onClick={() => setInfo({ title: name, text })}
+        className="grow my-0.5 text-sm info-on-click"
+        onClick={() => setInfo(ritual.type)}
       >
         {ritual.name}
       </span>

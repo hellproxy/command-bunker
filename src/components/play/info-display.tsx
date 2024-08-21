@@ -1,15 +1,16 @@
-import { useInfoStore } from "@/stores/info";
+import { useInfo, useInfoStore } from "@/stores/info";
 import { X } from "lucide-react";
 
 export const InfoDisplay = () => {
-  const [info, clear] = useInfoStore((state) => [state.info, state.clearInfo]);
+  const info = useInfo();
+  const clear = useInfoStore((state) => state.clearInfo);
 
   return (
     <div className="flex bg-white rounded shadow-md px-2 py-4 overflow-hidden">
       {info ? (
-        <div className="flex flex-col gap-2 px-3 overflow-auto">
+        <div className="flex flex-col gap-2 px-3 overflow-auto grow">
           <div className="flex flex-row items-center">
-            <div className="mr-auto">{info.title}</div>
+            <div className="mr-auto">{info.name}</div>
             <button className="btn btn-gray p-0.5" onClick={clear}>
               <X size={16} />
             </button>

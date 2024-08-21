@@ -3,14 +3,23 @@ import { Phase } from "./phase";
 import { RitualButton } from "../button/ritual-button";
 import { Swords } from "lucide-react";
 import { Toggle } from "@/components/toggle";
+import { useInfoStore } from "@/stores/info";
 
 export const FightPhase = () => {
+  const setInfo = useInfoStore((state) => state.setInfo);
+
   return (
     <Phase name="Fight Phase" icon={<Swords size={20} />}>
       <div className="flex flex-col py-2">
         <div className="game-interaction py-1.5">
           <span className="grow my-0.5 text-sm">
-            Use Ritual: <span className="font-semibold">Twist of Fate</span>
+            Use Ritual:{" "}
+            <span
+              className="info-on-click"
+              onClick={() => setInfo("twist-of-fate")}
+            >
+              Twist of Fate
+            </span>
           </span>
           <RitualButton ritual="twist-of-fate" />
         </div>
