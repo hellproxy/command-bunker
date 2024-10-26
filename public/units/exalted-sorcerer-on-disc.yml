@@ -1,0 +1,106 @@
+type: exalted-sorcerer-on-disc
+name: Thousand Sons Exalted Sorcerer on Disc of Tzeentch
+image: /images/exalted-sorcerer-on-disc.jpg
+section: characters
+cabalPoints: 2
+statLine:
+  movement: 12
+  toughness: 4
+  armourSave: 3
+  invulnerableSave: 4
+  wounds: 6
+  leadership: 6
+  objectiveControl: 1
+rangedWeapons:
+  - type: exalted-sorcerer-on-disc-arcane-fire
+    name: Arcane Fire
+    range: 18
+    attacks: D6
+    skill: N/A
+    strength: 6
+    ap: -2
+    damage: D3
+    tags:
+      - Ignores Cover
+      - Psychic
+      - Torrent
+  - type: exalted-sorcerer-on-disc-inferno-bolt-pistol
+    name: Inferno bolt pistol
+    range: 12
+    attacks: 1
+    skill: 2
+    strength: 4
+    ap: -1
+    damage: 1
+    tags:
+      - Pistol
+    optional: true
+  - type: exalted-sorcerer-on-disc-warpflame-pistol
+    name: Warpflame pistol
+    range: 12
+    attacks: D6
+    skill: N/A
+    strength: 3
+    ap: -1
+    damage: 1
+    tags:
+      - Ignores Cover
+      - Pistol
+      - Torrent
+    optional: true
+  - type: exalted-sorcerer-on-disc-plasma-pistol
+    name: Plasma pistol
+    profileName: standard
+    range: 12
+    attacks: 1
+    skill: 2
+    strength: 7
+    ap: -2
+    damage: 1
+    tags:
+      - Pistol
+    optional: true
+    alts:
+      - profileName: supercharge
+        range: 12
+        attacks: 1
+        skill: 2
+        strength: 8
+        ap: -3
+        damage: 2
+        tags:
+          - Hazardous
+          - Pistol
+meleeWeapons:
+  - type: exalted-sorcerer-on-disc-force-weapon
+    name: Force weapon
+    range: melee
+    attacks: 5
+    skill: 2
+    strength: 6
+    ap: -1
+    damage: D3
+    tags:
+      - Psychic
+  - type: exalted-sorcerer-on-disc-prosperine-khopesh
+    name: Prosperine khopesh
+    range: melee
+    attacks: 4
+    skill: 3
+    strength: 5
+    ap: -2
+    damage: 2
+    optional: true
+abilities:
+  - type: exalted-sorcerer-on-disc-arcane-shield
+    name: Arcane shield
+    description: >-
+      While this model is leading a unit, models in that unit have a 4+ invulnerable save.
+    tags:
+      - Psychic
+  - type: exalted-sorcerer-on-disc-rebind-rubricae
+    name: Binding Tendrils
+    description: >-
+      In your Shooting phase, after this model has shot, select one enemy unit (excluding Monsters and Vehicles) hit by one or more of those attacks made with its Arcane Fire; until the start of your next turn, that enemy unit is pinned. While a unit is pinned, subtract 2 from its Move characteristics and subtract 2 from Charge rolls made for it.
+    tags:
+      - Psychic

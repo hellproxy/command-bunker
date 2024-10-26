@@ -1,0 +1,159 @@
+type: helbrute
+name: Thousand Sons Helbrute
+image: /images/helbrute.jpg
+section: nonInfantry
+statLine:
+  movement: 6
+  toughness: 9
+  armourSave: 2
+  invulnerableSave: 5
+  wounds: 8
+  leadership: 6
+  objectiveControl: 3
+rangedWeapons:
+  - type: helbrute-heavy-flamer
+    name: Heavy flamer
+    range: 12
+    attacks: D6
+    skill: N/A
+    strength: 5
+    ap: -1
+    damage: 1
+    tags:
+      - Ignores Cover
+      - Torrent
+    optional: true
+  - type: helbrute-plasma-cannon
+    name: Helbrute plasma cannon
+    range: 36
+    attacks: D3
+    skill: 3
+    strength: 8
+    ap: -3
+    damage: 3
+    tags:
+      - Blast
+      - Hazardous
+    optional: true
+  - type: helbrute-inferno-combi-bolter
+    name: Inferno combi-bolter
+    range: 24
+    attacks: 2
+    skill: 3
+    strength: 4
+    ap: -1
+    damage: 1
+    tags:
+      - Rapid Fire 2
+    optional: true
+  - type: helbrute-missile-launcher
+    name: Missile launcher
+    profileName: frag
+    range: 48
+    attacks: D6
+    skill: 3
+    strength: 4
+    ap: 0
+    damage: 1
+    tags:
+      - Blast
+    optional: true
+    alts:
+      - profileName: krak
+        range: 48
+        attacks: 1
+        skill: 3
+        strength: 9
+        ap: -2
+        damage: D6
+  - type: helbrute-multi-melta
+    name: Multi-melta
+    range: 18
+    attacks: 2
+    skill: 3
+    strength: 9
+    ap: -4
+    damage: D6
+    tags:
+      - Melta 2
+    optional: true
+  - type: helbrute-twin-autocannon
+    name: Twin autocannon
+    range: 48
+    attacks: 2
+    skill: 3
+    strength: 9
+    ap: -1
+    damage: 3
+    tags:
+      - Twin-linked
+    optional: true
+  - type: helbrute-twin-inferno-heavy-bolter
+    name: Twin inferno heavy bolter
+    range: 36
+    attacks: 3
+    skill: 3
+    strength: 5
+    ap: -2
+    damage: 2
+    tags:
+      - Sustained Hits 1
+      - Twin-linked
+    optional: true
+  - type: helbrute-twin-lascannon
+    name: Twin lascannon
+    range: 48
+    attacks: 1
+    skill: 3
+    strength: 12
+    ap: -3
+    damage: D6+1
+    tags:
+      - Twin-linked
+    optional: true
+meleeWeapons:
+  - type: helbrute-close-combat-weapon
+    name: Close combat weapon
+    range: melee
+    attacks: 5
+    skill: 3
+    strength: 6
+    ap: 0
+    damage: 1
+    optional: true
+  - type: helbrute-fist
+    name: Helbrute fist
+    range: melee
+    attacks: 5
+    skill: 3
+    strength: 12
+    ap: -2
+    damage: 3
+    optional: true
+  - type: helbrute-hammer
+    name: Helbrute hammer
+    range: melee
+    attacks: 5
+    skill: 4
+    strength: 14
+    ap: -3
+    damage: D6+1
+    optional: true
+  - type: helbrute-power-scourge
+    name: Power scourge
+    range: melee
+    attacks: 8
+    skill: 3
+    strength: 7
+    ap: -1
+    damage: 2
+    optional: true
+coreAbilities:
+  - Deadly Demise 1
+abilities:
+  - type: helbrute-arcane-knowledge
+    name: Arcane knowledge admist babbling insanity
+    description: >-
+      Each time a friendly Thousand Sons Psyker model within 9" of this model is selected to use a Ritual, you gain 1 Cabal point.
+    tags:
+      - Aura
