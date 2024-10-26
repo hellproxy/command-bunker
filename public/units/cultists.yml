@@ -1,0 +1,78 @@
+type: cultists
+name: Thousand Sons Cultists
+image: /images/cultists.jpg
+section: infantry
+statLine:
+  movement: 6
+  toughness: 3
+  armourSave: 6
+  invulnerableSave: 6
+  wounds: 1
+  leadership: 7
+  objectiveControl: 1
+rangedWeapons:
+  - type: cultists-firearm
+    name: Cultist firearm
+    range: 24
+    attacks: 1
+    skill: 4
+    strength: 3
+    ap: 0
+    damage: 1
+  - type: cultists-flamer
+    name: Flamer
+    range: 12
+    attacks: D6
+    skill: N/A
+    strength: 4
+    ap: 0
+    damage: 1
+    tags:
+      - Ignores Cover
+      - Torrent
+    optional: true
+  - type: cultists-grenade-launcher
+    name: Grenade launcher
+    profileName: frag
+    range: 24
+    attacks: D3
+    skill: 4
+    strength: 4
+    ap: 0
+    damage: 1
+    tags:
+      - Blast
+    optional: true
+    alts:
+      - profileName: krak
+        range: 24
+        attacks: 1
+        skill: 4
+        strength: 9
+        ap: -2
+        damage: D3
+  - type: cultists-heavy-stubber
+    name: Heavy stubber
+    range: 36
+    attacks: 3
+    skill: 4
+    strength: 4
+    ap: 0
+    damage: 1
+    tags:
+      - Rapid Fire 3
+    optional: true
+meleeWeapons:
+  - type: cultists-brutal-assault-weapon
+    name: Brutal assault weapon
+    range: melee
+    attacks: 2
+    skill: 4
+    strength: 3
+    ap: 0
+    damage: 1
+abilities:
+  - type: cultists-pawns-of-fate
+    name: Pawns of fate
+    description: >-
+      Each time this unit destroys an enemy unit, roll one D6: on a 2+, you gain 1CP. When this unit is destroyed, roll one D6: on a 2+, you gain 1CP.
