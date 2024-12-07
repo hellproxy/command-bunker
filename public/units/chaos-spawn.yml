@@ -1,0 +1,28 @@
+type: chaos-spawn
+name: Chaos-spawn
+image: /images/chaos-spawn.jpg
+section: nonInfantry
+statLine:
+  movement: 8
+  toughness: 5
+  armourSave: 4
+  invulnerableSave: 5
+  wounds: 4
+  leadership: 7
+  objectiveControl: 1
+meleeWeapons:
+  - type: chaos-spawn-hideous-mutations
+    name: Hideous mutations
+    range: melee
+    attacks: D6+2
+    skill: 4
+    strength: 5
+    ap: -1
+    damage: 2
+coreAbilities:
+  - Feel No Pain 5+
+abilities:
+  - type: chaos-spawn-regenerating-monstrosities
+    name: Regenerating monstrosities
+    description: >-
+      At the start of each player's Command phase, one model in this unit regains up to D3 lost wounds.
