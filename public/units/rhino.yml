@@ -6,7 +6,6 @@ statLine:
   movement: 12
   toughness: 9
   armourSave: 3
-  invulnerableSave: 5
   wounds: 10
   leadership: 6
   objectiveControl: 2

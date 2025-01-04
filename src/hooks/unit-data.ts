@@ -38,6 +38,7 @@ export const unitFiles = [
   "/units/rhino.yml",
   "/units/helbrute.yml",
   "/units/heldrake.yml",
+  "/units/predator-annihilator.yml",
   // allies
   "/units/pink-horrors.yml",
   "/units/screamers.yml",

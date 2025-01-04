@@ -1,0 +1,97 @@
+type: predator-annihilator
+name: Thousand Sons Predator Annihilator
+image: /images/predator-annihilator.jpg
+section: nonInfantry
+statLine:
+  movement: 10
+  toughness: 10
+  armourSave: 3
+  wounds: 11
+  leadership: 6
+  objectiveControl: 4
+rangedWeapons:
+  - type: predator-annihilator-twin-lascannon
+    name: Predator twin lascannon
+    range: 48
+    attacks: 1
+    skill: 3
+    strength: 14
+    ap: -3
+    damage: D6+1
+    tags:
+      - Twin-linked
+  - type: predator-annihilator-inferno-heavy-bolter
+    name: Inferno heavy bolter
+    range: 36
+    attacks: 3
+    skill: 3
+    strength: 5
+    ap: -2
+    damage: 2
+    tags:
+      - Sustained Hits 1
+    optional: true
+  - type: predator-annihilator-lascannon
+    name: Lascannon
+    range: 48
+    attacks: 1
+    skill: 3
+    strength: 12
+    ap: -3
+    damage: D6+1
+    optional: true
+  - type: predator-annihilator-inferno-combi-bolter
+    name: Inferno combi-bolter
+    range: 24
+    attacks: 2
+    skill: 3
+    strength: 4
+    ap: -1
+    damage: 1
+    tags:
+      - Rapid Fire 2
+    optional: true
+  - type: predator-annihilator-inferno-combi-weapon
+    name: Inferno combi-weapon
+    range: 24
+    attacks: 1
+    skill: 4
+    strength: 4
+    ap: -1
+    damage: 1
+    tags:
+      - Anti-infantry 4+
+      - Devastating Wounds
+      - Rapid Fire 1
+    optional: true
+  - type: predator-annihilator-havoc-launcher
+    name: Havoc launcher
+    range: 48
+    attacks: D6
+    skill: 3
+    strength: 5
+    ap: 0
+    damage: 1
+    tags:
+      - Blast
+    optional: true
+meleeWeapons:
+  - type: predator-annihilator-armoured-tracks
+    name: Armoured tracks
+    range: melee
+    attacks: 3
+    skill: 4
+    strength: 6
+    ap: 0
+    damage: 1
+coreAbilities:
+  - Deadly Demise D3
+abilities:
+  - type: predator-annihilator-annihilator
+    name: Annihilator
+    description: >-
+      Each time a range attack made by this model is allocated to a MONSTER or VEHICLE model, you can re-roll the Damage roll.
+  - type: predator-annihilator-damaged
+    name: "Damaged: 1-4 wounds remaining"
+    description: >-
+      While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.
