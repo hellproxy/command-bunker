@@ -4,33 +4,37 @@ rituals:
     cost: 2
     phase: any
     turn: any
-    text: >-
-      Use this Ritual at the start of any phase. Once during that phase, when a saving throw is failed for a friendly Thousand Sons model whose unit is within 18" of this Psyker, you can re-roll that saving throw.
+    text: |-
+      Use this Ritual at the start of any phase. Once during that phase, when a saving throw is failed for a friendly **Thousand Sons** model whose unit is within 18" of this **Psyker**, you can re-roll that saving throw.
+
   - type: temporal-surge
     name: Temporal Surge
     cost: 5
     phase: shooting
     turn: player
     text: >-
-      Use this ritual at the start of your Shooting phase. Select one friendly Thousand Sons unit within 18" of this Psyker; unless that unit is within Engagement Range of one or more enemy units, it can make a Normal move. If it does, that unit is not eligible to declare a charge this turn. That same unit cannot be selected for this Ritual more than once per phase.
+      Use this ritual at the start of your Shooting phase. Select one friendly **Thousand Sons** unit within 18" of this **Psyker**; unless that unit is within Engagement Range of one or more enemy units, it can make a Normal move. If it does, that unit is not eligible to declare a charge this turn. That same unit cannot be selected for this Ritual more than once per phase.
+
   - type: echoes-of-the-warp
     name: Echoes of the Warp
     cost: 6
     phase: any
     turn: any
     text: >-
-      Use this Ritual at the start of any phase. Once this phase, you can select this Psyker's unit as the target of a Stratagem for 0CP, even if you have already used that Stratagem this phase.
+      Use this Ritual at the start of any phase. Once this phase, you can select this **Psyker**'s unit as the target of a Stratagem for 0CP, even if you have already used that Stratagem this phase.
+
   - type: doombolt
     name: Doombolt
     cost: 7
     phase: shooting
     turn: player
     text: >-
-      Use this Ritual at the start of the Shooting phase. Select one enemy unit within 18" of and visible to this Psyker (excluding units with the Lone Operative ability that are not part of an Attached unit and are not within 12" of the Psyker). Roll one D6: on a 1, that enemy suffers D3 mortal wounds; on a 2-5, that enemy suffers D3+3 moral wounds; on a 6, that enemy suffers D3+6 moral wounds.
+      Use this Ritual at the start of the Shooting phase. Select one enemy unit within 18" of and visible to this **Psyker** (excluding units with the Lone Operative ability that are not part of an Attached unit and are not within 12" of the **Psyker**). Roll one D6: on a 1, that enemy suffers D3 mortal wounds; on a 2-5, that enemy suffers D3+3 moral wounds; on a 6, that enemy suffers D3+6 moral wounds.
+
   - type: twist-of-fate
     name: Twist of Fate
     cost: 9
     phase: shooting
     turn: player
     text: >-
-      Use this Ritual at the start of your Shooting phase. Select one enemy unit within 18" of and visible to the Psyker; until the end of the phase, each time a Thousand Sons model from your army makes a range attack that targets that unit, improve the Armour Penetration characteristic of that attack by 2.
+      Use this Ritual at the start of your Shooting phase. Select one enemy unit within 18" of and visible to the **Psyker**; until the end of the phase, each time a **Thousand Sons** model from your army makes a range attack that targets that unit, improve the Armour Penetration characteristic of that attack by 2.
