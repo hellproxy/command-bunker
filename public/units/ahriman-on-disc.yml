@@ -1,0 +1,59 @@
+type: ahriman-on-disc
+name: Ahriman on Disc of Tzeentch
+image: /images/ahriman.jpg
+section: characters
+cabalPoints: 3
+statLine:
+  movement: 10
+  toughness: 4
+  armourSave: 3
+  invulnerableSave: 4
+  wounds: 5
+  leadership: 6
+  objectiveControl: 1
+rangedWeapons:
+  - type: ahriman-on-disc-inferno-bolt-pistol
+    name: Inferno bolt pistol
+    range: 12
+    attacks: 1
+    skill: 2
+    strength: 4
+    ap: -1
+    damage: 1
+    tags:
+      - Pistol
+  - type: ahriman-on-disc-psychic-stalk
+    name: Psychic Stalk
+    range: 18
+    attacks: 1
+    skill: 2
+    strength: 6
+    ap: -1
+    damage: D6
+    tags:
+      - Precision
+      - Psychic
+meleeWeapons:
+  - type: ahriman-on-disc-black-staff
+    name: Black Staff of Ahriman
+    range: melee
+    attacks: 5
+    skill: 2
+    strength: 7
+    ap: -1
+    damage: 3
+    tags:
+      - Psychic
+coreAbilities:
+  - Leader
+abilities:
+  - type: ahriman-on-disc-rubric-lord
+    name: Rubric Lord
+    description: >-
+      While this model is leading a unit, each time a model in that unit makes an attack, add 1 to the Wound roll.
+  - type: ahriman-on-disc-arch-sorcerer-of-tzeentch
+    name: Arch-Sorcerer of Tzeentch
+    description: >-
+      Once per battle, you can select this model to use a Ritual for 0 cabal points (see Cabal of Sorcerers). If you do, all the other rules for using Rituals still apply.
+    tags:
+      - Psychic

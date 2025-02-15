@@ -22,6 +22,7 @@ export const unitFiles = [
   // leaders
   "/units/magnus-the-red.yml",
   "/units/ahriman.yml",
+  "/units/ahriman-on-disc.yml",
   "/units/daemon-prince.yml",
   "/units/daemon-prince-with-wings.yml",
   "/units/exalted-sorcerer.yml",
