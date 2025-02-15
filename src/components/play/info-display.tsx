@@ -1,5 +1,6 @@
 import { useInfo, useInfoStore } from "@/stores/info";
 import { X } from "lucide-react";
+import Markdown from "react-markdown";
 
 export const InfoDisplay = () => {
   const info = useInfo();
@@ -15,12 +16,13 @@ export const InfoDisplay = () => {
               <X size={16} />
             </button>
           </div>
-          <div className="text-sm text-justify">{info.text}</div>
+          <div className="text-sm markdown">
+            <Markdown>{info.text}</Markdown>
+          </div>
         </div>
       ) : (
-        <div className="text-gray-400 px-3">
-          Click any <span className="font-semibold">bold text</span> to view
-          more info here
+        <div className="text-gray-400 px-3 markdown">
+          <Markdown>Click any **bold text** to view more info here</Markdown>
         </div>
       )}
     </div>

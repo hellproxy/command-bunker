@@ -2,15 +2,31 @@ stratagems:
   - type: overwatch
     cost: 1
     name: Overwatch
-    text: >-
-      Some text
+    text: |-
+      **When:** Your opponent's Movement or Charge phase, just after an enemy unit is set up or when an enemy unit starts or ends a Normal, Advance or Fall Back move or declares a Charge.
+
+      **Target:** One unit from your army (excluding **Titanic** units) that is within 24" of that enemy unit and that would be eligible to shoot if it were your Shooting phase.
+
+      **Effect:** If that enemy unit is visible to your unit, your unit can shoot that enemy unit as if it were your Shooting phase.
+
+      **Restrictions:** You cannot target a **Titanic** unit with this Stratagem. Until the end of the phase, each time a model in your unit makes a range attack, an unmodified Hit roll of 6 is required to score a hit, irrespecive of the attacking weapon's Ballistic Skill or any modifiers. You can only use this Stratagem once per turn.
+
   - type: destined-by-fate
     cost: 1
     name: Destined by Fate
-    text: >-
-      Some text
+    text: |-
+      **When:** Any phase, when a saving throw is failed for a **Thousand Sons Psyker** model from your army.
+
+      **Target:** That **Psyker** model.
+
+      **Effect:** Change the Damage characteristic of that attack to 0.
+
   - type: ensorcelled-infusion
     cost: 1
     name: Ensorcelled Infusion
-    text: >-
-      Some text
+    text: |-
+      **When:** Your shooting phase
+
+      **Target:** One **Thousand Sons Psyker** unit from your army that has not been selected to shoot this phase.
+
+      **Effect:** Until the end of the phase, all inferno bolt pistols, inferno boltguns, inferno combi-bolters and inferno combi-weapons equipped by models in your unit have the **[Psychic]** ability and a Strength characteristic of 5.
