@@ -26,6 +26,7 @@ export const unitFiles = [
   "/units/daemon-prince-with-wings.yml",
   "/units/exalted-sorcerer.yml",
   "/units/exalted-sorcerer-on-disc.yml",
+  "/units/infernal-master.yml",
   "/units/sorcerer-in-terminator-armour.yml",
   // infantry
   "/units/rubricae.yml",
@@ -39,6 +40,7 @@ export const unitFiles = [
   "/units/helbrute.yml",
   "/units/heldrake.yml",
   "/units/predator-annihilator.yml",
+  "/units/forgefiend.yml",
   // allies
   "/units/pink-horrors.yml",
   "/units/screamers.yml",

@@ -1,0 +1,59 @@
+type: forgefiend
+name: Thousand Sons forgefiend
+image: /images/forgefiend.jpg
+section: nonInfantry
+statLine:
+  movement: 8
+  toughness: 10
+  armourSave: 3
+  invulnerableSave: 5
+  wounds: 12
+  leadership: 6
+  objectiveControl: 3
+rangedWeapons:
+  - type: forgefiend-inferno-ectoplasma-cannon
+    name: Ectoplasma cannon
+    range: 36
+    attacks: D3
+    skill: 3
+    strength: 10
+    ap: -3
+    damage: 3
+    tags:
+      - Blast
+    optional: true
+  - type: forgefiend-inferno-hades-autocannon
+    name: Hades autocannon
+    range: 36
+    attacks: 6
+    skill: 3
+    strength: 8
+    ap: -1
+    damage: 2
+    optional: true
+meleeWeapons:
+  - type: forgefiend-claws
+    name: Forgefiend claws
+    range: melee
+    attacks: 3
+    skill: 3
+    strength: 6
+    ap: 0
+    damage: 1
+    optional: true
+  - type: forgefiend-jaws
+    name: Forgefiend jaws
+    range: melee
+    attacks: 5
+    skill: 3
+    strength: 7
+    ap: 0
+    damage: 2
+    optional: true
+coreAbilities:
+  - Deadly Demise D3
+abilities:
+  - type: forgefiend-blazing-salvoes
+    name: Blazing salvoes
+    description: >-
+      In your Shooting phase, after this model has shot, select one enemy unit that was hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.
