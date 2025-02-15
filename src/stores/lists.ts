@@ -75,7 +75,9 @@ export const useListStore = create<ListState>()(
       removeUnit: (listId, unitId) => () => {
         set(
           produce((state: ListState) => {
-            state.lists.get(listId)!.units.delete(unitId);
+            const list = state.lists.get(listId)!;
+            list.units.delete(unitId);
+            list.enhancements.delete(unitId);
           })
         );
       },
